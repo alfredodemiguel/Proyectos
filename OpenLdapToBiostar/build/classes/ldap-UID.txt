@@ -1,0 +1,13 @@
+uid: root
+gecos: Netbios Domain Administrator
+uid: nobody
+uid: joindomain
+gecos: GenericJoinDomain
+uid: tecnico
+gecos: TecnicoClickControl
+uid: onlyprint
+gecos: Solo Impresion
+uid: scanrepro
+gecos: scanrepro
+uid: al036000
+gecos: fulanito y sotanito

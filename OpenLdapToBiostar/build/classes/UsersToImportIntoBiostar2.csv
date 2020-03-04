@@ -1,0 +1,7 @@
+user_id,name,phone,email,user_group,start_datetime,expiry_datetime,csn,DNI,Sexo
+root,Netbios Domain Administrator,201,,All Users,2020-01-01 00:00:00,2030-12-31 23:59:00,,00000000A,M
+joindomain,GenericJoinDomain,201,,All Users,2020-01-01 00:00:00,2030-12-31 23:59:00,,00000000A,M
+tecnico,TecnicoClickControl,201,,All Users,2020-01-01 00:00:00,2030-12-31 23:59:00,,00000000A,M
+onlyprint,Solo Impresion,201,,All Users,2020-01-01 00:00:00,2030-12-31 23:59:00,,00000000A,M
+scanrepro,scanrepro,201,,All Users,2020-01-01 00:00:00,2030-12-31 23:59:00,,00000000A,M
+al036000,fulanito y sotanito,201,,All Users,2020-01-01 00:00:00,2030-12-31 23:59:00,,00000000A,M
