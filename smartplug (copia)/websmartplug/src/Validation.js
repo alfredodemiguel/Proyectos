@@ -1,5 +1,5 @@
 import React from 'react';
-import {setNumberOfSmartPlug, getIdOfSmartPlug} from './stateSmartPlug';
+import {setNumberOfSmartPlug} from './stateSmartPlug';
 import {getDataSmartPlug} from './io';
 
 
@@ -16,11 +16,11 @@ function Validation(props) {
 
 
 
-  async function checkNumberSubmited() {
-    await setNumberOfSmartPlug (numberOfSmartPlug);
+  function checkNumberSubmited() {
+    setNumberOfSmartPlug (numberOfSmartPlug);
     alert ('numero introducido en checknumrbesubmited' + numberOfSmartPlug);
-    getDataSmartPlug (numberOfSmartPlug);
-    if (getIdOfSmartPlug() !== undefined){
+    alert ('gedat'+ getDataSmartPlug (numberOfSmartPlug));
+    if (getDataSmartPlug (numberOfSmartPlug) !== 1){
       alert ('Dentro del if');
       history.push("/smartPlug");
     }

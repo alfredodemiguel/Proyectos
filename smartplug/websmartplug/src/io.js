@@ -1,11 +1,11 @@
 import axios from 'axios';
 import {setNumberOfSmartPlug,setIdOfSmartPlug,setIsSmartPlugLive,setPlug,setProximity,
-    setPlugState,setProximityState,getNumberOfSmartPlug} from './stateSmartPlug';
+    setPlugState,setProximityState, getIdOfSmartPlug} from './stateSmartPlug';
 
 
 
 const urlSmartPlug = "http://localhost:3017/smartplug/";
-
+let id,live,sPlug,proximity,plugState,proximityState;
 
 
 export function putDataSmartPlug(smartplug) {
@@ -17,27 +17,27 @@ export function putDataSmartPlug(smartplug) {
   });
 }
 
-export  function getDataSmartPlug(numberOfSmartPlug,callback) {
-  //let tempUrlSmartPlug = urlSmartPlug + getNumberOfSmartPlug ();
+export  function getDataSmartPlug(numberOfSmartPlug) {
   let tempUrlSmartPlug = urlSmartPlug + numberOfSmartPlug;
-  alert ('tempurlsmatplug:'+ tempUrlSmartPlug);
+
+
+
   axios.get(tempUrlSmartPlug)
     .then(function (response) {
-      setIdOfSmartPlug (response.data.id);
-      setIsSmartPlugLive (response.data.isSmartPlugLive);
-      setPlug (response.data.plug);
-      setProximity (response.data.proximity);
-      setPlugState (response.data.plugState);
-      setProximityState (response.data.proximityState);
-      console.log ('estoy dentro de getdatasmartplu')
-      console.log (response.data.id);
-      console.log (response.data.isSmartPlugLive);
-      alert (response.data.id);
-      let kk = 55;
-      callback (kk);
+      id = response.data.id;
+      live = response.data.isSmartPlugLive;
+      sPlug = response.data.plug;
+      proximity = response.data.proximity;
+      plugState = response.data.plugState;
+      proximityState = response.data.proximityState;
     })
     .then (function (){
-      alert ('fuera del if');
+      alert ('Segundo then');
+      setDataSmartPlug (id,live,sPlug,proximity,plugState,proximityState);
+    })
+    .then (function(){
+      
+      alert ('Tercer then:'+ getIdOfSmartPlug());
     })
     .catch(function (error) {
       setNumberOfSmartPlug (0);
@@ -45,4 +45,11 @@ export  function getDataSmartPlug(numberOfSmartPlug,callback) {
   }
  
 
-  
+  function setDataSmartPlug (id,live,sPlug,proximity,plugState,proximityState){
+    setIdOfSmartPlug (id);
+    setIsSmartPlugLive (live);
+    setPlug (sPlug);
+    setProximity (proximity);
+    setPlugState (plugState);
+    setProximityState (proximityState);
+  }
