@@ -17,7 +17,7 @@ export function putDataSmartPlug(smartplug) {
   });
 }
 
-export  function getDataSmartPlug(numberOfSmartPlug) {
+export  function getDataSmartPlug(numberOfSmartPlug,callback) {
   let tempUrlSmartPlug = urlSmartPlug + numberOfSmartPlug;
 
 
@@ -42,6 +42,11 @@ export  function getDataSmartPlug(numberOfSmartPlug) {
     .catch(function (error) {
       setNumberOfSmartPlug (0);
     });  
+    console.log ('Estoy en getDataSmartPlug');
+    setTimeout(function(){
+      console.log ('Termino segunda funcion');
+      callback (); 
+    }, 3000);
   }
  
 
@@ -53,3 +58,4 @@ export  function getDataSmartPlug(numberOfSmartPlug) {
     setPlugState (plugState);
     setProximityState (proximityState);
   }
+

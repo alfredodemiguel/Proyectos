@@ -65,6 +65,8 @@ export function getNumberOfSmartPlug() {
     return (numberOfSmartPlug);
 }
 
-export async function setNumberOfSmartPlug (TempNumberOfSmartPlug){
+export async function setNumberOfSmartPlug (TempNumberOfSmartPlug,callback){
+    console.log ('Estoy en setNumberOfSmartPlug');
     numberOfSmartPlug = TempNumberOfSmartPlug;
+    callback ();
 }

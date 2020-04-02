@@ -1,6 +1,12 @@
-import React from 'react';
-import {setNumberOfSmartPlug, getIdOfSmartPlug} from './stateSmartPlug';
-import {getDataSmartPlug} from './io';
+import React, {useEffect} from 'react';
+import axios from 'axios';
+
+
+
+const urlSmartPlug = "http://localhost:3017/smartplug/";
+let menPlugs = [];
+  
+
 
 
 
@@ -10,21 +16,33 @@ function Validation(props) {
 
  
 
+
+  useEffect(() => {
+    axios.get(urlSmartPlug)
+    .then(function (response) {
+      menPlugs = response.data;
+    }) 
+    .catch(function (error) {
+      console.log ('Error al hacer get'+ error);
+    });  
+  },[]);
+  
+  
+  
   function checkNumber(event) {
     numberOfSmartPlug = (event.target.value);
   }
-
-
-
-  async function checkNumberSubmited() {
-    await setNumberOfSmartPlug (numberOfSmartPlug);
-    alert ('numero introducido en checknumrbesubmited' + numberOfSmartPlug);
-    getDataSmartPlug (numberOfSmartPlug);
-    if (getIdOfSmartPlug() !== undefined){
-      alert ('Dentro del if');
-      history.push("/smartPlug");
-    }
+  
+  
+  
+  function checkNumberSubmited (){
+    menPlugs.forEach(element => {
+                                 if (element.id === parseInt(numberOfSmartPlug)){
+                                  history.push("/smartPlug");
+                                }
+                                });
   }
+
 
   return (
     <div className="Menu">

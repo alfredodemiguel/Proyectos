@@ -5,7 +5,6 @@ import {getNumberOfSmartPlug,getIsSmartPlugLive, getPlug,setPlug} from './stateS
 
 function InterfazSmartPlug() {
 
-  alert ('Estoy en smartplug interface');
   let plugOfSmartPlug = "";
 
   function checkPlug(event) {
