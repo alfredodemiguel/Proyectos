@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
+import {setNumberOfSmartPlug} from './stateSmartPlug';
 
 
 
@@ -37,12 +38,14 @@ function Validation(props) {
   
   function checkNumberSubmited (){
     menPlugs.forEach(element => {
-                                 if (element.id === parseInt(numberOfSmartPlug)){
-                                  history.push("/smartPlug");
-                                }
-                                });
+                                setNumberOfSmartPlug (numberOfSmartPlug);
+                                if (element.id === parseInt(numberOfSmartPlug)){
+                                history.push(`/smartPlug/:id${numberOfSmartPlug}`);
+                              }
+                              });
   }
 
+ //console.log ('test en validation:'+ test);
 
   return (
     <div className="Menu">

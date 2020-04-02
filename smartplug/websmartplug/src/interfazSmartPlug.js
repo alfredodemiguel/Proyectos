@@ -3,7 +3,7 @@ import React from 'react';
 import {getNumberOfSmartPlug,getIsSmartPlugLive, getPlug,setPlug} from './stateSmartPlug';
 
 
-function InterfazSmartPlug() {
+function InterfazSmartPlug(props) {
 
   let plugOfSmartPlug = "";
 
@@ -14,7 +14,9 @@ function InterfazSmartPlug() {
   function checkSubmited() {
     setPlug (plugOfSmartPlug);
   }
-
+console.log ('interfaxsmartplug');
+console.log (props);
+console.log (props.numberOfSmartPlug);
 
   return (
       <div>
