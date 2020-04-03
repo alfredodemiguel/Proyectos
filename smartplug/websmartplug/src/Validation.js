@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
-import {setNumberOfSmartPlug} from './stateSmartPlug';
+
 
 
 
@@ -13,7 +13,6 @@ let menPlugs = [];
 
 function Validation(props) {
   const { history } = props;
-  let numberOfSmartPlug = "";
 
  
 
@@ -31,21 +30,21 @@ function Validation(props) {
   
   
   function checkNumber(event) {
-    numberOfSmartPlug = (event.target.value);
+    window.$numberOfSmartPlug = (event.target.value);
   }
   
   
   
   function checkNumberSubmited (){
     menPlugs.forEach(element => {
-                                setNumberOfSmartPlug (numberOfSmartPlug);
-                                if (element.id === parseInt(numberOfSmartPlug)){
-                                history.push(`/smartPlug/:id${numberOfSmartPlug}`);
-                              }
+                                if (element.id === parseInt(window.$numberOfSmartPlug)){
+                                  history.push(`/smartPlug`);
+                                }
                               });
   }
 
- //console.log ('test en validation:'+ test);
+ 
+
 
   return (
     <div className="Menu">

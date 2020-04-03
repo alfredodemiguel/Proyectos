@@ -34,12 +34,10 @@ app.get('/smartplug/:id', function(req, res) {
     if (id) {
         smartPlugs.forEach((smartPlugs) => {
            if (smartPlugs.id === inputId) {
-            isSmartPlugLive = smartPlugs.isSmartPlugLive;
-            plug = smartPlugs.plug;
-            proximity = smartPlugs.proximity;
-            plugState = smartPlugs.plugState;
-            proximityState = smartPlugs.proximityState;
-            selectedSmartPlug = {id,isSmartPlugLive,plug,proximity,plugState,proximityState}
+            smLive = smartPlugs.smLive;
+            smState = smartPlugs.smState;
+            smGroup = smartPlugs.smGroup;
+            selectedSmartPlug = {id,smLive,smState,smGroup}
            }
        });
    }
@@ -49,19 +47,15 @@ app.get('/smartplug/:id', function(req, res) {
 app.put('/smartplug/:id', function (req, res) {
     const { id } = req.params;
     let inputId = parseInt(id);
-    let isSmartPlugLive = req.body.isSmartPlugLive;
-    let plug = req.body.plug;
-    let proximity = req.body.proximity;  
-    let plugState = req.body.plugState;
-    let proximityState = req.body.proximityState;
-    if (id && isSmartPlugLive && plug && proximity && plugState && proximityState) {
+    let smLive = req.body.smLive;
+    let smState = req.body.smState;
+    let smGroup = req.body.smGroup;
+    if (id && smLive && smState && smGroup) {
         smartPlugs.forEach((smartPlugs) => {
-           if (smartPlugs.id === inputId) {
-               smartPlugs.isSmartPlugLive = isSmartPlugLive;
-               smartPlugs.plug = plug;
-               smartPlugs.proximity = proximity;
-               smartPlugs.plugState = plugState;
-               smartPlugs.proximityState = proximityState;
+           if (smartPlugs.id === inputId || smartPlugs.smGroup === smGroup) {
+               smartPlugs.smLive = smLive;
+               smartPlugs.smState = smState;
+               smartPlugs.smGroup = smGroup;
            }
        });
        res.json(smartPlugs);;
@@ -83,15 +77,18 @@ app.delete('/smartplug/:id', function (req, res) {
 
 
 app.post('/smartplug', (req, res) => {
-    let id = req.body.id
-    let isSmartPlugLive = req.body.isSmartPlugLive;
-    let plug = req.body.plug;
-    let proximity = req.body.proximity;  
-    let plugState = req.body.plugState;
-    let proximityState = req.body.proximityState;
-    const newSmartPlug = {id,isSmartPlugLive,plug,proximity,plugState,proximityState};
    
-    if (id && isSmartPlugLive && plug && proximity && plugState && proximityState) {
+   
+    let id = req.body.id
+    let smLive = req.body.smLive; 
+    let smState = req.body.smState;
+    let smGroup = req.body.smGroup;
+    const newSmartPlug = {id,smLive,smState,smGroup};
+
+
+
+        
+    if (id && smLive && smState && smGroup) {
         smartPlugs.push (newSmartPlug);
         res.send(newSmartPlug);
     } else {

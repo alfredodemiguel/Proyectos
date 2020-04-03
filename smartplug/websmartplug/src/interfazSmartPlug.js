@@ -1,22 +1,18 @@
 import {Link} from 'react-router-dom';
 import React from 'react';
-import {getNumberOfSmartPlug,getIsSmartPlugLive, getPlug,setPlug} from './stateSmartPlug';
+
 
 
 function InterfazSmartPlug(props) {
 
-  let plugOfSmartPlug = "";
 
   function checkPlug(event) {
-    plugOfSmartPlug = (event.target.value);
+    let kk = (event.target.value);
   }
 
   function checkSubmited() {
-    setPlug (plugOfSmartPlug);
+    
   }
-console.log ('interfaxsmartplug');
-console.log (props);
-console.log (props.numberOfSmartPlug);
 
   return (
       <div>
@@ -24,11 +20,11 @@ console.log (props.numberOfSmartPlug);
         <br/>
         <br/>
         <br/>
-        <span>Id:{getNumberOfSmartPlug()}</span>
+        <span>Id:{props.numberOfSmartPlug}</span>
         <br/>
-        <span>IsSmartPlugLive:{getIsSmartPlugLive()}</span>
+        <span>IsSmartPlugLive:</span>
         <br/>
-        <span>Plug:{getPlug()}</span>
+        <span>Plug:</span>
         <br/>
         <br/>
         <form onSubmit={checkSubmited}>
