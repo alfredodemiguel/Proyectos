@@ -5,6 +5,8 @@
  */
 package Temporizador;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.*; 
 import java.io.IOException;
 import javax.sound.sampled.AudioSystem;
@@ -29,16 +31,39 @@ public class Temporizador extends javax.swing.JFrame {
                 minuto = minuto -1;
                 textField1.setText(Integer.toString(minuto));
             }else {
-                textField1.setText("FIN");
-                Reloj.stop();
-                sonido ();
-            }
+                if ((modoclasico == "false") && (vuelta == 0)){
+                        minuto = 5;
+                        vuelta = 1;
+                        textField1.setBackground(Color.green);
+                        textField1.setText(Integer.toString(minuto));
+                        sonido ();
+                } else
+                {
+                    textField1.setBackground(Color.red);
+                    textField1.setText("FIN");
+                    Reloj.stop();
+                    sonido ();
+                }
+            };
         };
         initComponents();
         
         
     }
 
+    
+
+@Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("Temporizador/logo.png"));
+
+
+        return retValue;
+    }
+
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,9 +80,12 @@ public class Temporizador extends javax.swing.JFrame {
         button2 = new java.awt.Button();
         button3 = new java.awt.Button();
         jLabel3 = new javax.swing.JLabel();
+        toogle = new javax.swing.JToggleButton();
+        jSpinner1 = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         jLabel1.setForeground(java.awt.Color.black);
@@ -72,7 +100,7 @@ public class Temporizador extends javax.swing.JFrame {
 
         textField1.setBackground(new java.awt.Color(252, 7, 7));
         textField1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        textField1.setText("50");
+        textField1.setText("25");
 
         button1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         button1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -102,6 +130,15 @@ public class Temporizador extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel3.setText("Tiempo Restante:");
 
+        toogle.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        toogle.setText("Clásico");
+        toogle.setToolTipText("");
+        toogle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toogleActionPerformed(evt);
+            }
+        });
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Temporizador/fondo1.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
 
@@ -110,70 +147,96 @@ public class Temporizador extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(textArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
-            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(160, 160, 160)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(toogle))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(340, 340, 340)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(textArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(280, 280, 280)
+                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1))
+                    .addComponent(toogle))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addComponent(textArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1))
-            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110)
+                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     ActionListener action = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                if (minuto > 0) {
-                    minuto = minuto -1;
-                    textField1.setText(Integer.toString(minuto));
-                }else {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            if (minuto > 0) {
+                minuto = minuto -1;
+                textField1.setText(Integer.toString(minuto));
+            }else {
+                if ((modoclasico == "false") && (vuelta == 0)){
+                        minuto = 5;
+                        vuelta = 1;
+                        textField1.setBackground(Color.green);
+                        textField1.setText(Integer.toString(minuto));
+                        sonido ();
+                } else
+                {
                     textField1.setBackground(Color.red);
                     textField1.setText("FIN");
                     Reloj.stop();
                     sonido ();
-                }
+                }  
             }
-        }; // Fin de la declaración del ActionListener.
-    
+        }
+    }; // Fin de la declaración del ActionListener.
+
     
     
     private void button1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseClicked
         // TODO add your handling code here:
-        textField1.setBackground(Color.green);
+         if ("false".equals(modoclasico)) {
+             if (vuelta == 0) { textField1.setBackground(Color.yellow);}else{
+                  textField1.setBackground(Color.green);
+             }
+         } else { textField1.setBackground(Color.green);}
+       
         Reloj.start();
     }//GEN-LAST:event_button1MouseClicked
 
@@ -187,10 +250,25 @@ public class Temporizador extends javax.swing.JFrame {
     private void button3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button3MouseClicked
         // TODO add your handling code here:
         Reloj.stop();
-        minuto = 50;
+        if ("true".equals(modoclasico)) {minuto = 50;} else {minuto = 25;}
+        vuelta = 0;
         textField1.setBackground(Color.red);
         textField1.setText(Integer.toString(minuto));
     }//GEN-LAST:event_button3MouseClicked
+
+    private void toogleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toogleActionPerformed
+        if (toogle.isSelected()) {
+            modoclasico = "true";
+            minuto = 50;
+            textField1.setText(Integer.toString(minuto));
+        } else {
+            modoclasico = "false";
+            minuto = 25;
+            vuelta = 0;
+            textField1.setText(Integer.toString(minuto));
+            
+        }
+    }//GEN-LAST:event_toogleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,9 +316,10 @@ public class Temporizador extends javax.swing.JFrame {
     
     
     
-    
+    String modoclasico = "false";
+    int vuelta = 0;
     public Clip clip;
-    int minuto = 50;
+    int minuto = 25;
     Timer Reloj = new Timer(60000, action);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button button1;
@@ -249,7 +328,9 @@ public class Temporizador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JSpinner jSpinner1;
     private java.awt.TextArea textArea1;
     private java.awt.TextField textField1;
+    private javax.swing.JToggleButton toogle;
     // End of variables declaration//GEN-END:variables
 }

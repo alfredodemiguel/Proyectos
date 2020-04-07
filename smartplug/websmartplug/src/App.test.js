@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './Appx';
+import Validation from './Validation';
 
 test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
+  const { getByText } = render(<Validation />);
+  const linkElement = getByText("Number Of SmartPlug:");
   expect(linkElement).toBeInTheDocument();
 });

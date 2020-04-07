@@ -6,18 +6,21 @@ import Validation from './Validation';
 import InterfazSmartPlug from './interfazSmartPlug';
 
 
-window.$numberOfSmartPlug = 0 //global variable
+window.$id = 0;
+window.$smLive = "Off";
+window.$smState = "Off";
+window.$smGroup = "0000";
 
 
 
 const App = () => (
     <BrowserRouter>
             <Route exact path ='/' component={Validation}/>   
-            <Route path ='/smartPlug' component={()=> <InterfazSmartPlug numberOfSmartPlug={window.$numberOfSmartPlug}/>}/>
+            <Route path ='/smartPlug' component={()=> <InterfazSmartPlug id={window.$id} smLive={window.$smLive} smState={window.$smState} smGroup={window.$smGroup}/>}/>
     </BrowserRouter>
 );
 
-
+ 
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

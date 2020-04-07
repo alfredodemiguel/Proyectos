@@ -30,14 +30,17 @@ function Validation(props) {
   
   
   function checkNumber(event) {
-    window.$numberOfSmartPlug = (event.target.value);
+    window.$id = (event.target.value);
   }
   
   
   
   function checkNumberSubmited (){
     menPlugs.forEach(element => {
-                                if (element.id === parseInt(window.$numberOfSmartPlug)){
+                                if (element.id === parseInt(window.$id)){
+                                  window.$smLive = element.smLive;
+                                  window.$smState = element.smState;
+                                  window.$smGroup = element.smGroup;
                                   history.push(`/smartPlug`);
                                 }
                               });

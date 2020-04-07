@@ -253,27 +253,27 @@ const expect = require('chai').expect;
 
 
 
-	// await describe('Post Exitent Data of smartPlug',()=>{
+	await describe('Post Exitent Data of smartPlug',()=>{
 
-	// 	it('Post Exitent data smartPlug', (done) => {
-	// 		const id = 2;
-	// 		smLive = 'True';
-    //         smState = 'Off';
-    //         smGroup = '0000';
-	// 		const newSmartPlug = {id,smLive,smState,smGroup};
-	// 		smartPlugs.push (newSmartPlug);
+		it('Post Exitent data smartPlug', (done) => {
+			const id = 2;
+			smLive = 'True';
+            smState = 'Off';
+            smGroup = '0000';
+			const newSmartPlug = {id,smLive,smState,smGroup};
+			smartPlugs.push (newSmartPlug);
 			
 			
-	// 		chai.request(url)
-	// 			.post('/smartplug')
-	// 			.set('Content-Type', 'application/json')
-	// 			.send(newSmartPlug)
-	// 			.end( function(err,res){
-	// 				expect(res).to.have.status(200);
-	// 				done();
-	// 			});
-	// 	});   
-	// });
+			chai.request(url)
+				.post('/smartplug')
+				.set('Content-Type', 'application/json')
+				.send(newSmartPlug)
+				.end( function(err,res){
+					expect(res).to.have.status(200);
+					done();
+				});
+		});   
+	});
 
 
 
