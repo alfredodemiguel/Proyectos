@@ -37,7 +37,7 @@ function Validation(props) {
   
   function checkNumberSubmited (){
     menPlugs.forEach(element => {
-                                if (element.id === window.$id){
+                                if (element.id === parseInt(window.$id)){
                                   window.$smLive = element.smLive;
                                   window.$smState = element.smState;
                                   window.$smGroup = element.smGroup;
@@ -62,7 +62,7 @@ function Validation(props) {
         <form onSubmit={checkNumberSubmited}>
           <label>
             Number Of SmartPlug:
-            <input type="text" name="numberOfSmartPlug" placeholder="0" onChange={checkNumber}/>
+            <input type="number" name="numberOfSmartPlug" placeholder="0" onChange={checkNumber}/>
           </label>
           <input type="submit" value="Submit" />
         </form>

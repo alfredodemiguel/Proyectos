@@ -31,16 +31,17 @@ app.get('/smartplug', function(req, res) {
     });
     res.send(smartPlugs);
 });
- 
+
 
 app.get('/smartplug/:id', function(req, res) {
     let selectedSmartPlug;
 
     const { id } = req.params;
-    
+    let inputId = parseInt(id);
+
     if (id) {
         smartPlugs.forEach((smartPlugs) => {
-           if (smartPlugs.id === id) {
+           if (smartPlugs.id === inputId) {
             if ((Date.now() - smartPlugs.smTimeStamp) > 30000){
                 smLive = "false"
                 smartPlugs.smLive = "false"
@@ -60,13 +61,14 @@ app.get('/smartplug/:id', function(req, res) {
 
 app.put('/smartplug/:id', function (req, res) {
     const { id } = req.params;
+    let inputId = parseInt(id);
     let smLive = req.body.smLive;
     let smState = req.body.smState;
     let smGroup = req.body.smGroup;
     let smTimeStamp = req.body.smTimeStamp;
-    if (id && smLive && smState && smGroup) {
+    if (id && smLive && smState && smGroup && smTimeStamp) {
         smartPlugs.forEach((smartPlugs) => {
-           if (smartPlugs.id === id || smartPlugs.smGroup === smGroup) {
+           if (smartPlugs.id === inputId || smartPlugs.smGroup === smGroup) {
                smartPlugs.smLive = smLive;
                smartPlugs.smState = smState;
                smartPlugs.smGroup = smGroup;
@@ -87,7 +89,7 @@ app.delete('/smartplug/:id', function (req, res) {
     const { id } = req.params;
    
     smartPlugs.forEach(element => {
-        if (element.id === id) {
+        if (element.id === parseInt(id)) {
             numberItem = cont;
         }
         cont = cont + 1;
@@ -114,7 +116,7 @@ app.post('/smartplug', (req, res) => {
     
     if (id && smLive && smState && smGroup) {
         smartPlugs.forEach(element => {
-            if (element.id === id) {
+            if (element.id === parseInt(id)) {
                 numberItem = cont;
             }
             cont = cont + 1;
