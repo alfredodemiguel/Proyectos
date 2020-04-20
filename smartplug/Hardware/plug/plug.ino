@@ -4,7 +4,7 @@
 #include <ESP8266HTTPClient.h>
 
 //-------------------VARIABLES GLOBALES--------------------------
-const char* url = "http://192.168.17.44:3017/smartplug";
+const char* url = "http://192.168.17.44:3017/smartplug/";
 int contconexion = 0;
 unsigned long previousMillis = 0;
 
@@ -16,6 +16,8 @@ const char *passConf = "";
 
 String mensaje = "";
 String mac;
+
+
 
 //-----------CODIGO HTML PAGINA DE CONFIGURACION---------------
 String pagina = "<!DOCTYPE html>"
@@ -43,7 +45,7 @@ void setup_wifi() {
 // Conexión WIFI
   WiFi.mode(WIFI_STA); //para que no inicie el SoftAP en el modo normal
   WiFi.begin(ssid, pass);
-  while (WiFi.status() != WL_CONNECTED and contconexion <50) { //Cuenta hasta 50 si no se puede conectar lo cancela
+  while (WiFi.status() != WL_CONNECTED and contconexion <150) { //Cuenta hasta 150 si no se puede conectar lo cancela
     ++contconexion;
     delay(250);
     Serial.print(".");
@@ -157,23 +159,60 @@ void escanear() {
 }
 
 void actualizarDatos () {
+      String datos = obtenerDatos();
+      String smState = (obtenerState (datos));
+      String smGroup = (obtenerGroup (datos));
+      if (smState == "On"){
+        digitalWrite(4,HIGH);
+      } else {
+        digitalWrite(4,LOW);
+      }
+    
+     
+     
     HTTPClient http;
     //String stringSent = "\{\"isRoverLive\":\"true\",\"message\":\"" + Message + "\",\"distance\":" + distance + "\}";  
-    String stringSent = "\{\"id\": \"" + mac + "\",\"smLive\": \"true\",\"smState\": \"On\",\"smGroup\": \"0003\", \"smTimeStamp\": \"1\"\}";
-    http.begin(url);      
+    String stringSend = "\{\"id\": \"" + mac + "\",\"smLive\": \"true\",\"smState\": \"" + smState + "\",\"smGroup\":  \"" + smGroup + "\", \"smTimeStamp\": \"1\"\}";
+    http.begin(url);     
     http.addHeader("Content-Type", "application/json"); 
-    int codeRespond = http.POST(stringSent);   
+    int codeRespond = http.POST(stringSend);   
     http.end();  
 }
 
-void obtenerDatos (){
+
+String obtenerState (String bodyResponse){
+  int startState = bodyResponse.indexOf(':',43);
+  int endState = bodyResponse.indexOf('\"',startState+2);
+  String smState = bodyResponse.substring(startState+2,endState);
+  if (smState == "]" or smState == "") {
+    smState = "Off";
+  }
+  return (smState);
+}
+
+String obtenerGroup (String bodyResponse){
+  int startGroup = bodyResponse.indexOf(':',54);
+  int endGroup = bodyResponse.indexOf('\"',startGroup+2);
+  String smGroup = bodyResponse.substring(startGroup+2,endGroup);
+  if (smGroup == "]" or smGroup == "") {
+    smGroup = "0000";
+  }
+  return (smGroup);
+}
+
+
+String obtenerDatos (){
       HTTPClient http;
-      http.begin(url);         
+      String urlGet = url + mac;
+      http.begin(urlGet);         
       http.addHeader("Content-Type", "application/json"); 
       int codeResponse = http.GET();   
       String bodyResponse = http.getString();
-      Serial.println(bodyResponse);
       http.end();  
+      Serial.println ("Obtener datos");
+      Serial.println(urlGet);
+      Serial.println (bodyResponse);
+      return (bodyResponse);
 }
 
 
@@ -189,7 +228,7 @@ void setup() {
 
   EEPROM.begin(512);
 
-  
+  pinMode(4, OUTPUT);  
 
 
   leer(0).toCharArray(ssid, 50);
@@ -202,17 +241,15 @@ void setup() {
 
 //--------------------------LOOP--------------------------------
 void loop() {
-
-  unsigned long currentMillis = millis();
 	
-  if (currentMillis - previousMillis >= 5000) { 
-    previousMillis = currentMillis;
     Serial.println(mac);
     
 	  server.handleClient();
   	if(WiFi.status()== WL_CONNECTED){   
-  		obtenerDatos();
       actualizarDatos();
-  	}  
-  }
+  	} else {
+      digitalWrite(4,LOW); 
+  	}
+   delay (10000);
+  
 }

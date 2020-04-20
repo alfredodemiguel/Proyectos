@@ -172,6 +172,17 @@ F 3 "~" H 8950 3250 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
+L Device:Fuse F2
+U 1 1 5EA8E288
+P 7250 3050
+F 0 "F2" V 7310 3096 50  0000 L CNN
+F 1 "Portafusible para fusible 5x20mm (Quick Blow 630ma)" H 7310 3005 24  0000 L CNN
+F 2 "" V 7180 3050 50  0001 C CNN
+F 3 "~" H 7250 3050 50  0001 C CNN
+	1    7250 3050
+	0    -1   -1   0   
+$EndComp
+$Comp
 L Device:CP1_Small C3
 U 1 1 5EA90A0F
 P 6900 2950
@@ -187,11 +198,22 @@ L Device:CP1_Small C1
 U 1 1 5EA928E5
 P 6650 2950
 F 0 "C1" H 6559 2925 50  0000 R CNN
-F 1 "Capacitor 22uF" H 6559 2996 24  0000 L CNN
+F 1 "Capacitor 22uF" H 6559 2996 24  0000 R CNN
 F 2 "" H 6650 2950 50  0001 C CNN
 F 3 "~" H 6650 2950 50  0001 C CNN
 	1    6650 2950
 	-1   0    0    1   
+$EndComp
+$Comp
+L Device:Fuse F3
+U 1 1 5EA96872
+P 7250 3700
+F 0 "F3" V 7310 3746 50  0000 L CNN
+F 1 "Portafusible para fusible 5x20mm (Quick Blow 630ma)" H 7310 3655 24  0000 R CNN
+F 2 "" V 7180 3700 50  0001 C CNN
+F 3 "~" H 7250 3700 50  0001 C CNN
+	1    7250 3700
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:CP1_Small C4
@@ -209,7 +231,7 @@ L Device:CP1_Small C2
 U 1 1 5EA9F1E7
 P 6650 3600
 F 0 "C2" H 6559 3575 50  0000 R CNN
-F 1 "Capacitor 22uF" H 6559 3646 24  0000 L CNN
+F 1 "Capacitor 22uF" H 6559 3646 24  0000 R CNN
 F 2 "" H 6650 3600 50  0001 C CNN
 F 3 "~" H 6650 3600 50  0001 C CNN
 	1    6650 3600
@@ -394,26 +416,4 @@ Wire Wire Line
 	9650 3550 9900 3550
 Wire Wire Line
 	9650 3650 9900 3650
-$Comp
-L Device:Fuse F3
-U 1 1 5EA96872
-P 7250 3700
-F 0 "F3" V 7192 3746 50  0000 C CNN
-F 1 "Portafusible para fusible 5x20mm (Quick Blow 630ma)" H 7310 3655 24  0000 R CNN
-F 2 "" V 7180 3700 50  0001 C CNN
-F 3 "~" H 7250 3700 50  0001 C CNN
-	1    7250 3700
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:Fuse F2
-U 1 1 5EA8E288
-P 7250 3050
-F 0 "F2" V 7192 3096 50  0000 L CNN
-F 1 "Portafusible para fusible 5x20mm (Quick Blow 630ma)" H 7310 3005 24  0000 L CNN
-F 2 "" V 7180 3050 50  0001 C CNN
-F 3 "~" H 7250 3050 50  0001 C CNN
-	1    7250 3050
-	0    -1   -1   0   
-$EndComp
 $EndSCHEMATC
