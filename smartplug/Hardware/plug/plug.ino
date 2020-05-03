@@ -4,7 +4,7 @@
 #include <ESP8266HTTPClient.h>
 
 //-------------------VARIABLES GLOBALES--------------------------
-const char* url = "http://192.168.17.44:3017/smartplug/";
+const char* url = "http://192.168.17.2:3017/smartplug/";
 int contconexion = 0;
 unsigned long previousMillis = 0;
 
@@ -17,7 +17,8 @@ const char *passConf = "";
 String mensaje = "";
 String mac;
 
-
+// Variable Sensor de movimiento
+  int val;
 
 //-----------CODIGO HTML PAGINA DE CONFIGURACION---------------
 String pagina = "<!DOCTYPE html>"
@@ -164,18 +165,25 @@ void actualizarDatos () {
       String smGroup = (obtenerGroup (datos));
       if (smState == "On"){
         digitalWrite(4,HIGH);
+        digitalWrite(13,HIGH);
       } else {
         digitalWrite(4,LOW);
+        digitalWrite(13,LOW);
       }
     
      
      
     HTTPClient http;
-    //String stringSent = "\{\"isRoverLive\":\"true\",\"message\":\"" + Message + "\",\"distance\":" + distance + "\}";  
-    String stringSend = "\{\"id\": \"" + mac + "\",\"smLive\": \"true\",\"smState\": \"" + smState + "\",\"smGroup\":  \"" + smGroup + "\", \"smTimeStamp\": \"1\"\}";
+    //String stringSend = "\{\"id\": \"" + mac + "\",\"smLive\": \"true\",\"smState\": \"" + smState + "\",\"smGroup\": \"" + smGroup + "\", \"smTimeStamp\": \"1\"\}";
+    String stringSend = "\{\"id\":\"" + mac + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1\}";
     http.begin(url);     
     http.addHeader("Content-Type", "application/json"); 
-    int codeRespond = http.POST(stringSend);   
+    Serial.println ("antes Post");
+    Serial.println (url);
+    Serial.println (stringSend);
+    int codeRespond = http.POST(stringSend); 
+    Serial.println ("codigo operacion");
+    Serial.println (codeRespond);
     http.end();  
 }
 
@@ -227,8 +235,11 @@ void setup() {
   Serial.println("");
 
   EEPROM.begin(512);
-
+  // Pin Rele
   pinMode(4, OUTPUT);  
+  // Pin Led Rele
+  pinMode (13, OUTPUT);
+  
 
 
   leer(0).toCharArray(ssid, 50);
@@ -250,6 +261,15 @@ void loop() {
   	} else {
       digitalWrite(4,LOW); 
   	}
+   val = digitalRead(14);
+   if (val == LOW)
+    {
+      Serial.println("No motion");
+    }
+    else
+    {
+      Serial.println("Motion detected  ALARM");
+    }
    delay (10000);
   
 }
