@@ -4,7 +4,7 @@
 #include <ESP8266HTTPClient.h>
 
 //-------------------VARIABLES GLOBALES--------------------------
-const char* url = "http://192.168.17.44:3017/smartplug/";
+const char* url = "http://api-smartplug.herokuapp.com/smartplug/";
 int contconexion = 0;
 unsigned long previousMillis = 0;
 
@@ -174,8 +174,8 @@ void actualizarDatos () {
      
      
     HTTPClient http;
-    //String stringSend = "\{\"id\": \"" + mac + "\",\"smLive\": \"true\",\"smState\": \"" + smState + "\",\"smGroup\": \"" + smGroup + "\", \"smTimeStamp\": \"1\"\}";
-    String stringSend = "\{\"id\":\"" + mac + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1\}";
+    //id,smLive,smState,smGroup,smTimeStamp,smProximity,smEmail,smStateEmail,smUser,smPassword,smInitialConf,smPG1,smPG2,smPG3
+    String stringSend = "\{\"id\":\"" + mac + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"On\",\"smEmail\":\"alfredodemiguel\@yahoo.es\",\"smStateEmail\":\"On\",\"smUser\":\"user01\",\"smPassword\":\"password\",\"smInitialConf\":\"On\",\"smPG1\":\"pg1\",\"smPG2\":\"pg2\",\"smPG3\":\"pg3\"\}";
     http.begin(url);     
     http.addHeader("Content-Type", "application/json"); 
     Serial.println ("antes Post");

@@ -3,6 +3,10 @@ const morgan = require ('morgan');
 const bodyParser = require('body-parser');
 var cors = require('cors-express');
 const app = express();
+//const port = process.env.PORT;
+const port = 3017;
+
+
 
 app.use (morgan('dev'));
 app.use(express.static('.'));
@@ -19,14 +23,15 @@ app.use(cors(options));
 
 var smartPlugs = [];
 
+
+app.get ('/', (req, res) => res.send ('SmartPlug'));
+
 app.get('/smartplug', function(req, res) {
     smartPlugs.forEach((smartPlugs) => {
          if ((Date.now() - smartPlugs.smTimeStamp) > 30000){
-             //smLive = "false"
              smartPlugs.smLive = "false"
          } else {
              smartPlugs.smLive = "true"
-             //smLive = "true"
          }
     });
     res.send(smartPlugs);
@@ -41,13 +46,13 @@ app.get('/smartplug/:id', function(req, res) {
     if (id) {
         smartPlugs.forEach((smartPlugs) => {
            if (smartPlugs.id === id) {
-            if ((Date.now() - smartPlugs.smTimeStamp) > 30000){
-                smLive = "false"
-                smartPlugs.smLive = "false"
-            } else {
-                smartPlugs.smLive = "true"
-                smLive = "true"
-            }
+                if ((Date.now() - smartPlugs.smTimeStamp) > 30000){
+                    smLive = "false"
+                    smartPlugs.smLive = "false"
+                } else {
+                    smartPlugs.smLive = "true"
+                    smLive = "true"
+                }
             smState = smartPlugs.smState;
             smGroup = smartPlugs.smGroup;
             smTimeStamp = smartPlugs.smTimeStamp;
@@ -84,7 +89,7 @@ app.put('/smartplug/:id', function (req, res) {
     let smPG2 = req.body.smPG2;
     let smPG3 = req.body.smPG3;
 
-    if (id && smLive && smState && smGroup && smProximity && smEmail && smStateEmail 
+    if (id && smLive && smState && sm/Group && smProximity && smEmail && smStateEmail 
         && smUser && smPassword && smInitialConf && smPG1 && smPG2 && smPG3) {
         // Modifica el registro en cuestión y los del grupo
         smartPlugs.forEach((smartPlugs) => {
@@ -216,7 +221,7 @@ app.post('/smartplug', (req, res) => {
     }
 });
 
-app.listen(3017, () => {
- console.log("El servidor está inicializado en el puerto 3017");
+app.listen(port, () => {
+ console.log("El servidor está inicializado en el puerto: " + port);
 });
  
