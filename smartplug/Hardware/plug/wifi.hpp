@@ -42,6 +42,18 @@ String obtenerGroup (String bodyResponse){
 }
 
 
+String obtenerProximity (String bodyResponse){
+  int startProximity = bodyResponse.indexOf(':',54);
+  int endProximity = bodyResponse.indexOf('\"',startProximity+2);
+  String smProximity = bodyResponse.substring(startProximity+2,endProximity);
+  if (smProximity == "]" or smProximity == "") {
+    smProximity = "0000";
+  }
+  return (smProximity);
+}
+
+
+
 
 String obtenerDatos (){
       HTTPClient http;

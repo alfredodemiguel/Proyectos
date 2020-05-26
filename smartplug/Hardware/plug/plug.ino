@@ -2,10 +2,12 @@
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
 #include <ESP8266HTTPClient.h>
+#include <base64.h>
 
 
 // Inicialización del cliente wifi
 WiFiClient espClient;
+WiFiClientSecure client;
 ESP8266WebServer server(80);
 
 
@@ -14,6 +16,7 @@ ESP8266WebServer server(80);
 #include "wifi.hpp"
 #include "EEprom_IO.hpp"
 #include "ap_wifi.hpp"
+#include "email.hpp"
 
  
 
