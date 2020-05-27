@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <title>Configuración SmartPlug</title>
+        <meta charset='UTF-8'>
+        <style>
+            .titulo {
+              float: top;
+              font-size:5vw;
+              text-align: center;
+              color: chartreuse;
+            }
+            .cuerpo {
+                background-color:blue;
+                border:1px solid chartreuse;
+            }
+            .formulario{
+                color: chartreuse;
+            }
+        </style>
+    </head>
+    <body class='cuerpo'>
+        <h1 class='titulo' >SMART PLUG</h1>
+        <form action='guardar_conf' method='get' class="formulario">
+            SSID:
+            <input class='input1' name='ssid' type='text'><br>
+            PASSWORD:
+            <input class='input1' name='pass' type='password'><br><br>
+            <input type='checkbox' name='switch'><br><br>
+            <input class='boton' type='submit' value='GUARDAR'/><br><br>
+        </form>
+        <a href='escanear'><button class='boton'>ESCANEAR</button></a><br><br>
+        <a href='validacion'><button class='boton'>VALIDACIÓN</button></a><br><br>
+    </body>
+</html>
