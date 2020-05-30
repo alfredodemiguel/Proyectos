@@ -7,7 +7,7 @@
 
 // Inicialización del cliente wifi
 WiFiClient espClient;
-//WiFiClientSecure client;
+WiFiClientSecure client;
 ESP8266WebServer server(80);
 
 
@@ -16,7 +16,7 @@ ESP8266WebServer server(80);
 #include "wifi.hpp"
 #include "EEprom_IO.hpp"
 #include "ap_wifi.hpp"
-//#include "email.hpp"
+#include "email.hpp"
 
  
 
@@ -47,6 +47,7 @@ void setup() {
   mac = WiFi.macAddress();
   setup_wifi();
   ap_wifi();
+  sendEmail();
 }
 
 //--------------------------LOOP--------------------------------
