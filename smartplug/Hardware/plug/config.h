@@ -1,28 +1,28 @@
 char ssid[50];      
 char pass[50];
-char usuario[50];
-char contrasena[50];
-char grupo[50];
-char email[50];
 char url[50];
 
-const char *ssidConf = "";
-const char *passConf = "";
-const char *usuarioConf = "";
-const char *contrasenaConf = "";
-const char *grupoConf = "";
-const char *emailConf = "";
-const char *urlConf = "";
 
+String id;
+String smLive;
+String smState;
+String smGroup;
+String smTimeStamp;
+String smProximity;
+String smEmail;
+String smStateEmail;
+String smUser;
+String smPassword;
+String smInitialConf;
+String smPG1, smPG2, smPG3;
 
 int movimiento;
 int operacion;
 
 
-
-
+String bodyResponse;
 String mensaje = "";
-String mac;
+
 
 // Email
 const char* fingerprint = "289509731da223e5218031c38108dc5d014e829b"; // For smtp.gmail.com

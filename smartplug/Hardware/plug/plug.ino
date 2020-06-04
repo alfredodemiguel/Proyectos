@@ -18,7 +18,24 @@ ESP8266WebServer server(80);
 #include "ap_wifi.hpp"
 #include "email.hpp"
 
- 
+void _startVariables (){
+
+  id = WiFi.macAddress();
+  read(0).toCharArray(ssid, 50);
+  read(50).toCharArray(pass, 50);
+  smUser = read(100);
+  smPassword = read(150);
+  smGroup = read(200);
+  smEmail = read(250);
+  read(300).toCharArray(url, 50);
+  smState = "Off";
+  smProximity = "Off";
+  smStateEmail = "Off";
+  smInitialConf = "Off";
+  smPG1 = "Off";
+  smPG2 = "Off";
+  smPG3 = "Off";
+}
 
 //------------------------SETUP-----------------------------
 void setup() {
@@ -36,15 +53,8 @@ void setup() {
   
   //Inicia acceso flash y carga valores del mismo.
   EEPROM.begin(512);
-  leer(0).toCharArray(ssid, 50);
-  leer(50).toCharArray(pass, 50);
-  leer(100).toCharArray(usuario, 50);
-  leer(150).toCharArray(contrasena, 50);
-  leer(200).toCharArray(grupo, 50);
-  leer(250).toCharArray(email, 50);
-  leer(300).toCharArray(url, 50);
-  Serial.println(WiFi.macAddress());
-  mac = WiFi.macAddress();
+  
+  _startVariables ();
   setup_wifi();
   ap_wifi();
   sendEmail();
@@ -53,11 +63,12 @@ void setup() {
 //--------------------------LOOP--------------------------------
 void loop() {
 	
-    Serial.println(mac);
+    Serial.println(id);
     
 	  server.handleClient();
   	if(WiFi.status()== WL_CONNECTED){   
-      actualizarDatos();
+      getApi ();
+      postApi();
   	} else {
       digitalWrite(4,LOW); 
   	}

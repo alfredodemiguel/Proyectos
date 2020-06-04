@@ -1,7 +1,7 @@
 void setup_wifi() {
   int contconexion = 0;
   
-  WiFi.mode(WIFI_STA); //para que no inicie el SoftAP en el modo normal
+  WiFi.mode(WIFI_STA); 
   WiFi.begin(ssid, pass);
   while (WiFi.status() != WL_CONNECTED and contconexion <150) {
     ++contconexion;
@@ -20,72 +20,50 @@ void setup_wifi() {
 }
 
 
-String obtenerState (String bodyResponse){
-  int startState = bodyResponse.indexOf(':',43);
-  int endState = bodyResponse.indexOf('\"',startState+2);
-  String smState = bodyResponse.substring(startState+2,endState);
-  if (smState == "]" or smState == "") {
-    smState = "Off";
+String _extractDataOfResponseApi (String searchedString, String bodyResponse){
+  String extractedData;
+  int startPositionData;
+  int endPositionData;
+  
+  startPositionData = (bodyResponse.indexOf(":", (bodyResponse.indexOf(searchedString)))) + 2;
+  endPositionData = bodyResponse.indexOf('\"',startPositionData);
+  extractedData = bodyResponse.substring(startPositionData,endPositionData);
+
+  if (extractedData == "]") {
+    extractedData = "";
   }
-  return (smState);
+  
+  return (extractedData);
+}
+
+void _setVariables (){
+  smState = (_extractDataOfResponseApi("smState",bodyResponse));
+  smGroup = (_extractDataOfResponseApi("smGroup",bodyResponse));
+  smProximity = (_extractDataOfResponseApi("smProximity",bodyResponse));
+  smEmail = (_extractDataOfResponseApi("smEmail",bodyResponse));
+  smStateEmail = (_extractDataOfResponseApi("smStateEmail",bodyResponse));
+  smUser = (_extractDataOfResponseApi("smUser",bodyResponse));
+  smPassword = (_extractDataOfResponseApi("smPassword",bodyResponse));
+  smInitialConf = (_extractDataOfResponseApi("smInitialConf",bodyResponse));
+  smPG1 = (_extractDataOfResponseApi("smPG1",bodyResponse));
+  smPG2 = (_extractDataOfResponseApi("smPG2",bodyResponse));
+  smPG3 = (_extractDataOfResponseApi("smPG3",bodyResponse));
+  Serial.println (smPG3);
 }
 
 
-String obtenerGroup (String bodyResponse){
-  int startGroup = bodyResponse.indexOf(':',54);
-  int endGroup = bodyResponse.indexOf('\"',startGroup+2);
-  String smGroup = bodyResponse.substring(startGroup+2,endGroup);
-  if (smGroup == "]" or smGroup == "") {
-    smGroup = "0000";
-  }
-  return (smGroup);
-}
-
-
-String obtenerProximity (String bodyResponse){
-  int startProximity = bodyResponse.indexOf(':',110);
-  int endProximity = bodyResponse.indexOf('\"',startProximity+2);
-  String smProximity = bodyResponse.substring(startProximity+2,endProximity);
-  if (smProximity == "]" or smProximity == "") {
-    smProximity = "0000";
-  }
-  return (smProximity);
-}
-
-
-
-
-String obtenerDatos (){
-      Serial.println ("INICIO --- Obtener datos");
-      HTTPClient http;
-      String urlGet = url + mac;
-      Serial.println ("Urlget:" + urlGet);
-      http.begin(urlGet);         
-      http.addHeader("Content-Type", "application/json"); 
-      int codeResponse = http.GET();   
-      Serial.println (codeResponse);
-      String bodyResponse = http.getString();
-      Serial.println ("bodyResponse:" + bodyResponse);
-      delay (10000);
-      http.end();  
-      Serial.println ("FIN --- Obtener datos");
-      return (bodyResponse);
-}
-
-void actualizarDatos () {
-    String datos = obtenerDatos();
-    String smState = (obtenerState (datos));
-    String smGroup = (obtenerGroup (datos));
-    String smProximity = (obtenerProximity (datos));
-    Serial.println ("INICIO --- Extracción datos");
-    Serial.println ("Datos: " + datos);
-    Serial.println (smState);
-    Serial.println ("smGroup:" + smGroup);
-    Serial.println ("smProximity:" + smProximity);
-    Serial.println ("FIN --- Extracción datos");
-
-
+String getApi (){
+    String URLGET = url + id;
     
+    HTTPClient http;
+    http.begin(URLGET);         
+    http.addHeader("Content-Type", "application/json"); 
+    int codeResponse = http.GET();   
+    bodyResponse = http.getString();
+    http.end();  
+
+    _setVariables ();
+ 
     if (smState == "On"){
       digitalWrite(4,HIGH);
       digitalWrite(13,HIGH);
@@ -93,18 +71,19 @@ void actualizarDatos () {
       digitalWrite(4,LOW);
       digitalWrite(13,LOW);
     }    
-     
-    HTTPClient http;
-    //id,smLive,smState,smGroup,smTimeStamp,smProximity,smEmail,smStateEmail,smUser,smPassword,smInitialConf,smPG1,smPG2,smPG3
-    String stringSend = "\{\"id\":\"" + mac + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"On\",\"smEmail\":\"alfredodemiguel\@yahoo.es\",\"smStateEmail\":\"On\",\"smUser\":\"user01\",\"smPassword\":\"password\",\"smInitialConf\":\"On\",\"smPG1\":\"pg1\",\"smPG2\":\"pg2\",\"smPG3\":\"pg3\"\}";
-    http.begin(url);     
-    http.addHeader("Content-Type", "application/json"); 
-    Serial.println ("INICIO ---- Post");
-    Serial.println (url);
-    Serial.println (stringSend);
-    int codeRespond = http.POST(stringSend); 
-    Serial.println ("codigo operacion");
-    Serial.println (codeRespond);
-    Serial.println ("FIN ---- Post");
-    http.end();  
+
+    
+    return (bodyResponse);
+}
+
+
+
+void postApi () {
+  String stringSend = "\{\"id\":\"" + id + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"" + smProximity + "\",\"smEmail\":\"" + smEmail + "\",\"smStateEmail\":\"" + smStateEmail + "\",\"smUser\":\"" + smUser + "\",\"smPassword\":\"" + smPassword + "\",\"smInitialConf\":\"" + smInitialConf + "\",\"smPG1\":\"" + smPG1 + "\",\"smPG2\":\"" + smPG2 + "\",\"smPG3\":\"" + smPG3 + "\"\}"; 
+  
+  HTTPClient http;
+  http.begin(url);     
+  http.addHeader("Content-Type", "application/json"); 
+  int codeRespond = http.POST(stringSend); 
+  http.end();  
 }

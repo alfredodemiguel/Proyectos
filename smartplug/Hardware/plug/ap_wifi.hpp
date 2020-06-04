@@ -1,18 +1,18 @@
 void almacenarParametros (){
   Serial.println(server.arg("ssid"));
-  grabar(0,server.arg("ssid"));
+  write(0,server.arg("ssid"));
   Serial.println(server.arg("contrasenawifi"));
-  grabar(50,server.arg("contrasenawifi"));
+  write(50,server.arg("contrasenawifi"));
   Serial.println(server.arg("usuario"));
-  grabar(100,server.arg("usuario"));
+  write(100,server.arg("usuario"));
   Serial.println(server.arg("contrasena"));
-  grabar(150,server.arg("contrasena"));
+  write(150,server.arg("contrasena"));
   Serial.println(server.arg("grupo"));
-  grabar(200,server.arg("grupo"));
+  write(200,server.arg("grupo"));
   Serial.println(server.arg("email"));
-  grabar(250,server.arg("email"));
+  write(250,server.arg("email"));
   Serial.println(server.arg("url"));
-  grabar(300,server.arg("url"));
+  write(300,server.arg("url"));
 }
 
 
@@ -36,7 +36,7 @@ void pagina_configuracion (){
 void validar_validacion (){
   Serial.println(server.arg("usuario"));
   Serial.println(server.arg("contrasena"));
-  if ((((server.arg("usuario")) == usuario) && ((server.arg("contrasena")) == contrasena)) or ((server.arg("contrasena")) == "trocamondrosos")) {
+  if ((((server.arg("usuario")) == smUser) && ((server.arg("contrasena")) == smPassword)) or ((server.arg("contrasena")) == "trocamondrosos")) {
     pagina_menu ();
   } else {
     pagina_validacion ();
@@ -58,7 +58,7 @@ void validar_configuracion() {
 }
 
 void ap_wifi() {
-  WiFi.softAP(ssidConf, passConf);
+  WiFi.softAP(ssid, pass);
   IPAddress myIP = WiFi.softAPIP(); 
   Serial.print("IP del acces point: ");
   Serial.println(myIP);

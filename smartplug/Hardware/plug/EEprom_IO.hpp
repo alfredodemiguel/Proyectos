@@ -1,5 +1,5 @@
 //----------------Función para grabar en la EEPROM-------------------
-void grabar(int addr, String a) {
+void write(int addr, String a) {
   int tamano = a.length(); 
   char inchar[50]; 
   a.toCharArray(inchar, tamano+1);
@@ -14,7 +14,7 @@ void grabar(int addr, String a) {
 
 
 //-----------------Función para leer la EEPROM------------------------
-String leer(int addr) {
+String read(int addr) {
    byte lectura;
    String strlectura;
    for (int i = addr; i < addr+50; i++) {
