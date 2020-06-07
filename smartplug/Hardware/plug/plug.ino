@@ -2,16 +2,8 @@
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
 #include <ESP8266HTTPClient.h>
-//#include <base64.h>
-#include <stdio.h>
-#include <string.h>
-
 #include "Base64.h"
 
-
-//extern "C" {
-//#include "crypto/base64.h"
-//}
 
 
 
@@ -69,9 +61,8 @@ void setup() {
   setup_wifi();
   ap_wifi();
   Serial.println ("inicio Codificacion");
-  Serial.println (_encodePassword ("Hola"));
-  Serial.println (_decodePassword ("SG9sYQ=="));
-
+  Serial.println (_encodePassword ("troca"));
+  Serial.println (_decodePassword ("dHJvY2E="));
   Serial.println ("Fin Codificacion");
   //sendEmail();
 }
@@ -83,8 +74,8 @@ void loop() {
     
 	  server.handleClient();
   	if(WiFi.status()== WL_CONNECTED){   
-      getApi ();
       postApi();
+      getApi ();
   	} else {
       digitalWrite(4,LOW); 
   	}

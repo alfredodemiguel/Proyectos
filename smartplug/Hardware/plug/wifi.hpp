@@ -37,18 +37,19 @@ String _extractDataOfResponseApi (String searchedString, String bodyResponse){
 }
 
 void _setVariables (){
-  smState = (_extractDataOfResponseApi("smState",bodyResponse));
-  smGroup = (_extractDataOfResponseApi("smGroup",bodyResponse));
-  smProximity = (_extractDataOfResponseApi("smProximity",bodyResponse));
-  smEmail = (_extractDataOfResponseApi("smEmail",bodyResponse));
-  smStateEmail = (_extractDataOfResponseApi("smStateEmail",bodyResponse));
-  smUser = (_extractDataOfResponseApi("smUser",bodyResponse));
-  smPassword = (_extractDataOfResponseApi("smPassword",bodyResponse));
-  smInitialConf = (_extractDataOfResponseApi("smInitialConf",bodyResponse));
-  smPG1 = (_extractDataOfResponseApi("smPG1",bodyResponse));
-  smPG2 = (_extractDataOfResponseApi("smPG2",bodyResponse));
-  smPG3 = (_extractDataOfResponseApi("smPG3",bodyResponse));
-  Serial.println (smPG3);
+  if ((_extractDataOfResponseApi("smState",bodyResponse)) != ""){
+    smState = (_extractDataOfResponseApi("smState",bodyResponse));
+    smGroup = (_extractDataOfResponseApi("smGroup",bodyResponse));
+    smProximity = (_extractDataOfResponseApi("smProximity",bodyResponse));
+    smEmail = (_extractDataOfResponseApi("smEmail",bodyResponse));
+    smStateEmail = (_extractDataOfResponseApi("smStateEmail",bodyResponse));
+    smUser = (_extractDataOfResponseApi("smUser",bodyResponse));
+    smPassword = (_extractDataOfResponseApi("smPassword",bodyResponse));
+    smInitialConf = (_extractDataOfResponseApi("smInitialConf",bodyResponse));
+    smPG1 = (_extractDataOfResponseApi("smPG1",bodyResponse));
+    smPG2 = (_extractDataOfResponseApi("smPG2",bodyResponse));
+    smPG3 = (_extractDataOfResponseApi("smPG3",bodyResponse));
+  }
 }
 
 
@@ -80,7 +81,6 @@ String getApi (){
 
 void postApi () {
   String stringSend = "\{\"id\":\"" + id + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"" + smProximity + "\",\"smEmail\":\"" + smEmail + "\",\"smStateEmail\":\"" + smStateEmail + "\",\"smUser\":\"" + smUser + "\",\"smPassword\":\"" + smPassword + "\",\"smInitialConf\":\"" + smInitialConf + "\",\"smPG1\":\"" + smPG1 + "\",\"smPG2\":\"" + smPG2 + "\",\"smPG3\":\"" + smPG3 + "\"\}"; 
-  
   HTTPClient http;
   http.begin(url);     
   http.addHeader("Content-Type", "application/json"); 

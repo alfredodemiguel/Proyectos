@@ -2,11 +2,8 @@ String _encodePassword (String password) {
   char input[] ="";
   int len = password.length();
   password.toCharArray(input, len+1);
-  //int inputLen = strlen (input);
-  //int encodedLen = base64_enc_len(inputLen);
   int encodedLen = base64_enc_len(len);
   char encoded[encodedLen];
-  //base64_encode(encoded, input, inputLen); 
   base64_encode(encoded, input, len); 
   String myEncoded = String(encoded);
   
@@ -14,19 +11,12 @@ String _encodePassword (String password) {
 }
 
 String _decodePassword (String password) {
-  char input2[] = "";
-  int len = password.length();
-  
-  password.toCharArray(input2, len+1);
-  
-
-  int input2Len = strlen (input2);
-  
-  int decodedLen = base64_dec_len(input2, input2Len);
+  char input[] = "";
+  int len = password.length();  
+  password.toCharArray(input, len+1);
+  int decodedLen = base64_dec_len(input, len);
   char decoded[decodedLen];
-  
-  base64_decode(decoded, input2, input2Len);
-  
+  base64_decode(decoded, input, len);
   String myDecoded = String(decoded);
   
   return myDecoded;

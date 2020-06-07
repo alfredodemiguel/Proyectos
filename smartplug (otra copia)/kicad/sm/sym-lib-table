@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name sm-rescue)(type Legacy)(uri ${KIPRJMOD}/sm-rescue.lib)(options "")(descr ""))
-)
