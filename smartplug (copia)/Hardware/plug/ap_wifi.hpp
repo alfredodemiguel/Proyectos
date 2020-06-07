@@ -1,35 +1,31 @@
 String _encodePassword (String password) {
-  char input[] ="";
-  int len = password.length();
-  password.toCharArray(input, len+1);
-  //int inputLen = strlen (input);
-  //int encodedLen = base64_enc_len(inputLen);
-  int encodedLen = base64_enc_len(len);
-  char encoded[encodedLen];
-  //base64_encode(encoded, input, inputLen); 
-  base64_encode(encoded, input, len); 
-  String myEncoded = String(encoded);
-  
-  return myEncoded;
+ 
+char * toEncode = "Hello World";
+  size_t outputLength;
+ 
+  unsigned char * encoded = base64_encode((const unsigned char *)toEncode, strlen(toEncode), &outputLength);
+ 
+  Serial.print("Length of encoded message: ");
+  Serial.println(outputLength);
+ 
+  Serial.printf("%.*s", outputLength, encoded);
+  free(encoded);
+  return "1";
 }
 
 String _decodePassword (String password) {
-  char input2[] = "";
-  int len = password.length();
+   
+  char * toEncode = "Hello World";
+  size_t outputLength;
+ 
+  unsigned char * encoded = base64_encode((const unsigned char *)toEncode, strlen(toEncode), &outputLength);
+ 
+  Serial.print("Length of encoded message: ");
+  Serial.println(outputLength);
+ 
+  Serial.printf("%.*s", outputLength, encoded);
+  free(encoded);
   
-  password.toCharArray(input2, len+1);
-  
-
-  int input2Len = strlen (input2);
-  
-  int decodedLen = base64_dec_len(input2, input2Len);
-  char decoded[decodedLen];
-  
-  base64_decode(decoded, input2, input2Len);
-  
-  String myDecoded = String(decoded);
-  
-  return myDecoded;
 }
 
 void almacenarParametros (){

@@ -18,19 +18,20 @@
             .formulario{
                 color: chartreuse;
             }
+            .input1{
+                background-color:blue;
+                color: chartreuse;
+            }
         </style>
     </head>
     <body class='cuerpo'>
         <h1 class='titulo' >SMART PLUG</h1>
         <form action='guardar_conf' method='get' class="formulario">
-            SSID:
-            <input class='input1' name='ssid' type='text'><br>
+            USER:
+            <input class='input1' name='user' type='text'><br>
             PASSWORD:
             <input class='input1' name='pass' type='password'><br><br>
-            <input type='checkbox' name='switch'><br><br>
-            <input class='boton' type='submit' value='GUARDAR'/><br><br>
+            <input class='boton' type='submit' value='validar'/><br><br>
         </form>
-        <a href='escanear'><button class='boton'>ESCANEAR</button></a><br><br>
-        <a href='validacion'><button class='boton'>VALIDACIÓN</button></a><br><br>
     </body>
 </html>

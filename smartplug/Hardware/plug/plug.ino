@@ -2,7 +2,18 @@
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
 #include <ESP8266HTTPClient.h>
-#include <base64.h>
+//#include <base64.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "Base64.h"
+
+
+//extern "C" {
+//#include "crypto/base64.h"
+//}
+
+
 
 
 // Inicialización del cliente wifi
@@ -57,7 +68,12 @@ void setup() {
   _startVariables ();
   setup_wifi();
   ap_wifi();
-  sendEmail();
+  Serial.println ("inicio Codificacion");
+  Serial.println (_encodePassword ("Hola"));
+  Serial.println (_decodePassword ("SG9sYQ=="));
+
+  Serial.println ("Fin Codificacion");
+  //sendEmail();
 }
 
 //--------------------------LOOP--------------------------------
