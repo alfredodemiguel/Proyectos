@@ -39,15 +39,35 @@ String _extractDataOfResponseApi (String searchedString, String bodyResponse){
 void _setVariables (){
   if ((_extractDataOfResponseApi("smState",bodyResponse)) != ""){
     smState = (_extractDataOfResponseApi("smState",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smGroup",bodyResponse)) != ""){
     smGroup = (_extractDataOfResponseApi("smGroup",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smProximity",bodyResponse)) != ""){
     smProximity = (_extractDataOfResponseApi("smProximity",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smEmail",bodyResponse)) != ""){
     smEmail = (_extractDataOfResponseApi("smEmail",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smStateEmail",bodyResponse)) != ""){
     smStateEmail = (_extractDataOfResponseApi("smStateEmail",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smUser",bodyResponse)) != ""){
     smUser = (_extractDataOfResponseApi("smUser",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smPassword",bodyResponse)) != ""){
     smPassword = (_extractDataOfResponseApi("smPassword",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smInitialConf",bodyResponse)) != ""){
     smInitialConf = (_extractDataOfResponseApi("smInitialConf",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smPG1",bodyResponse)) != ""){
     smPG1 = (_extractDataOfResponseApi("smPG1",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smPG2",bodyResponse)) != ""){
     smPG2 = (_extractDataOfResponseApi("smPG2",bodyResponse));
+  }
+  if ((_extractDataOfResponseApi("smPG3",bodyResponse)) != ""){
     smPG3 = (_extractDataOfResponseApi("smPG3",bodyResponse));
   }
 }
@@ -81,6 +101,7 @@ String getApi (){
 
 void postApi () {
   String stringSend = "\{\"id\":\"" + id + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"" + smProximity + "\",\"smEmail\":\"" + smEmail + "\",\"smStateEmail\":\"" + smStateEmail + "\",\"smUser\":\"" + smUser + "\",\"smPassword\":\"" + smPassword + "\",\"smInitialConf\":\"" + smInitialConf + "\",\"smPG1\":\"" + smPG1 + "\",\"smPG2\":\"" + smPG2 + "\",\"smPG3\":\"" + smPG3 + "\"\}"; 
+  Serial.println (stringSend);
   HTTPClient http;
   http.begin(url);     
   http.addHeader("Content-Type", "application/json"); 

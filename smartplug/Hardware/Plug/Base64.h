@@ -12,7 +12,7 @@
  */
 extern const char b64_alphabet[];
 
-/* base64_encode:
+/* base64X_encode:
  * 		Description:
  * 			Encode a string of characters as base64
  * 		Parameters:
@@ -26,7 +26,7 @@ extern const char b64_alphabet[];
  * 			2. input must not be null
  * 			3. inputLen must be greater than or equal to 0
  */
-int base64_encode(char *output, char *input, int inputLen);
+int base64X_encode(char *output, char *input, int inputLen);
 
 /* base64_decode:
  * 		Description:
@@ -44,9 +44,9 @@ int base64_encode(char *output, char *input, int inputLen);
  * 			2. input must not be null
  * 			3. inputLen must be greater than or equal to 0
  */
-int base64_decode(char *output, char *input, int inputLen);
+int base64X_decode(char *output, char *input, int inputLen);
 
-/* base64_enc_len:
+/* base64X_enc_len:
  * 		Description:
  * 			Returns the length of a base64 encoded string whose decoded
  * 			form is inputLen bytes long
@@ -58,7 +58,7 @@ int base64_decode(char *output, char *input, int inputLen);
  * 		Requirements:
  * 			None
  */
-int base64_enc_len(int inputLen);
+int base64X_enc_len(int inputLen);
 
 /* base64_dec_len:
  * 		Description:
@@ -74,6 +74,6 @@ int base64_enc_len(int inputLen);
  * 			1. input must not be null
  * 			2. input must be greater than or equal to zero
  */
-int base64_dec_len(char *input, int inputLen);
+int base64X_dec_len(char *input, int inputLen);
 
 #endif // _BASE64_H

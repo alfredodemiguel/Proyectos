@@ -1,3 +1,5 @@
+#include "Arduino.h"
+#include "EMailSender.h"
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
@@ -14,12 +16,12 @@ WiFiClientSecure client;
 ESP8266WebServer server(80);
 
 
-#include "config.h" 
-#include "index.h" 
-#include "wifi.hpp"
+#include "Config.h" 
+#include "Index.h" 
+#include "Wifi.hpp"
 #include "EEprom_IO.hpp"
-#include "ap_wifi.hpp"
-#include "email.hpp"
+#include "Ap_Wifi.hpp"
+#include "Email.hpp"
 
 void _startVariables (){
 
@@ -60,11 +62,13 @@ void setup() {
   _startVariables ();
   setup_wifi();
   ap_wifi();
+  
   Serial.println ("inicio Codificacion");
   Serial.println (_encodePassword ("troca"));
   Serial.println (_decodePassword ("dHJvY2E="));
   Serial.println ("Fin Codificacion");
-  //sendEmail();
+  
+  //mail();
 }
 
 //--------------------------LOOP--------------------------------
@@ -88,6 +92,6 @@ void loop() {
     {
       Serial.println("Motion detected  ALARM");
     }
-  delay (10000);
+  delay (20000);
   
 }
