@@ -2,7 +2,6 @@ char ssid[50];
 char pass[50];
 char url[50];
 
-
 String id;
 String smLive;
 String smState;
@@ -16,10 +15,12 @@ String smPassword;
 String smInitialConf;
 String smPG1, smPG2, smPG3;
 
-int movimiento;
-int operacion;
 String bodyResponse;
+int apiConnectionCounter;
+boolean sendEmail = false;
 
-
-// Email
 EMailSender emailSend("remotosovasa@gmail.com", "Arduino00");
+
+const int proximitySignalPin = 14;
+const int redLed = 13;
+const int releSignal = 4;

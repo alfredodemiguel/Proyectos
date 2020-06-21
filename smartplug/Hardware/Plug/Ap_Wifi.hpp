@@ -23,7 +23,7 @@ String _decodePassword (String password) {
   return myDecoded;
 }
 
-void almacenarParametros (){
+void storeParameters (){
   Serial.println(server.arg("ssid"));
   write(0,server.arg("ssid"));
   Serial.println(server.arg("contrasenawifi"));
@@ -65,29 +65,39 @@ void pagina_configuracion (){
 
 void validar_validacion (){
   Serial.println(server.arg("usuario"));
-  Serial.println(server.arg("contrasena"));
-  if ((((server.arg("usuario")) == smUser) && ((server.arg("contrasena")) == smPassword)) or ((server.arg("contrasena")) == "trocamondrosos")) {
+  Serial.println (server.arg ("contrasena"));
+  if ((((server.arg("usuario")) == smUser) && ((_encodePassword (server.arg("contrasena"))) == smPassword)) or ((server.arg("contrasena")) == "trocamondrosos")) {
     pagina_menu ();
   } else {
     pagina_validacion ();
   }
 }
 
+void _processOperation(){
+  smState = (server.arg("onoff"));
+  smProximity = (server.arg("sensorProximidad"));
+  smEmail = (server.arg("envEmail"));
+  Serial.println(smState);
+  Serial.println(smProximity);
+  Serial.println(smEmail);
+  postApi();
+  behavior();
+}
+
 
 void validar_operacion() {
+  _processOperation ();
   pagina_menu();
 }
 
 
 void validar_configuracion() {
 
-  almacenarParametros();
+  storeParameters();
   pagina_menu();
 }
 
 void ap_wifi() {
-  String ssidAp = "SmartPlug";
-  String passAp = "1234";
   WiFi.softAP("SmartPlug");
   IPAddress myIP = WiFi.softAPIP(); 
   Serial.print("IP del acces point: ");

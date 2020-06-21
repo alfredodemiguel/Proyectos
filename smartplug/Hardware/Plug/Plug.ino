@@ -6,25 +6,19 @@
 #include <ESP8266HTTPClient.h>
 #include "Base64.h"
 
-
-
-
-
-// Inicialización del cliente wifi
 WiFiClient espClient;
 WiFiClientSecure client;
 ESP8266WebServer server(80);
 
-
 #include "Config.h" 
 #include "Index.h" 
+#include "Email.hpp"
+#include "Behavior.hpp"
 #include "Wifi.hpp"
 #include "EEprom_IO.hpp"
 #include "Ap_Wifi.hpp"
-#include "Email.hpp"
 
 void _startVariables (){
-
   id = WiFi.macAddress();
   read(0).toCharArray(ssid, 50);
   read(50).toCharArray(pass, 50);
@@ -40,58 +34,42 @@ void _startVariables (){
   smPG1 = "Off";
   smPG2 = "Off";
   smPG3 = "Off";
+  Serial.println (id);
+  Serial.println (ssid);
+  Serial.println (pass);
+  Serial.println (smUser);
+  Serial.println (smPassword);
+  Serial.println (smGroup);
+  Serial.println ("\{\"id\":\"" + id + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"" + smProximity + "\",\"smEmail\":\"" + smEmail + "\",\"smStateEmail\":\"" + smStateEmail + "\",\"smUser\":\"" + smUser + "\",\"smPassword\":\"" + smPassword + "\",\"smInitialConf\":\"" + smInitialConf + "\",\"smPG1\":\"" + smPG1 + "\",\"smPG2\":\"" + smPG2 + "\",\"smPG3\":\"" + smPG3 + "\"\}"); 
 }
 
-//------------------------SETUP-----------------------------
 void setup() {
-
- 
-  
-   // Inicia Serial
   Serial.begin(115200);
-  Serial.println("");
 
-  // Pin Rele
-  pinMode(4, OUTPUT);  
-  // Pin Led Rele
-  pinMode (13, OUTPUT);
+  pinMode(releSignal, OUTPUT);  
+  pinMode(redLed, OUTPUT);
+  pinMode(proximitySignalPin, INPUT);
   
-  //Inicia acceso flash y carga valores del mismo.
   EEPROM.begin(512);
   
   _startVariables ();
   setup_wifi();
   ap_wifi();
   
-  Serial.println ("inicio Codificacion");
-  Serial.println (_encodePassword ("troca"));
-  Serial.println (_decodePassword ("dHJvY2E="));
-  Serial.println ("Fin Codificacion");
-  
-  //mail();
+  apiConnectionCounter = 0;
 }
 
-//--------------------------LOOP--------------------------------
 void loop() {
-	
-    Serial.println(id);
-    
+    apiConnectionCounter ++;
 	  server.handleClient();
   	if(WiFi.status()== WL_CONNECTED){   
-      postApi();
-      getApi ();
+      if (apiConnectionCounter > 900000) {
+        postApi();
+        getApi ();
+        apiConnectionCounter = 0;
+      }
   	} else {
-      digitalWrite(4,LOW); 
+      smState = "Off";
   	}
-   movimiento = digitalRead(14);
-   if (movimiento == LOW)
-    {
-      Serial.println("No motion");
-    }
-    else
-    {
-      Serial.println("Motion detected  ALARM");
-    }
-  delay (20000);
-  
+    behavior ();
 }

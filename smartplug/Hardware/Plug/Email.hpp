@@ -8,13 +8,13 @@
 // EMailSender emailSend("remotosovasa@gmail.com", "Arduino00");
 
 
-void mail()
+void mail(String _subject, String _message)
 {
    
 
     EMailSender::EMailMessage message;
-    message.subject = "Mi asunto.";
-    message.message = "Mi mensaje.";
+    message.subject = _subject;
+    message.message = _message;
 
     EMailSender::Response resp = emailSend.send("alfredodemiguel17@gmail.com", message);
 

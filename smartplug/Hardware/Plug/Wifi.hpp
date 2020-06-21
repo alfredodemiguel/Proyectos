@@ -74,27 +74,19 @@ void _setVariables (){
 
 
 String getApi (){
-    String URLGET = url + id;
-    
-    HTTPClient http;
-    http.begin(URLGET);         
-    http.addHeader("Content-Type", "application/json"); 
-    int codeResponse = http.GET();   
-    bodyResponse = http.getString();
-    http.end();  
+  String URLGET = url + id;
+  
+  HTTPClient http;
+  http.begin(URLGET);         
+  http.addHeader("Content-Type", "application/json"); 
+  int codeResponse = http.GET();   
+  bodyResponse = http.getString();
+  http.end();  
 
-    _setVariables ();
- 
-    if (smState == "On"){
-      digitalWrite(4,HIGH);
-      digitalWrite(13,HIGH);
-    } else {
-      digitalWrite(4,LOW);
-      digitalWrite(13,LOW);
-    }    
+  _setVariables ();
+  behavior();
 
-    
-    return (bodyResponse);
+  return (bodyResponse);
 }
 
 
