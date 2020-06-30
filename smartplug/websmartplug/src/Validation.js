@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 
-const urlSmartPlug = "http://localhost:3017/smartplug/";
+const urlSmartPlug = "http://api-smartplug.herokuapp.com/smartplug/";
 let menPlugs = [];
   
 

@@ -7,7 +7,7 @@ import axios from 'axios';
 function InterfazSmartPlug(props) {
   
   
-  const url = "http://localhost:3017/smartplug/";
+  const url = "http://api-smartplug.herokuapp.com/smartplug/";
   let smState = props.smState;
   let smGroup = props.smGroup;
 
