@@ -1,3 +1,5 @@
+
+
 #include "Arduino.h"
 #include "EMailSender.h"
 #include <ESP8266WiFi.h>
@@ -34,12 +36,7 @@ void _startVariables (){
   smPG1 = "Off";
   smPG2 = "Off";
   smPG3 = "Off";
-  Serial.println (id);
-  Serial.println (ssid);
-  Serial.println (pass);
-  Serial.println (smUser);
-  Serial.println (smPassword);
-  Serial.println (smGroup);
+  
   Serial.println ("\{\"id\":\"" + id + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"" + smProximity + "\",\"smEmail\":\"" + smEmail + "\",\"smStateEmail\":\"" + smStateEmail + "\",\"smUser\":\"" + smUser + "\",\"smPassword\":\"" + smPassword + "\",\"smInitialConf\":\"" + smInitialConf + "\",\"smPG1\":\"" + smPG1 + "\",\"smPG2\":\"" + smPG2 + "\",\"smPG3\":\"" + smPG3 + "\"\}"); 
 }
 
@@ -64,8 +61,8 @@ void loop() {
 	  server.handleClient();
   	if(WiFi.status()== WL_CONNECTED){   
       if (apiConnectionCounter > 900000) {
-        postApi();
         getApi ();
+        postApi();
         apiConnectionCounter = 0;
       }
   	} else {

@@ -1,10 +1,6 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
 
-
-
-
-const urlSmartPlug = "http://api-smartplug.herokuapp.com/smartplug/";
 let menPlugs = [];
   
 
@@ -18,7 +14,7 @@ function Validation(props) {
 
 
   useEffect(() => {
-    axios.get(urlSmartPlug)
+    axios.get(window.$urlSmartPlug)
     .then(function (response) {
       menPlugs = response.data;
     }) 
@@ -29,18 +25,29 @@ function Validation(props) {
   
   
   
-  function checkNumber(event) {
-    window.$id = (event.target.value);
+  function checkUser(event) {
+    window.$smUser = (event.target.value);
+  }
+  
+  function checkPassword(event) {
+    window.$smPassword = (event.target.value);
   }
   
   
-  
-  function checkNumberSubmited (){
+  function checkUserSubmited (){
+    console.log (menPlugs);
     menPlugs.forEach(element => {
-                                if (element.id === window.$id){
+                                if (element.smUser === window.$smUser && element.smPassword === window.$smPassword){
+                                  window.$menPlugs=menPlugs;
+                                  window.$id = element.id;
                                   window.$smLive = element.smLive;
                                   window.$smState = element.smState;
                                   window.$smGroup = element.smGroup;
+                                  window.$smProximity = element.$smProximity;
+                                  window.$smEmail = element.$smEmail;
+                                  window.$smStateEmail = element.$smStateEmail;
+                                  window.$smUser = element.$smUser;
+                                  window.$smPassword = element.$smPassword;
                                   history.push(`/smartPlug`);
                                 }
                               });
@@ -59,11 +66,15 @@ function Validation(props) {
       <div id="imagesMenu">
         <br/>
         <br/>
-        <form onSubmit={checkNumberSubmited}>
+        <form onSubmit={checkUserSubmited}>
           <label>
-            Number Of SmartPlug:
-            <input type="text" name="numberOfSmartPlug" placeholder="0" onChange={checkNumber}/>
+            Usuario:
+            <input type="text" name="usuarioOfSmartPlug" placeholder="0" onChange={checkUser}/>
           </label>
+          <label>
+            Contraseña:
+            <input type="text" name="passwordOfSmartPlug" placeholder="0" onChange={checkPassword}/>
+          </label>   
           <input type="submit" value="Submit" />
         </form>
         <br/>

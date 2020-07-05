@@ -81,6 +81,7 @@ String getApi (){
   http.addHeader("Content-Type", "application/json"); 
   int codeResponse = http.GET();   
   bodyResponse = http.getString();
+  Serial.println (bodyResponse);
   http.end();  
 
   _setVariables ();

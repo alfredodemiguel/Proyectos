@@ -77,11 +77,16 @@ void _processOperation(){
   smState = (server.arg("onoff"));
   smProximity = (server.arg("sensorProximidad"));
   smEmail = (server.arg("envEmail"));
+  Serial.println("processOperation:");
   Serial.println(smState);
   Serial.println(smProximity);
   Serial.println(smEmail);
   postApi();
+  Serial.println ("despues de postapi");
+  Serial.println (smState);
   behavior();
+  Serial.println ("despues de bahavior");
+  Serial.println (smState);
 }
 
 
