@@ -17,6 +17,7 @@ function Validation(props) {
     axios.get(window.$urlSmartPlug)
     .then(function (response) {
       menPlugs = response.data;
+      window.$menPlugs = menPlugs;
     }) 
     .catch(function (error) {
       console.log ('Error al hacer get'+ error);
@@ -38,16 +39,6 @@ function Validation(props) {
     console.log (menPlugs);
     menPlugs.forEach(element => {
                                 if (element.smUser === window.$smUser && element.smPassword === window.$smPassword){
-                                  window.$menPlugs=menPlugs;
-                                  window.$id = element.id;
-                                  window.$smLive = element.smLive;
-                                  window.$smState = element.smState;
-                                  window.$smGroup = element.smGroup;
-                                  window.$smProximity = element.$smProximity;
-                                  window.$smEmail = element.$smEmail;
-                                  window.$smStateEmail = element.$smStateEmail;
-                                  window.$smUser = element.$smUser;
-                                  window.$smPassword = element.$smPassword;
                                   history.push(`/smartPlug`);
                                 }
                               });
