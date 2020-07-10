@@ -37,11 +37,21 @@ function Validation(props) {
   
   function checkUserSubmited (){
     console.log (menPlugs);
+    window.$selectedMenPlugs.length = 0;
     menPlugs.forEach(element => {
                                 if (element.smUser === window.$smUser && element.smPassword === window.$smPassword){
-                                  history.push(`/smartPlug`);
+                                  window.$selectedMenPlugs.push({"id": element.id,"smLive": element.smLive,"smState": element.smState,
+                                  "smGroup": element.smGroup,"smTimeStamp": element.smTimeStamp,"smProximity": element.smProximity,
+                                  "smEmail": element.smEmail,"smStateEmail": element.smStateEmail,"smUser": element.smUser,
+                                  "smPassword": element.smPassword,"smInitialConf":element.smInitialConf,"smPG1":element.smPG1,
+                                  "smPG2":element.smPG2,"smPG3":element.smPG3});
                                 }
                               });
+    console.log ("selectedmenplugs:");
+    console.log (window.$selectedMenPlugs);
+    if (window.$selectedMenPlugs.length > 0){
+      history.push(`/smartPlug`);
+    }
   }
 
  
