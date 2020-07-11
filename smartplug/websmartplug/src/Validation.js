@@ -2,22 +2,17 @@ import React, {useEffect} from 'react';
 import axios from 'axios';
 
 let menPlugs = [];
+let user = "";
+let password = "";
   
-
-
-
 
 function Validation(props) {
   const { history } = props;
-
- 
-
 
   useEffect(() => {
     axios.get(window.$urlSmartPlug)
     .then(function (response) {
       menPlugs = response.data;
-      window.$menPlugs = menPlugs;
     }) 
     .catch(function (error) {
       console.log ('Error al hacer get'+ error);
@@ -25,21 +20,18 @@ function Validation(props) {
   },[]);
   
   
-  
   function checkUser(event) {
-    window.$smUser = (event.target.value);
+    user = (event.target.value);
   }
   
   function checkPassword(event) {
-    window.$smPassword = (event.target.value);
+    password = btoa((event.target.value));
   }
   
-  
   function checkUserSubmited (){
-    console.log (menPlugs);
     window.$selectedMenPlugs.length = 0;
     menPlugs.forEach(element => {
-                                if (element.smUser === window.$smUser && element.smPassword === window.$smPassword){
+                                if (element.smUser === user && element.smPassword === password){
                                   window.$selectedMenPlugs.push({"id": element.id,"smLive": element.smLive,"smState": element.smState,
                                   "smGroup": element.smGroup,"smTimeStamp": element.smTimeStamp,"smProximity": element.smProximity,
                                   "smEmail": element.smEmail,"smStateEmail": element.smStateEmail,"smUser": element.smUser,
@@ -47,16 +39,12 @@ function Validation(props) {
                                   "smPG2":element.smPG2,"smPG3":element.smPG3});
                                 }
                               });
-    console.log ("selectedmenplugs:");
-    console.log (window.$selectedMenPlugs);
     if (window.$selectedMenPlugs.length > 0){
       history.push(`/smartPlug`);
     }
   }
 
  
-
-
   return (
     <div className="Menu">
       <header className="Menu-header">

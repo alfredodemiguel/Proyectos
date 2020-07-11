@@ -7,15 +7,8 @@ import {Modal, ModalBody, ModalHeader, ModalFooter} from 'reactstrap';
 
 
 
-function InterfazSmartPlug(props) {
+function InterfazSmartPlug() {
   
-  
-  const url = window.$urlSmartPlug;
-  //let smState = "Off";
-  //let smGroup = "000";
-  
-
-
   const [data, setData] = useState(window.$selectedMenPlugs);
   const [modalEditar, setModalEditar] = useState(false);
   
@@ -30,9 +23,9 @@ function InterfazSmartPlug(props) {
     smStateEmail: ''
   });
 
-  const seleccionarSM=(elemento, caso)=>{
+  const seleccionarSM=(elemento)=>{
     setSM(elemento);
-    (caso==='Editar')?setModalEditar(true):setModalEditar(true)
+    setModalEditar(true);
   }
 
   const handleChange=e=>{
@@ -54,6 +47,20 @@ function InterfazSmartPlug(props) {
         sm.smProximity=smSeleccionado.smProximity;
         sm.smEmail=smSeleccionado.smEmail;
         sm.smStateEmail=smSeleccionado.smStateEmail
+        
+        let thePlug = {"id": sm.id,"smLive": sm.smLive,"smState": sm.smState,"smGroup": sm.smGroup,
+        "smTimeStamp": 1,"smProximity": sm.smProximity,"smEmail": sm.smEmail,"smStateEmail": sm.smStateEmail,
+        "smUser": sm.smUser,"smPassword": sm.smPassword,"smInitialConf":"new","smPG1":"nul","smPG2":"nul",
+        "smPG3":"nul"};
+
+        axios.post(window.$urlSmartPlug, thePlug)
+        .then(function (response) {
+          console.log ("response:");
+          console.log (response);
+        })
+        .catch(function (error) {
+          console.log (error);
+        });
       }
       return 0;
     });
@@ -61,64 +68,6 @@ function InterfazSmartPlug(props) {
     setModalEditar(false);
   }
 
-  
-
-
-
-
-/*
-  function checkState(event) {
-    console.log ('Estoy en checkState');
-    smState = (event.target.value);
-    console.log (smState);
-  }
-
-
- const smPlugList = window.$selectedMenPlugs.map (smplug =>
-    <li key={smplug.id}>Id:{smplug.id}
-      &nbsp;Operativo:{smplug.smLive}
-      &nbsp;Estado:<input type="text" name="state" placeholder={smplug.smState} onChange={checkState}/>
-      &nbsp;Grupo:<input type="text" name="group" placeholder={smplug.smGroup} onChange={checkGroup}/>
-      &nbsp;Presencia:{smplug.smProximity}&nbsp;Email:{smplug.smEmail}
-      &nbsp;Estado Email:{smplug.smStateEmail}
-      &nbsp;Usuario:{smplug.smUser}
-      &nbsp;Contraseña:{smplug.smPassword}
-      <br/>
-      <input type="submit" value="Submit" onClick={checkSubmited("2C:F4:32:78:24:A5")}/>
-      <br/><br/><br/><br/>
-    </li>
-  );
-
-
-  
-  function checkGroup(event) {
-    smGroup = (event.target.value);
-    console.log (smGroup);
-  }
-
-  function checkSubmited(id) {
-    //let thePlug = {"id": props.id,"smLive": props.smLive,"smState": smState,"smGroup": smGroup, "smTimeStamp": "0"};
-    //String stringSend = "\{\"id\":\"" + id + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"" + smProximity + "\",\"smEmail\":\"" + smEmail + "\",\"smStateEmail\":\"" + smStateEmail + "\",\"smUser\":\"" + smUser + "\",\"smPassword\":\"" + smPassword + "\",\"smInitialConf\":\"" + smInitialConf + "\",\"smPG1\":\"" + smPG1 + "\",\"smPG2\":\"" + smPG2 + "\",\"smPG3\":\"" + smPG3 + "\"\}"; 
-    let thePlug = {"id":"2C:F4:32:78:24:A5","smLive":"true","smState":"Off","smGroup":"0013","smTimeStamp":1586365329980,"smProximity":"true","smEmail":"alfredodemiguel@yahoo.es","smStateEmail":"true","smUser":"u2","smPassword":"123","smInitialConf":"new","smPG1":"nul","smPG2":"nul","smPG3":"nul"};
-    let urlGet = url;
-    console.log ("Estoy en checksubmited");
-    console.log ("urlget");
-    console.log (urlGet);
-    console.log ("id");
-    console.log (id);
-    console.log ("theplug");
-    console.log (thePlug);
-    axios.post(urlGet, thePlug)
-    .then(function (response) {
-      console.log ("response:");
-      console.log (response);
-    })
-    .catch(function (error) {
-      console.log (error);
-    });
-  }
-
-*/
 
   return (
     <div className="App">
@@ -148,12 +97,14 @@ function InterfazSmartPlug(props) {
             <td>{elemento.smProximity}</td>
             <td>{elemento.smEmail}</td>
             <td>{elemento.smStateEmail}</td>
-            <td><button className="btn btn-primary" onClick={()=>seleccionarSM(elemento, 'Editar')}>Editar</button> {"   "}</td>
+            <td><button className="btn btn-primary" onClick={()=>seleccionarSM(elemento)}>Editar</button> {"   "}</td>
           </tr>
         ))
         }
       </tbody>
     </table>
+
+
 
     <Modal isOpen={modalEditar}>
       <ModalHeader>
