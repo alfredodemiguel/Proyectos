@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 let menPlugs = [];
 let user = "";
@@ -49,26 +50,50 @@ function Validation(props) {
     <div className="Menu">
       <header className="Menu-header">
         <br />
-        <h1 id="titleP">SMARTPLUG</h1>
+        <h1 class="alert alert-primary" role="alert" id="titleP">SMARTPLUG</h1>
         <br />
       </header>
       <div id="imagesMenu">
         <br/>
         <br/>
+
+
+
         <form onSubmit={checkUserSubmited}>
+
+        <div class="input-group input-group-lg">
+         <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-lg">Usuario</span>
+         </div>
+          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="usuarioOfSmartPlug" onChange={checkUser}/>
+        </div>
+
+        <div class="input-group input-group-lg">
+         <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-lg">Contraseña</span>
+         </div>
+         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="passwordOfSmartPlug" onChange={checkPassword}/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+        {/*
           <label>
-            Usuario:
-            <input type="text" name="usuarioOfSmartPlug" placeholder="0" onChange={checkUser}/>
+          <input type="submit" value="Submit" />
+          Usuario:
+          <input type="text" name="usuarioOfSmartPlug" placeholder="0" onChange={checkUser}/>
           </label>
           <label>
             Contraseña:
             <input type="text" name="passwordOfSmartPlug" placeholder="0" onChange={checkPassword}/>
           </label>   
-          <input type="submit" value="Submit" />
+        */}
         </form>
         <br/>
         <br/>
       </div>
+      <blockquote class="blockquote text-center">
+        <a href="https://github.com/alfredodemiguel/Proyectos/tree/master/smartplug" class="badge badge-secondary">Código fuente del proyecto</a>
+      </blockquote>
     </div>
   );
 }

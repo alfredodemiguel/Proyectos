@@ -3,6 +3,7 @@ import React, {useState}  from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Modal, ModalBody, ModalHeader, ModalFooter} from 'reactstrap';
+import { MDBContainer } from 'mdbreact';
 
 
 
@@ -71,136 +72,143 @@ function InterfazSmartPlug() {
 
   return (
     <div className="App">
-    <h2>SMART PLUG</h2>
-    <br />
- 
-  <br /><br />
-    <table className="table table-bordered">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Vivo</th>
-          <th>Estado</th>
-          <th>Grupo</th>
-          <th>Proximidad</th>
-          <th>Email</th>
-          <th>Estado Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        {window.$selectedMenPlugs.map(elemento=>(
-          <tr key={elemento.id}>
-            <td>{elemento.id}</td>
-            <td>{elemento.smLive}</td>
-            <td>{elemento.smState}</td>
-            <td>{elemento.smGroup}</td>
-            <td>{elemento.smProximity}</td>
-            <td>{elemento.smEmail}</td>
-            <td>{elemento.smStateEmail}</td>
-            <td><button className="btn btn-primary" onClick={()=>seleccionarSM(elemento)}>Editar</button> {"   "}</td>
+      <h1 class="alert alert-primary" role="alert" id="titleP">SMARTPLUG</h1>
+      <br/><br/><br/>
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Vivo</th>
+            <th>Estado</th>
+            <th>Grupo</th>
+            <th>Proximidad</th>
+            <th>Email</th>
+            <th>Estado Email</th>
           </tr>
-        ))
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {window.$selectedMenPlugs.map(elemento=>(
+            <tr key={elemento.id}>
+              <td>{elemento.id}</td>
+              <td>{elemento.smLive}</td>
+              <td>{elemento.smState}</td>
+              <td>{elemento.smGroup}</td>
+              <td>{elemento.smProximity}</td>
+              <td>{elemento.smEmail}</td>
+              <td>{elemento.smStateEmail}</td>
+              <td><button className="btn btn-primary" onClick={()=>seleccionarSM(elemento)}>Editar</button> {"   "}</td>
+            </tr>
+          ))
+          }
+        </tbody>
+      </table>
 
 
 
-    <Modal isOpen={modalEditar}>
-      <ModalHeader>
-        <div>
-          <h3>Editar SmartPlug</h3>
-        </div>
-      </ModalHeader>
-      <ModalBody>
-        <div className="form-group">
-          <label>ID</label>
-          <input
-            className="form-control"
-            readOnly
-            type="text"
-            name="id"
-            value={smSeleccionado && smSeleccionado.id}
+      <Modal isOpen={modalEditar}>
+        <ModalHeader>
+          <div>
+            <h3>Editar SmartPlug</h3>
+          </div>
+        </ModalHeader>
+        <ModalBody>
+          <div className="form-group">
+            <label>ID</label>
+            <input
+              className="form-control"
+              readOnly
+              type="text"
+              name="id"
+              value={smSeleccionado && smSeleccionado.id}
+            />
+            <br />
 
-          />
-          <br />
+            <label>Vivo</label>
+            <input
+              className="form-control"
+              type="text"
+              name="smLive"
+              value={smSeleccionado && smSeleccionado.smLive}
+              onChange={handleChange}
+            />
+            <br />
 
-          <label>Vivo</label>
-          <input
-            className="form-control"
-            type="text"
-            name="smLive"
-            value={smSeleccionado && smSeleccionado.smLive}
-            onChange={handleChange}
-          />
-          <br />
+            <label>Estado</label>
+            <input
+              className="form-control"
+              type="text"
+              name="smState"
+              value={smSeleccionado && smSeleccionado.smState}
+              onChange={handleChange}
+            />
+            <br />
 
-          <label>Estado</label>
-          <input
-            className="form-control"
-            type="text"
-            name="smState"
-            value={smSeleccionado && smSeleccionado.smState}
-            onChange={handleChange}
-          />
-          <br />
+            <label>Grupo</label>
+            <input
+              className="form-control"
+              type="text"
+              name="smGroup"
+              value={smSeleccionado && smSeleccionado.smGroup}
+              onChange={handleChange}
+            />
+            <br />
 
-          <label>Grupo</label>
-          <input
-            className="form-control"
-            type="text"
-            name="smGroup"
-            value={smSeleccionado && smSeleccionado.smGroup}
-            onChange={handleChange}
-          />
-          <br />
+            <label>Proximidad</label>
+            <input
+              className="form-control"
+              type="text"
+              name="smProximity"
+              value={smSeleccionado && smSeleccionado.smProximity}
+              onChange={handleChange}
+            />
+            <br />
 
-          <label>Proximidad</label>
-          <input
-            className="form-control"
-            type="text"
-            name="smProximity"
-            value={smSeleccionado && smSeleccionado.smProximity}
-            onChange={handleChange}
-          />
-          <br />
+            <label>Email</label>
+            <input
+              className="form-control"
+              type="text"
+              name="smEmail"
+              value={smSeleccionado && smSeleccionado.smEmail}
+              onChange={handleChange}
+            />
+            <br />
 
-          <label>Email</label>
-          <input
-            className="form-control"
-            type="text"
-            name="smEmail"
-            value={smSeleccionado && smSeleccionado.smEmail}
-            onChange={handleChange}
-          />
-          <br />
-
-          <label>Estado Email</label>
-          <input
-            className="form-control"
-            type="text"
-            name="smStateEmail"
-            value={smSeleccionado && smSeleccionado.smStateEmail}
-            onChange={handleChange}
-          />
-          <br />
-        </div>
-      </ModalBody>
-      <ModalFooter>
-        <button className="btn btn-primary" onClick={()=>editar()}>
-          Actualizar
-        </button>
-        <button
-          className="btn btn-danger"
-          onClick={()=>setModalEditar(false)}
-        >
-          Cancelar
-        </button>
-      </ModalFooter>
-    </Modal>
-
+            <label>Estado Email</label>
+            <input
+              className="form-control"
+              type="text"
+              name="smStateEmail"
+              value={smSeleccionado && smSeleccionado.smStateEmail}
+              onChange={handleChange}
+            />
+            <br />
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <button className="btn btn-primary" onClick={()=>editar()}>
+            Actualizar
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={()=>setModalEditar(false)}
+          >
+            Cancelar
+          </button>
+        </ModalFooter>
+      </Modal>
+      
       <br/>
-      <Link to="/">Menu Principal </Link>
+      <div class="mx-auto" style={{width: "200px"}}>
+      <MDBContainer>
+        <div className="text-wrap badge badge-secondary" style={{width: "8rem"}}> 
+          <Link to="/"><p class="text-white text-center">Menu Principal</p></Link>
+        </div>
+      </MDBContainer>
+      </div>
+      <br/><br/><br/><br/>
+      <blockquote class="blockquote text-right">
+        <a href="https://github.com/alfredodemiguel/Proyectos/tree/master/smartplug" class="badge badge-secondary">Código fuente del proyecto</a>
+      </blockquote>
     </div>
   ); 
 }
