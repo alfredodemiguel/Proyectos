@@ -75,18 +75,6 @@ function Validation(props) {
          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="passwordOfSmartPlug" onChange={checkPassword}/>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-
-        {/*
-          <label>
-          <input type="submit" value="Submit" />
-          Usuario:
-          <input type="text" name="usuarioOfSmartPlug" placeholder="0" onChange={checkUser}/>
-          </label>
-          <label>
-            Contraseña:
-            <input type="text" name="passwordOfSmartPlug" placeholder="0" onChange={checkPassword}/>
-          </label>   
-        */}
         </form>
         <br/>
         <br/>

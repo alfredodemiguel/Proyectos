@@ -1,0 +1,15 @@
+{
+  "name": "websmplug",
+  "version": "1.0.0",
+  "description": "Web for management of smPlugs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
+  },
+  "author": "Alfredo De Miguel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

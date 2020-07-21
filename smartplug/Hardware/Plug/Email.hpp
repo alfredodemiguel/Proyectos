@@ -3,23 +3,19 @@
 */
 
 
-   
-
-// EMailSender emailSend("remotosovasa@gmail.com", "Arduino00");
 
 
 void mail(String _subject, String _message)
 {
-   
+    int smEmailLen = smEmail.length() + 1;
+    char smEmailChar[smEmailLen];
+    smEmail.toCharArray(smEmailChar, smEmailLen);
 
     EMailSender::EMailMessage message;
     message.subject = _subject;
     message.message = _message;
-
-    EMailSender::Response resp = emailSend.send("alfredodemiguel17@gmail.com", message);
-
+    EMailSender::Response resp = emailSend.send(smEmailChar, message);
     Serial.println("Sending status: ");
-
     Serial.println(resp.status);
     Serial.println(resp.code);
     Serial.println(resp.desc);

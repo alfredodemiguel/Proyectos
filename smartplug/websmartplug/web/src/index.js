@@ -6,7 +6,7 @@ import Validation from './Validation';
 import InterfazSmartPlug from './interfazSmartPlug';
 
 
-window.$urlSmartPlug = "http://api-smartplug.herokuapp.com/smartplug/";
+window.$urlSmartPlug = "https://api-smartplug.herokuapp.com/smartplug/";
 window.$selectedMenPlugs = [];
 
 

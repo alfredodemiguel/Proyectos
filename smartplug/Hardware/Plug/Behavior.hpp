@@ -9,7 +9,10 @@ void _statePlug (){
 }
 
 void _emailPlug (){
-  if (smEmail == "On" && sendEmail == false) {
+  Serial.println("Envio de email");
+  Serial.println(smStateEmail);
+  Serial.println(sendEmail);
+  if (smStateEmail == "On" && sendEmail == false) {
     mail ("Movimiento detectado por smartPlug","Se ha detectado movimiento, y se ha puesto en marcha el enchufe."); 
     sendEmail = true; 
   }
