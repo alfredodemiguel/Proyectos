@@ -151,7 +151,7 @@ function InterfazSmartPlug() {
               value={smSeleccionado && smSeleccionado.smState}
               onChange={handleChange}
             />
-            <br />
+            <br/>
 
             <label>Grupo</label>
             <input
@@ -161,7 +161,7 @@ function InterfazSmartPlug() {
               value={smSeleccionado && smSeleccionado.smGroup}
               onChange={handleChange}
             />
-            <br />
+            <br/>
 
             <label>Proximidad</label>
             <input
