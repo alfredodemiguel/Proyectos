@@ -4,7 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Modal, ModalBody, ModalHeader, ModalFooter} from 'reactstrap';
 import { MDBContainer } from 'mdbreact';
-
+import Encabezado from './components/Encabezado';
 
 
 
@@ -34,7 +34,7 @@ function InterfazSmartPlug() {
     setSM((prevState)=>({
       ...prevState,
       [name]: value
-    }));
+    }));  
   }
 
 
@@ -43,11 +43,23 @@ function InterfazSmartPlug() {
     dataNueva.map(sm=>{
       if(sm.id===smSeleccionado.id){
         sm.smLive=smSeleccionado.smLive;
-        sm.smState=smSeleccionado.smState;
+        if (smSeleccionado.smState === 'On' || smSeleccionado.smState === 'Off'){
+          sm.smState=smSeleccionado.smState;
+        } else {
+          sm.smState="Off"
+        }
         sm.smGroup=smSeleccionado.smGroup;
-        sm.smProximity=smSeleccionado.smProximity;
+        if (smSeleccionado.smProximity === "true" || smSeleccionado.smProximity === "false"){
+          sm.smProximity=smSeleccionado.smProximity;
+        } else {
+          sm.smProximity = "false"
+        }
         sm.smEmail=smSeleccionado.smEmail;
-        sm.smStateEmail=smSeleccionado.smStateEmail
+        if (smSeleccionado.smStateEmail === "On" || smSeleccionado.smStateEmail === "Off"){
+          sm.smStateEmail=smSeleccionado.smStateEmail
+        } else {
+          sm.smStateEmail = "false"
+        }
         
         let thePlug = {"id": sm.id,"smLive": sm.smLive,"smState": sm.smState,"smGroup": sm.smGroup,
         "smTimeStamp": 1,"smProximity": sm.smProximity,"smEmail": sm.smEmail,"smStateEmail": sm.smStateEmail,
@@ -56,7 +68,6 @@ function InterfazSmartPlug() {
 
         axios.post(window.$urlSmartPlug, thePlug)
         .then(function (response) {
-          console.log ("response:");
           console.log (response);
         })
         .catch(function (error) {
@@ -72,8 +83,7 @@ function InterfazSmartPlug() {
 
   return (
     <div className="App">
-      <h1 class="alert alert-primary" role="alert" id="titleP">SMARTPLUG</h1>
-      <br/><br/><br/>
+      <Encabezado/>
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -104,7 +114,6 @@ function InterfazSmartPlug() {
       </table>
 
 
-
       <Modal isOpen={modalEditar}>
         <ModalHeader>
           <div>
@@ -129,6 +138,7 @@ function InterfazSmartPlug() {
               type="text"
               name="smLive"
               value={smSeleccionado && smSeleccionado.smLive}
+              readOnly
               onChange={handleChange}
             />
             <br />
@@ -166,12 +176,12 @@ function InterfazSmartPlug() {
             <label>Email</label>
             <input
               className="form-control"
-              type="text"
+              type="email"
               name="smEmail"
               value={smSeleccionado && smSeleccionado.smEmail}
               onChange={handleChange}
             />
-            <br />
+            <br/>
 
             <label>Estado Email</label>
             <input

@@ -97,9 +97,9 @@ const expect = require('chai').expect;
 	});
 
 
-	await describe('Put Data of smartPlug',()=>{
+	await describe('Post Data of smartPlug',()=>{
 
-		it('Put data SmartPlug', (done) => {
+		it('Post data SmartPlug', (done) => {
 			thePlug = {
 				id: "50:02:91:48:1C:11",
 				smLive: "false",
@@ -118,7 +118,7 @@ const expect = require('chai').expect;
 			}
 			
 			chai.request(url)
-				.put('/smartplug/50:02:91:48:1C:11') 
+				.post('/smartplug/') 
 				.set('Content-Type', 'application/json')
 				.send(thePlug)
 				.end( function(err,res){
@@ -145,24 +145,22 @@ const expect = require('chai').expect;
 	await describe('change state of smState',()=>{
 
 		it('smState to be Off', (done) => {
-			thePlug = {
-				id: "50:02:91:48:1C:11",
-				smLive: "false",
-				smState: "Off",
-				smGroup: "0013",
-				smTimeStamp: 1589186204159,
-				smProximity: "true",
-				smEmail: "alfredodemiguel@yahoo.es",
-				smStateEmail: "true",
-				smUser: "usuario01",
-				smPassword: "1234",
-				smInitialConf: "advertisement",
-				smPG1: "nul",
-				smPG2: "nul",
-				smPG3: "nul"
-			};
+			thePlug = {"id":"50:02:91:48:1C:11",
+			"smLive":"false",
+			"smState":"Off",
+			"smGroup":"0000",
+			"smTimeStamp":1586365329980,
+			"smProximity":"true",
+			"smEmail":"alfredodemiguel@yahoo.es",
+			"smStateEmail":"true",
+			"smUser":"usuarcio02",
+			"smPassword":"123",
+			"smInitialConf":"new",
+			"smPG1":"nul",
+			"smPG2":"nul",
+			"smPG3":"nul"};
 			chai.request(url)
-			.put('/smartplug/50:02:91:48:1C:11') 
+			.post('/smartplug/') 
 			.set('Content-Type', 'application/json')
 			.send(thePlug)
 			.end( function(err,res){
@@ -189,56 +187,60 @@ const expect = require('chai').expect;
 			
 			// New plug of group 0000
 
-			id = "50:02:91:48:1C:12";
-			smLive = 'true';
-            smState = 'Off';
-			smGroup = '0000';
-			smTimeStamp = '0';
-			smProximity = "true";
-			smEmail = "alfredodemiguel@yahoo.es";
-			smStateEmail = "true";
-			smUser = "usuario01";
-			smPassword = "1234";
-			smInitialConf = "advertisement";
-			smPG1 = "nul";
-			smPG2 = "nul";
-			smPG3 = "nul";
-			const newSmartPlug = {id,smLive,smState,smGroup,smTimeStamp,smProximity,
-				smEmail,smStateEmail,smUser,smPassword,smInitialConf,smPG1,smPG2,smPG3};
+			
+			const newSmartPlug = {
+			"id":"50:02:91:48:1C:12",
+			"smLive":"false",
+			"smState":"On",
+			"smGroup": "Grupo1",
+			"smTimeStamp":1586365329980,
+			"smProximity":"true",
+			"smEmail":"alfredodemiguel@yahoo.es",
+			"smStateEmail":"true",
+			"smUser":"usuarcio02",
+			"smPassword":"123",
+			"smInitialConf":"new",
+			"smPG1":"nul",
+			"smPG2":"nul",
+			"smPG3":"nul"}
 			chai.request(url)
 			.post('/smartplug')
 			.set('Content-Type', 'application/json')
 			.send(newSmartPlug)
 			.end( function(err,res){
 				expect(res).to.have.status(200);
+				
 			});
 			
 			// Change state plug 
 			thePlug = {
-				inputId: "50:02:91:48:1C:11",
-				smLive: 'true',
-				smState: 'On',
-				smGroup: '0000',
-				smTimeStamp: '0', 
-				smProximity: "true",
-				smEmail: "alfredodemiguel@yahoo.es",
-				smStateEmail: "true",
-				smUser: "usuario01",
-				smPassword: "1234",
-				smInitialConf: "advertisement",
-				smPG1: "nul",
-				smPG2: "nul",
-				smPG3: "nul"	
+				"id": "98:F4:AB:DA:5A:62",
+				"smLive": "true",
+				"smState": "Off",
+				"smGroup": "Grupo1",
+				"smTimeStamp": 1595756201251,
+				"smProximity": "Off",
+				"smEmail": "Alfredodemiguel@yahoo.es",
+				"smStateEmail": "Off",
+				"smUser": "Admin",
+				"smPassword": "MTIzNA==",
+				"smInitialConf": "Off",
+				"smPG1": "Off",
+				"smPG2": "Off",
+				"smPG3": "Off"		
 			};
+
+
+
 			chai.request(url)
-			.put('/smartplug/50:02:91:48:1C:11') 
+			.put('/smartplug/98:F4:AB:DA:5A:62') 
 			.set('Content-Type', 'application/json')
 			.send(thePlug)
 			.end( function(err,res){
-				//expect(res).to.have.status(200);
+				expect(res).to.have.status(200);
 			});
 
-			// State must be On for all members of group
+			//State must be On for all members of group
 			chai.request(url)
 				.get('/smartPlug/50:02:91:48:1C:12')
 				.set('Content-Type', 'application/json')
@@ -251,28 +253,28 @@ const expect = require('chai').expect;
 	}); 
 
 
-	await describe('Put no exitent plug',()=>{
+	await describe('Post no exitent plug',()=>{
 
-		it('Put No SmartPlug', (done) => {
+		it('Post No SmartPlug', (done) => {
 			
 			thePlug = {
-				inputId: "50:02:91:48:1C:12",
-				smLive: 'true',
-				smState: 'On',
-				smGroup: '0000',
-				smTimeStamp: '0',
-				smProximity: "true",
-				smEmail: "alfredodemiguel@yahoo.es",
-				smStateEmail: "true",
-				smUser: "usuario01",
-				smPassword: "1234",
-				smInitialConf: "advertisement",
-				smPG1: "nul",
-				smPG2: "nul",
-				smPG3: "nul"		
+				"id":"50:02:91:48:1C:13",
+				"smLive":"false",
+				"smState":"On",
+				"smGroup":"0000",
+				"smTimeStamp":1586365329980,
+				"smProximity":"true",
+				"smEmail":"alfredodemiguel@yahoo.es",
+				"smStateEmail":"true",
+				"smUser":"usuario02",
+				"smPassword":"123",
+				"smInitialConf":"new",
+				"smPG1":"nul",
+				"smPG2":"nul",
+				"smPG3":"nul"
 			};
 			chai.request(url)
-				.put('/smartplug/50:02:91:48:1C:12') 
+				.post('/smartplug/') 
 				.set('Content-Type', 'application/json')
 				.send(thePlug)
 				.end( function(err,res){

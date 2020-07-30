@@ -3,9 +3,7 @@ const morgan = require ('morgan');
 const bodyParser = require('body-parser');
 var cors = require('cors-express');
 const app = express();
-//const port = process.env.PORT;
-const port = 3017;
-
+const port = process.env.PORT || 3017;
 
 
 app.use (morgan('dev'));
@@ -89,7 +87,7 @@ app.put('/smartplug/:id', function (req, res) {
     let smPG2 = req.body.smPG2;
     let smPG3 = req.body.smPG3;
 
-    if (id && smLive && smState && sm/Group && smProximity && smEmail && smStateEmail 
+    if (id && smLive && smState && smGroup && smProximity && smEmail && smStateEmail 
         && smUser && smPassword && smInitialConf && smPG1 && smPG2 && smPG3) {
         // Modifica el registro en cuestión y los del grupo
         smartPlugs.forEach((smartPlugs) => {

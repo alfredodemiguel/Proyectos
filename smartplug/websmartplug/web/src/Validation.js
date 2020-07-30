@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Encabezado from './components/Encabezado';
 
 let menPlugs = [];
 let user = "";
@@ -48,19 +49,11 @@ function Validation(props) {
  
   return (
     <div className="Menu">
-      <header className="Menu-header">
-        <br />
-        <h1 class="alert alert-primary" role="alert" id="titleP">SMARTPLUG</h1>
-        <br />
-      </header>
+      <Encabezado/>
       <div id="imagesMenu">
         <br/>
         <br/>
-
-
-
         <form onSubmit={checkUserSubmited}>
-
         <div class="input-group input-group-lg">
          <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroup-sizing-lg">Usuario</span>

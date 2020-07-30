@@ -19,7 +19,7 @@ String bodyResponse;
 int apiConnectionCounter;
 boolean sendEmail = false;
 
-EMailSender emailSend("remotosovasa@gmail.com", "Arduino00");
+EMailSender emailSend("remotosovasa@gmail.com", "password");
 
 const int proximitySignalPin = 14;
 const int redLed = 13;
