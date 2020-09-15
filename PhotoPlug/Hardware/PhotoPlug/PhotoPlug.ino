@@ -64,7 +64,8 @@ void setup() {
   config.pixel_format = PIXFORMAT_JPEG;
   
   if(psramFound()){
-    config.frame_size = FRAMESIZE_UXGA;
+    //config.frame_size = FRAMESIZE_UXGA;
+    config.frame_size = FRAMESIZE_QVGA; 
     config.jpeg_quality = 10;
     config.fb_count = 2;
   } else {
@@ -87,10 +88,9 @@ void setup() {
 void loop() {
   if (apiConnectionCounter > 1900000) {
        getApi ();
+       postApi();
        apiConnectionCounter = 0;
        capturePhotoSaveSpiffs();
-       //Serial.print ("La longitud del buffer es:");
-       //Serial.println  (sizeof(fb));
       }
   apiConnectionCounter ++;
 }

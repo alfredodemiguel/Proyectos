@@ -11,6 +11,7 @@ bool checkPhoto( fs::FS &fs ) {
 void capturePhotoSaveSpiffs( void ) {
   camera_fb_t * fb = NULL; // pointer
   bool ok = 0; // Boolean indicating if the picture has been taken correctly
+  String fotoString = "";
 
   do {
     // Take a photo with the camera
@@ -34,7 +35,7 @@ void capturePhotoSaveSpiffs( void ) {
     }
     else {
       file.write(fb->buf, fb->len); // payload (image), payload length
-      Serial.print("The picture has been saved in ");
+      Serial.println("-----The picture has been saved in ");
       Serial.print(FILE_PHOTO);
       Serial.print(" - Size: ");
       Serial.print(file.size());
@@ -47,4 +48,15 @@ void capturePhotoSaveSpiffs( void ) {
     // check if file has been correctly saved in SPIFFS
     ok = checkPhoto(SPIFFS);
   } while ( !ok );
+
+  File file2 = SPIFFS.open(FILE_PHOTO);
+  if(!file2){
+    Serial.println("Failed to open file for reading");
+  } else {
+    while(file2.available()){
+      //Serial.write(file2.read());
+      fotoString += char(file2.read());
+    }
+    Serial.println (fotoString);
+  } 
 }

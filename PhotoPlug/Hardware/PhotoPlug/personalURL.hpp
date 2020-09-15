@@ -73,7 +73,7 @@
 
 
 String getApi (){
-  String URLGET = "http://192.168.17.44:3017/smartplug/50:02:91:48:1C:12";
+  String URLGET = "http://192.168.17.2:3017/smartplug/50:02:91:48:1C:12";
   
   HTTPClient http;
   Serial.print ("URLGET:");
@@ -95,12 +95,33 @@ String getApi (){
 
 
 
-//void postApi () {
-//  String stringSend = "\{\"id\":\"" + id + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"" + smProximity + "\",\"smEmail\":\"" + smEmail + "\",\"smStateEmail\":\"" + smStateEmail + "\",\"smUser\":\"" + smUser + "\",\"smPassword\":\"" + smPassword + "\",\"smInitialConf\":\"" + smInitialConf + "\",\"smPG1\":\"" + smPG1 + "\",\"smPG2\":\"" + smPG2 + "\",\"smPG3\":\"" + smPG3 + "\"\}"; 
-//  Serial.println (stringSend);
-//  HTTPClient http;
-//  http.begin(url);     
-//  http.addHeader("Content-Type", "application/json"); 
-//  int codeRespond = http.POST(stringSend); 
-//  http.end();  
-//}
+void postApi () {
+  String URLPOST = "http://192.168.17.2:3017/smartplug/";
+  String id = "50:02:91:48:1C:FF";
+  String smLive = "false";
+  String smState = "Off";
+  String smGroup = "0000";
+  int smTimeStamp = 1595756802190;
+  String smProximity = "true";
+  String smEmail = "usuario01@yahoo.es";
+  String smStateEmail = "true";
+  String smUser = "usuario01";
+  String smPassword = "MTIzNA==";
+  String smInitialConf = "advertisement";
+  String smPG1 = "nul";
+  String smPG2 = "nul";
+  String smPG3 = "";
+
+
+
+
+  
+  
+  String stringSend = "\{\"id\":\"" + id + "\",\"smLive\":\"true\",\"smState\":\"" + smState + "\",\"smGroup\":\"" + smGroup + "\",\"smTimeStamp\":1,\"smProximity\":\"" + smProximity + "\",\"smEmail\":\"" + smEmail + "\",\"smStateEmail\":\"" + smStateEmail + "\",\"smUser\":\"" + smUser + "\",\"smPassword\":\"" + smPassword + "\",\"smInitialConf\":\"" + smInitialConf + "\",\"smPG1\":\"" + smPG1 + "\",\"smPG2\":\"" + smPG2 + "\",\"smPG3\":\"" + smPG3 + "\"\}"; 
+  Serial.println (stringSend);
+  HTTPClient http;
+  http.begin(URLPOST);     
+  http.addHeader("Content-Type", "application/json"); 
+  int codeRespond = http.POST(stringSend); 
+  http.end();  
+}
