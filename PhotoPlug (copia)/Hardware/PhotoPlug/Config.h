@@ -2,6 +2,13 @@
 const char* ssid = "Coloso";
 const char* password = "31082004";
 
+//const char* ssid = "hackerspace_socios";
+//const char* password = "Siemprelanzacohetes$";
+
+int apiConnectionCounter = 0;
+String bodyResponse;
+String myEncoded = "";
+
 // To send Email using Gmail use port 465 (SSL) and SMTP Server smtp.gmail.com
 // YOU MUST ENABLE less secure app option https://myaccount.google.com/lesssecureapps?pli=1
 #define emailSenderAccount    "remotosovasa@gmail.com"
@@ -13,19 +20,6 @@ const char* password = "31082004";
 
 #define CAMERA_MODEL_AI_THINKER
 
-
-
-
-// To send Email using Gmail use port 465 (SSL) and SMTP Server smtp.gmail.com
-// YOU MUST ENABLE less secure app option https://myaccount.google.com/lesssecureapps?pli=1
-#define emailSenderAccount    "EXAMPLE_SENDER_ACCOUNT@gmail.com"
-#define emailSenderPassword   "SENDER_ACCOUNT_PASSWORD"
-#define smtpServer            "smtp.gmail.com"
-#define smtpServerPort        465
-#define emailSubject          "ESP32-CAM Photo Captured"
-#define emailRecipient        "YOUR_EMAIL_RECIPIENT@gmail.com"
-
-#define CAMERA_MODEL_AI_THINKER
 
 #if defined(CAMERA_MODEL_AI_THINKER)
   #define PWDN_GPIO_NUM     32

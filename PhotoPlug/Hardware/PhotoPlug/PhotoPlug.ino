@@ -2,12 +2,14 @@
 #include "SPI.h"
 #include "driver/rtc_io.h"
 #include "ESP32_MailClient.h"
+
 #include <FS.h>
 #include <SPIFFS.h>
 #include <WiFi.h>
 #include "Config.h" 
 #include "personalURL.hpp"
 #include "sendPhoto.hpp" 
+#include "rBase64.h"
 #include "capturePhotoSaveSpiffs.hpp"
 
 
@@ -81,7 +83,7 @@ void setup() {
     return;
   }
   
-  
+   pinMode(ledPIN , OUTPUT);
   //sendPhoto();
 }
 
@@ -91,6 +93,10 @@ void loop() {
        postApi();
        apiConnectionCounter = 0;
        capturePhotoSaveSpiffs();
+       digitalWrite(ledPIN , HIGH);   // poner el Pin en HIGH
+       delay(4000);                   // esperar 4 segundos
+       digitalWrite(ledPIN , LOW);    // poner el Pin en LOW
+       delay(1000); 
       }
   apiConnectionCounter ++;
 }

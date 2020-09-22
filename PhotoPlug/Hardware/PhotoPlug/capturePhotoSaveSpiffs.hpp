@@ -1,3 +1,36 @@
+String _encodePhoto (String photo) {
+//  char input[] ="";
+//  int len = password.length();
+//  password.toCharArray(input, len+1);
+//  int encodedLen = base64X_enc_len(len);
+//  char encoded[encodedLen];
+//  base64X_encode(encoded, input, len); 
+//  String myEncoded = String(encoded);
+
+  
+  Serial.println ("La foto del encode");
+  Serial.println (photo);
+  if (rbase64.encode(photo) == RBASE64_STATUS_OK) {
+    Serial.println("\nConverted the String to Base64 : ");
+    myEncoded = (rbase64.result());
+  } else {
+    
+    Serial.println ("Algo no chuta");
+    Serial.println ("size");
+    Serial.println (RABSE64_STATUS_SIZE);
+    Serial.println ("format");
+    Serial.println (RBASE64_STATUS_FORMAT);
+  }
+
+  myEncoded = "data:image/jpeg;base64," + myEncoded;
+  return (myEncoded);
+}
+
+
+
+
+
+
 // Check if photo capture was successful
 bool checkPhoto( fs::FS &fs ) {
   File f_pic = fs.open( FILE_PHOTO );
@@ -57,6 +90,10 @@ void capturePhotoSaveSpiffs( void ) {
       //Serial.write(file2.read());
       fotoString += char(file2.read());
     }
+    Serial.println ("FOTO RAW");
     Serial.println (fotoString);
+    Serial.println ("Foto CODIFICADA");
+    Serial.println (_encodePhoto (fotoString));
+    
   } 
 }

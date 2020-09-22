@@ -73,7 +73,7 @@
 
 
 String getApi (){
-  String URLGET = "http://192.168.17.2:3017/smartplug/50:02:91:48:1C:12";
+  String URLGET = "http://192.168.17.44:3017/smartplug/50:02:91:48:1C:12";
   
   HTTPClient http;
   Serial.print ("URLGET:");
@@ -96,7 +96,7 @@ String getApi (){
 
 
 void postApi () {
-  String URLPOST = "http://192.168.17.2:3017/smartplug/";
+  String URLPOST = "http://192.168.17.44:3017/smartplug/";
   String id = "50:02:91:48:1C:FF";
   String smLive = "false";
   String smState = "Off";

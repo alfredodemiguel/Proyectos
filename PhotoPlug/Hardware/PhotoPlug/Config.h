@@ -7,7 +7,8 @@ const char* password = "31082004";
 
 int apiConnectionCounter = 0;
 String bodyResponse;
-
+String myEncoded = "";
+const int ledPIN = 12;
 
 // To send Email using Gmail use port 465 (SSL) and SMTP Server smtp.gmail.com
 // YOU MUST ENABLE less secure app option https://myaccount.google.com/lesssecureapps?pli=1
