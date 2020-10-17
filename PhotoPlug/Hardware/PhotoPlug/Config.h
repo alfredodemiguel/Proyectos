@@ -3,29 +3,32 @@ const char* ssid = "Coloso";
 const char* password = "31082004";
 //const char* ssid = "hackerspace_socios";
 //const char* password = "Siemprelanzacohetes$";
+const char* ssidInside = "PhotoPlug";
+const char* passwordInside = "";
 String mac = WiFi.macAddress();
-String URLGET = "http://192.168.17.2:3017/smartplug/" + mac;
-String URLPOST = "http://192.168.17.2:3017/smartplug/";
+String URLGET = "http://192.168.17.44:3017/smartplug/" + mac;
+String URLPOST = "http://192.168.17.44:3017/smartplug/";
 
 int apiConnectionCounter = 0;
 String bodyResponse;
-//String myEncoded = "";
-const int ledPIN = 12;
+int longitud = 0;
 
-  String id = mac;
-  String smLive = "false";
-  String smState = "Off";
-  String smGroup = "0000";
-  int smTimeStamp = 1595756802190;
-  String smProximity = "true";
-  String smEmail = "usuario01@yahoo.es";
-  String smStateEmail = "true";
-  String smUser = "usuario01";
-  String smPassword = "MTIzNA==";
-  String smInitialConf = "advertisement";
-  String smPG1 = "nul";
-  String smPG2 = "nul";
-  String smPG3 = "nul";
+const int ledPin = 12;
+
+String id = mac;
+String smLive = "false";
+String smState = "Off";
+String smGroup = "0000";
+int smTimeStamp = 1595756802190;
+String smProximity = "true";
+String smEmail = "usuario01@yahoo.es";
+String smStateEmail = "true";
+String smUser = "usuario01";
+String smPassword = "MTIzNA==";
+String smInitialConf = "advertisement";
+String smPG1 = "nul";
+String smPG2 = "nul";
+String smPG3 = "nul";
 
 
 
@@ -52,4 +55,6 @@ const int ledPIN = 12;
 
 
 // Photo File Name to save in SPIFFS
-#define FILE_PHOTO "/photo.jpg"
+#define FILE_PHOTO "/photo02.jpg"
+
+String inputUsuario = "";

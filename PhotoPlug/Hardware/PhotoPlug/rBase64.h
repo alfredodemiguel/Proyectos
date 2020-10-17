@@ -30,7 +30,7 @@
 #define _RBASE64_H
 
 // This is the Size for the Default class @ref rbase64
-#define RBASE64_MAX_DEFAULT_SIZE 60000
+#define RBASE64_MAX_DEFAULT_SIZE 55000
 
 // Function to Calculate the Encoding Length from plain text length
 #define RBASE64_ENC_SIZECALC(X) ((X + 2 - ((X + 2) % 3)) / 3 * 4)

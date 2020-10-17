@@ -1,40 +1,70 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include "Index.h"
+#include "Arduino.h"
+#include "Config.h" 
+#include <SPIFFS.h>
+#include "soc/soc.h"           // Disable brownout problems
+#include "soc/rtc_cntl_reg.h"  // Disable brownout problems
+#include "driver/rtc_io.h"
+#include <ESPAsyncWebServer.h>
 #include "esp_camera.h"
 #include "SPI.h"
-#include "driver/rtc_io.h"
-#include "ESP32_MailClient.h"
-
-
-
 #include <FS.h>
-#include <SPIFFS.h>
-#include <WiFi.h>
-#include "Config.h" 
 #include "apiComunication.hpp"
 #include "rBase64.h"
 #include "capturePhoto.hpp"
-#include "Ap_Wifi.hpp"
-//#include "Behavior.hpp"
-//#include "EEprom_IO.hpp"
 
 
+AsyncWebServer server(80);
 
 
 void setup() {
+  //Others
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable brownout detector
-  
   Serial.begin(115200);
-  Serial.println();
 
-  // Connect to Wi-Fi
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting to WiFi...");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println();
+  //Wifi and AP
+ WiFi.begin(ssid, password);
+ while (WiFi.status() != WL_CONNECTED) {
+   delay(1000);
+   Serial.println("Connecting to WiFi...");
+ }
+
+  Serial.print("IP Address: http://");
+  Serial.println(WiFi.localIP());
+
   
-  if (!SPIFFS.begin(true)) {
+  WiFi.softAP(ssidInside,passwordInside);
+  IPAddress IP = WiFi.softAPIP();
+  Serial.print("AP IP address: ");
+  Serial.println(IP);
+
+
+// Route for root / web page
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send_P(200, "text/html", pag_validacion_html);
+    //request->send_P(200, "text/html", "Hola Cocacola!!!!");
+  });
+
+  server.on("/get", HTTP_GET, [] (AsyncWebServerRequest *request) {
+  // GET email_input value on <ESP_IP>/get?email_input=<inputMessage>
+  //http://192.168.17.47/get?usuario=alfredo&contrasena=122
+    if (request->hasParam("usuario")) {
+        inputUsuario = request->getParam("usuario")->value();
+      }
+    else {
+        inputUsuario = "No message sent";
+    }
+    Serial.println("el inputusuario:");
+    Serial.println(inputUsuario);
+    //validar_validacion();
+  });
+  server.begin();
+
+
+  // Check SPIFFS
+ if (!SPIFFS.begin(true)) {
     Serial.println("An Error has occurred while mounting SPIFFS");
     ESP.restart();
   }
@@ -42,11 +72,8 @@ void setup() {
     delay(500);
     Serial.println("SPIFFS mounted successfully");
   }
-  
-  // Print ESP32 Local IP Address
-  Serial.print("IP Address: http://");
-  Serial.println(WiFi.localIP());
-   
+
+  // Init Camera 
   camera_config_t config;
   config.ledc_channel = LEDC_CHANNEL_0;
   config.ledc_timer = LEDC_TIMER_0;
@@ -80,30 +107,31 @@ void setup() {
     config.fb_count = 1;
   }
 
-  // Initialize camera
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
     Serial.printf("Camera init failed with error 0x%x", err);
     return;
   }
-  
-   pinMode(ledPIN , OUTPUT);
-  //sendPhoto();
 
 
-  ap_wifi();
+  // Init LedPin
+   pinMode(ledPin , OUTPUT);
+
+
 }
 
 void loop() {
-  if (apiConnectionCounter > 1900000) {
-       getApi ();
+  if (apiConnectionCounter > 190000) {
+       getApi();
        photoTosmPG3 ();
        postApi();
-       apiConnectionCounter = 0;
+       apiConnectionCounter = 0;  
        
-       digitalWrite(ledPIN , HIGH);   // poner el Pin en HIGH
+       digitalWrite(ledPin , HIGH);   // poner el Pin en HIGH
+       Serial.printf("El pin esta encendido");
        delay(5000);                   // esperar 4 segundos
-       digitalWrite(ledPIN , LOW);    // poner el Pin en LOW
+       digitalWrite(ledPin , LOW);    // poner el Pin en LOW
+       Serial.printf("El pin esta apagado");
       }
   apiConnectionCounter ++;
 }
