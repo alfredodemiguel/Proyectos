@@ -17,6 +17,22 @@ String _encodePhoto () {
   Serial.println ("La foto del encode");
   Serial.println (photoString);
   photoEncoded = "data:image/jpeg;base64," + (base64::encode(photoString));
+  //photoEncoded = base64::encode(photoString);
+//  if (rbase64.encode(photoString) == RBASE64_STATUS_OK) {
+//    Serial.println("\nConverted the String to Base64 : ");
+//    photoEncoded = (rbase64.result());
+//    Serial.println ("La foto del codificada");
+//    Serial.println (photoEncoded);
+//  } else {
+//    
+//    Serial.println ("Algo no chuta");
+//    Serial.println ("size");
+//    Serial.println (RABSE64_STATUS_SIZE);
+//    Serial.println ("format");
+//    Serial.println (RBASE64_STATUS_FORMAT);
+//  }
+
+  
   
   return (photoEncoded);
 }
@@ -68,7 +84,7 @@ void _capturePhotoSaveSpiffs( void ) {
     else {
       Serial.println("Logitud:");
       Serial.println(fb->len);
-      //longitud = (fb->len);
+      longitud = (fb->len);
       file.write(fb->buf, fb->len); // payload (image), payload length
     }
     // Close the file

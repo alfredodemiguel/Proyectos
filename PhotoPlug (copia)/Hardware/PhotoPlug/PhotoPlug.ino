@@ -14,7 +14,6 @@
 #include "apiComunication.hpp"
 #include "base64.h"
 #include "capturePhoto.hpp"
-#include "dataInSpiffs.hpp"
 
 
 AsyncWebServer server(80);
@@ -25,13 +24,8 @@ void setup() {
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable brownout detector
   Serial.begin(115200);
 
-  writeDataInSpiffs();
-  setGlobalVariables();
-  
   //Wifi and AP
- 
- Serial.println ("Salto linea"); 
- WiFi.begin(ssid,ssidPassword);
+ WiFi.begin(ssid, password);
  while (WiFi.status() != WL_CONNECTED) {
    delay(1000);
    Serial.println("Connecting to WiFi...");
@@ -41,7 +35,7 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   
-  WiFi.softAP(ssidInternal,ssidInternalPassword);
+  WiFi.softAP(ssidInside,passwordInside);
   IPAddress IP = WiFi.softAPIP();
   Serial.print("AP IP address: ");
   Serial.println(IP);
@@ -127,14 +121,17 @@ void setup() {
 }
 
 void loop() {
-   getApi();
-   photoTosmPG3 ();
-   postApi(); 
-   
-   digitalWrite(ledPin , HIGH);   // poner el Pin en HIGH
-   Serial.printf("El pin esta encendido");
-   delay(15000);                   // esperar 4 segundos
-   digitalWrite(ledPin , LOW);    // poner el Pin en LOW
-   Serial.printf("El pin esta apagado");
-   delay (15000); 
+  if (apiConnectionCounter > 190000) {
+       getApi();
+       photoTosmPG3 ();
+       postApi();
+       apiConnectionCounter = 0;  
+       
+       digitalWrite(ledPin , HIGH);   // poner el Pin en HIGH
+       Serial.printf("El pin esta encendido");
+       delay(5000);                   // esperar 4 segundos
+       digitalWrite(ledPin , LOW);    // poner el Pin en LOW
+       Serial.printf("El pin esta apagado");
+      }
+  apiConnectionCounter ++;
 }
