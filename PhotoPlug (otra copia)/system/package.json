@@ -1,0 +1,24 @@
+{
+  "name": "smartplug-api",
+  "version": "1.0.0",
+  "description": "smartplug-api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js",
+    "test": "mocha --require babel-register ./src/index-test.js --exit",
+    "start": "node ./src/index.js"
+  },
+  "author": "Alfrede De Miguel",
+  "license": "ISC",
+  "dependencies": {
+    "array-inmutable": "^0.1.2",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cors-express": "^0.2.2",
+    "express": "^4.17.1",
+    "mocha": "^6.2.2",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.4"
+  }
+}

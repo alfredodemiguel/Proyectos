@@ -1,28 +1,23 @@
-// REPLACE WITH YOUR NETWORK CREDENTIALS
-
-char ssid[30];
-char ssidPassword[30];
+char ssid[50];
+char ssidPassword [50];
 String user;
 String userPassword;
 String url;
-char ssidInternal[30];
-char ssidInternalPassword[30];
 
-
-//const char* ssid = "Coloso";
-//const char* password = "31082004";
-//const char* ssid = "hackerspace_socios";
-//const char* password = "Siemprelanzacohetes$";
-//const char* ssidInside = "PhotoPlug";
-//const char* passwordInside = "";
+String ssidHtml = "";
+String ssidPasswordHtml ="";
+String userHtml = "";
+String userPasswordHtml = "";
+String onoffHtml = "";
+String urlHtml = "";
+String ssidInternalHtml = "PhotoPlug";
+String contrasenaWifiInternalHtml = "";
 
 String mac = WiFi.macAddress();
 String URLGET = "http://192.168.17.44:3017/smartplug/" + mac;
 String URLPOST = "http://192.168.17.44:3017/smartplug/";
 
-//int apiConnectionCounter = 0;
 String bodyResponse;
-//int longitud = 0;
 
 const int ledPin = 12;
 
@@ -67,5 +62,3 @@ String smPG3 = "nul";
 
 // Photo File Name to save in SPIFFS
 #define FILE_PHOTO "/photo00.jpg"
-
-String inputUsuario = "";

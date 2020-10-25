@@ -1,5 +1,6 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <EEPROM.h>
 #include "Index.h"
 #include "Arduino.h"
 #include "Config.h" 
@@ -11,22 +12,27 @@
 #include "esp_camera.h"
 #include "SPI.h"
 #include <FS.h>
+#include "EEprom_IO.hpp"
 #include "apiComunication.hpp"
 #include "base64.h"
 #include "capturePhoto.hpp"
-#include "dataInSpiffs.hpp"
+#include "dataInEEprom.hpp"
+#include "Behavior.hpp"
+
 
 
 AsyncWebServer server(80);
 
 
 void setup() {
+  
   //Others
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable brownout detector
   Serial.begin(115200);
-
-  writeDataInSpiffs();
+  EEPROM.begin(250);
+  //initialWriteDataInEEprom();
   setGlobalVariables();
+  WriteDataInEEprom ();
   
   //Wifi and AP
  
@@ -41,7 +47,7 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   
-  WiFi.softAP(ssidInternal,ssidInternalPassword);
+  WiFi.softAP("PhotoPlug","");
   IPAddress IP = WiFi.softAPIP();
   Serial.print("AP IP address: ");
   Serial.println(IP);
@@ -53,19 +59,71 @@ void setup() {
     //request->send_P(200, "text/html", "Hola Cocacola!!!!");
   });
 
-  server.on("/get", HTTP_GET, [] (AsyncWebServerRequest *request) {
-  // GET email_input value on <ESP_IP>/get?email_input=<inputMessage>
-  //http://192.168.17.47/get?usuario=alfredo&contrasena=122
-    if (request->hasParam("usuario")) {
-        inputUsuario = request->getParam("usuario")->value();
-      }
-    else {
-        inputUsuario = "No message sent";
-    }
-    Serial.println("el inputusuario:");
-    Serial.println(inputUsuario);
-    //validar_validacion();
+  server.on("/operacion", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send_P(200, "text/html", pag_operation_html);
   });
+  
+  server.on("/configuracion", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send_P(200, "text/html", pag_configuration_html);
+  });
+  
+  //http://192.168.17.47/get?usuario=alfredo&contrasena=122  
+  server.on("/get", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    if (request->hasParam("usuario")) {
+        userHtml = request->getParam("usuario")->value();
+    }
+    if (request->hasParam("contrasena")) {
+        userPasswordHtml = request->getParam("contrasena")->value();
+    }
+    Serial.println("el userHtml:");
+    Serial.println(userHtml);
+    Serial.println("el userPasswordHtml:");
+    Serial.println(userPasswordHtml);
+    if (userHtml == user && userPasswordHtml == userPassword){
+       request->send_P(200, "text/html", pag_menu_html);
+    } else {
+      request->send_P(200, "text/html", pag_validacion_html);
+    }
+  });
+
+  //http://192.168.17.47/validar_operacion?onoff=On&sensorProximidad=On&envEmail=Off
+  server.on("/validar_operacion", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    if (request->hasParam("onoff")) {
+        onoffHtml = request->getParam("onoff")->value();
+    }
+ 
+    Serial.println("onoff:");
+    Serial.println(onoffHtml);
+    request->send_P(200, "text/html", pag_menu_html);  
+  });
+  
+  //http://192.168.1.33/validar_configuracion?ssid=kjjhg&contrasenawifi=lkjkj&usuario=alfredo&contrasena=1234&grupo=grupo1
+  server.on("/validar_configuracion", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    if (request->hasParam("ssid")) {
+        ssidHtml = request->getParam("ssid")->value();
+    }
+    if (request->hasParam("contrasenawifi")) {
+        ssidPasswordHtml = request->getParam("contrasenawifi")->value();
+    }
+    if (request->hasParam("usuario")) {
+        userHtml = request->getParam("usuario")->value();
+    }
+    if (request->hasParam("contrasena")) {
+        userPasswordHtml = request->getParam("contrasena")->value();
+    }
+    if (request->hasParam("url")) {
+        urlHtml = request->getParam("url")->value();
+    }
+       
+    ssidHtml.toCharArray(ssid, 50);
+    ssidPasswordHtml.toCharArray(ssidPassword, 50);
+    user = userHtml;
+    userPassword = userPasswordHtml;
+    url = urlHtml;
+    WriteDataInEEprom ();
+    request->send_P(200, "text/html", pag_menu_html);  
+  });
+
   server.begin();
 
 
@@ -128,7 +186,7 @@ void setup() {
 
 void loop() {
    getApi();
-   photoTosmPG3 ();
+   //photoTosmPG3 ();
    postApi(); 
    
    digitalWrite(ledPin , HIGH);   // poner el Pin en HIGH
