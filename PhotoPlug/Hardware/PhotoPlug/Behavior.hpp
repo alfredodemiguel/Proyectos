@@ -1,28 +1,30 @@
-void writeConfigurationInFile (){
+void setGlobalVariablesWeb (){
+  Serial.printf("Setglobalvariablesweb");
+  smLive = "true";
   
-  
+  smUser = user;
+  smPassword = userPassword;
+  Serial.println("user:" + user);
+  Serial.println("smUser:" + smUser);
+  Serial.println("userPassword:" + userPassword);
+  Serial.println("smPassword:" + smPassword);
 }
-void writeDataInSpiffs(){  
-  if(!SPIFFS.begin(true)){
-        Serial.println("An Error has occurred while mounting SPIFFS");
-        return;
-   }
- 
-    File file = SPIFFS.open("/data.txt", FILE_WRITE);
- 
-    if(!file){
-        Serial.println("There was an error opening the file for writing");
-        return;
-    }
-    ssidHtml = ssid;
-    ssidPasswordHtml = ssidPassword;
-   
-    //if(file.print("ssid:Coloso,ssidPassword:31082004,user:Admin,userPassword:1234,url:http://192.168.17.2:3017/smartplug/,ssidInternal:PhotoPlug,ssidInternalPassword:,")){
-    if(file.print("ssid:" + ssidHtml + ",ssidPassword:" + ssidPasswordHtml +",user:" + user + ",userPassword:" + userPassword + ",url:" + url + ",ssidInternal:" + ssidInternalHtml + ",ssidInternalPassword:" + " ,")){      
-        Serial.println("File was written");;
-    } else {
-        Serial.println("File write failed");
-    }
- 
-    file.close();
+
+
+
+void checkBehavior (){
+  if (smState == "On" || onoffHtml == "On"){
+      digitalWrite(ledPin , HIGH);   // poner el Pin en HIGH
+      Serial.printf("El pin esta encendido");
+  } else {
+      digitalWrite(ledPin , LOW);    // poner el Pin en LOW
+      Serial.printf("El pin esta apagado");
+  }
+
+  if (smPG2 == "true" || photoHtml == "On"){
+    photoTosmPG3 ();
+    smPG2 = "false";
+    photoHtml = "Off";
+    setGlobalVariablesWeb ();
+  }
 }

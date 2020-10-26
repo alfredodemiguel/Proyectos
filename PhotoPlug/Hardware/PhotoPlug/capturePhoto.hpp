@@ -74,7 +74,6 @@ void _capturePhotoSaveSpiffs( void ) {
     // Close the file
     file.close();
     esp_camera_fb_return(fb);
-    //free (fb);
 
     // check if file has been correctly saved in SPIFFS
     ok = _checkPhoto(SPIFFS);

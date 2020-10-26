@@ -9,20 +9,20 @@ String ssidPasswordHtml ="";
 String userHtml = "";
 String userPasswordHtml = "";
 String onoffHtml = "";
+String photoHtml = "";
 String urlHtml = "";
 String ssidInternalHtml = "PhotoPlug";
 String contrasenaWifiInternalHtml = "";
 
 String mac = WiFi.macAddress();
-String URLGET = "http://192.168.17.44:3017/smartplug/" + mac;
-String URLPOST = "http://192.168.17.44:3017/smartplug/";
+
 
 String bodyResponse;
 
 const int ledPin = 12;
 
 String id = mac;
-String smLive = "false";
+String smLive = "true";
 String smState = "Off";
 String smGroup = "0000";
 int smTimeStamp = 1595756802190;
@@ -33,7 +33,7 @@ String smUser = "usuario01";
 String smPassword = "MTIzNA==";
 String smInitialConf = "advertisement";
 String smPG1 = "nul";
-String smPG2 = "nul";
+String smPG2 = "false";
 String smPG3 = "nul";
 
 

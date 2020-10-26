@@ -1,6 +1,7 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <EEPROM.h>
+#include "base64.h"
 #include "Index.h"
 #include "Arduino.h"
 #include "Config.h" 
@@ -14,7 +15,6 @@
 #include <FS.h>
 #include "EEprom_IO.hpp"
 #include "apiComunication.hpp"
-#include "base64.h"
 #include "capturePhoto.hpp"
 #include "dataInEEprom.hpp"
 #include "Behavior.hpp"
@@ -37,6 +37,12 @@ void setup() {
   //Wifi and AP
  
  Serial.println ("Salto linea"); 
+ 
+ WiFi.softAP("PhotoPlug","");
+ IPAddress IP = WiFi.softAPIP();
+ Serial.print("AP IP address: ");
+ Serial.println(IP);
+  
  WiFi.begin(ssid,ssidPassword);
  while (WiFi.status() != WL_CONNECTED) {
    delay(1000);
@@ -47,10 +53,6 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   
-  WiFi.softAP("PhotoPlug","");
-  IPAddress IP = WiFi.softAPIP();
-  Serial.print("AP IP address: ");
-  Serial.println(IP);
 
 
 // Route for root / web page
@@ -91,9 +93,14 @@ void setup() {
     if (request->hasParam("onoff")) {
         onoffHtml = request->getParam("onoff")->value();
     }
+    if (request->hasParam("photo")) {
+        photoHtml = request->getParam("photo")->value();
+    }
  
     Serial.println("onoff:");
     Serial.println(onoffHtml);
+    Serial.println("photo:");
+    Serial.println(photoHtml);
     request->send_P(200, "text/html", pag_menu_html);  
   });
   
@@ -121,6 +128,9 @@ void setup() {
     userPassword = userPasswordHtml;
     url = urlHtml;
     WriteDataInEEprom ();
+
+    setGlobalVariablesWeb ();
+    
     request->send_P(200, "text/html", pag_menu_html);  
   });
 
@@ -161,8 +171,8 @@ void setup() {
   config.pixel_format = PIXFORMAT_JPEG;
   
   if(psramFound()){
-    //config.frame_size = FRAMESIZE_UXGA;
-    config.frame_size = FRAMESIZE_QVGA; 
+    config.frame_size = FRAMESIZE_CIF;
+    //config.frame_size = FRAMESIZE_QVGA; 
     config.jpeg_quality = 10;
     config.fb_count = 2;
   } else {
@@ -185,14 +195,9 @@ void setup() {
 }
 
 void loop() {
-   getApi();
-   //photoTosmPG3 ();
    postApi(); 
+   getApi();
    
-   digitalWrite(ledPin , HIGH);   // poner el Pin en HIGH
-   Serial.printf("El pin esta encendido");
-   delay(15000);                   // esperar 4 segundos
-   digitalWrite(ledPin , LOW);    // poner el Pin en LOW
-   Serial.printf("El pin esta apagado");
-   delay (15000); 
+   checkBehavior ();
+   delay (5000);  
 }

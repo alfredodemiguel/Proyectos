@@ -242,7 +242,7 @@ const char pag_configuration_html[] PROGMEM = R"rawliteral(
           </tr>
           <tr>
            <td>URL SERVIDOR:</td>
-           <td><input class='input1' name='url' type='text' required maxlength='48' value = 'http://api-smartplug.herokuapp.com/photoplug/' placeholder='http://api-smartplug.herokuapp.com/photoplug/'><br></td>
+           <td><input class='input1' name='url' type='text' required maxlength='48' value = 'http://api-smartplug.herokuapp.com/smartplug/' placeholder='http://api-smartplug.herokuapp.com/smartplug/'><br></td>
           </tr>
         </table>
         <br><br><br>
@@ -329,6 +329,11 @@ const char pag_operation_html[] PROGMEM = R"rawliteral(
           <td>ON/OFF:</td> 
           <td><input class='input1' type='radio' id='onoff' name='onoff' value='On' required></td> 
           <td><input class='input1' type='radio' id='onoff' name='onoff' value='Off'></td> 
+        </tr> 
+         <tr> 
+          <td>Photo:</td> 
+          <td><input class='input1' type='radio' id='photo' name='photo' value='On' required></td> 
+          <td><input class='input1' type='radio' id='photo' name='photo' value='Off'></td> 
         </tr> 
       </table>
       <br><br><br>

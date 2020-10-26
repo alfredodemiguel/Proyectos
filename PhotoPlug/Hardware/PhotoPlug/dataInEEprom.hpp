@@ -12,6 +12,7 @@ void setGlobalVariables (){
   Serial.println (user);
   Serial.println (userPassword);
   Serial.println (url);
+ 
 }
 
 
@@ -26,7 +27,6 @@ void initialWriteDataInEEprom(){
   write (150,userPassword);
   url = "http://192.168.17.2:3017/smartplug/";
   write(200,url);
-  
 }
 
 void WriteDataInEEprom(){  

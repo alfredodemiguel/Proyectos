@@ -48,11 +48,10 @@ function InterfazSmartPlug() {
         } else {
           sm.smState="Off"
         }
-        sm.smGroup=smSeleccionado.smGroup;
-        if (smSeleccionado.smProximity === "true" || smSeleccionado.smProximity === "false"){
-          sm.smProximity=smSeleccionado.smProximity;
+        if (smSeleccionado.smPG2 === "true" || smSeleccionado.smPG2 === "false"){
+          sm.smPG2=smSeleccionado.smPG2;
         } else {
-          sm.smProximity = "false"
+          sm.smPG2 = "false"
         }
         sm.smEmail=smSeleccionado.smEmail;
         if (smSeleccionado.smStateEmail === "On" || smSeleccionado.smStateEmail === "Off"){
@@ -63,7 +62,7 @@ function InterfazSmartPlug() {
         
         let thePlug = {"id": sm.id,"smLive": sm.smLive,"smState": sm.smState,"smGroup": sm.smGroup,
         "smTimeStamp": 1,"smProximity": sm.smProximity,"smEmail": sm.smEmail,"smStateEmail": sm.smStateEmail,
-        "smUser": sm.smUser,"smPassword": sm.smPassword,"smInitialConf":"new","smPG1":"nul","smPG2":"nul",
+        "smUser": sm.smUser,"smPassword": sm.smPassword,"smInitialConf":"new","smPG1":"nul","smPG2":sm.smPG2,
         "smPG3":"nul"};
 
         axios.post(window.$urlSmartPlug, thePlug)
@@ -90,8 +89,7 @@ function InterfazSmartPlug() {
             <th>ID</th>
             <th>Vivo</th>
             <th>Estado</th>
-            <th>Grupo</th>
-            <th>Proximidad</th>
+            <th>Tomar Fotografia</th>
             <th>Email</th>
             <th>Estado Email</th>
           </tr>
@@ -102,8 +100,7 @@ function InterfazSmartPlug() {
               <td>{elemento.id}</td>
               <td>{elemento.smLive}</td>
               <td>{elemento.smState}</td>
-              <td>{elemento.smGroup}</td>
-              <td>{elemento.smProximity}</td>
+              <td>{elemento.smPG2}</td>
               <td>{elemento.smEmail}</td>
               <td>{elemento.smStateEmail}</td>
               <td><img src={elemento.smPG3} height="50" width="50" /></td>
@@ -154,22 +151,12 @@ function InterfazSmartPlug() {
             />
             <br/>
 
-            <label>Grupo</label>
+            <label>Tomar Fotografia</label>
             <input
               className="form-control"
               type="text"
-              name="smGroup"
-              value={smSeleccionado && smSeleccionado.smGroup}
-              onChange={handleChange}
-            />
-            <br/>
-
-            <label>Proximidad</label>
-            <input
-              className="form-control"
-              type="text"
-              name="smProximity"
-              value={smSeleccionado && smSeleccionado.smProximity}
+              name="smPG2"
+              value={smSeleccionado && smSeleccionado.smPG2}
               onChange={handleChange}
             />
             <br />
