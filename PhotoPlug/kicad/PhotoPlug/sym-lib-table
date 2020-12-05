@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name PhotoPlug-rescue)(type Legacy)(uri ${KIPRJMOD}/PhotoPlug-rescue.lib)(options "")(descr ""))
+  (lib (name LibPhotoPlug)(type Legacy)(uri ${LIBPP}/libPP/LibPhotoPlug.lib)(options "")(descr ""))
+)

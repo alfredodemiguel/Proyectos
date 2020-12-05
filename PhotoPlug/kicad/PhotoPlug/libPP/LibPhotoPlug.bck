@@ -1,0 +1,13 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ESP32-CAM
+D Modules PCBA Module RoHS
+F https://datasheet.lcsc.com/szlcsc/Ai-Thinker-ESP32-CAM_C277946.pdf
+$ENDCMP
+#
+$CMP SRD-05VDC-SL-C
+D Relay
+F http://files.microjpm.webnode.com/200001010-dda41de9e1/Songle%20Relay%20Datasheet.pdf
+$ENDCMP
+#
+#End Doc Library

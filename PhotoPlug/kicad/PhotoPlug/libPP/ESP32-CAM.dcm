@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ESP32-CAM
+D Modules PCBA Module RoHS
+K
+F https://datasheet.lcsc.com/szlcsc/Ai-Thinker-ESP32-CAM_C277946.pdf
+$ENDCMP
+#
+#End Doc Library
