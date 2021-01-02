@@ -1,4 +1,4 @@
-17334923422197544
+17342968075080069
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -76425,3 +76425,38 @@ varistor SIOV
 0
 2
 2
+milib
+Altech_AK300_1x02_P5.00mm_45-Degree
+Altech AK300 serie terminal block (Script generated with StandardBox.py) (http://www.altechcorp.com/PDFS/PCBMETRC.PDF)
+Altech AK300 serie connector
+0
+2
+2
+milib
+Altech_AK300_1x03_P5.00mm_45-Degree
+Altech AK300 serie terminal block (Script generated with StandardBox.py) (http://www.altechcorp.com/PDFS/PCBMETRC.PDF)
+Altech AK300 serie connector
+0
+3
+3
+milib
+MiFusible
+fuse holder, car blade fuse mini, http://www.keyelco.com/product-pdf.cfm?p=306
+car blade fuse mini
+0
+2
+2
+milib
+RV_Disc_D12mm_W4.8mm_P7.5mm
+Varistor, diameter 12mm, width 4.8mm, pitch 7.5mm
+varistor SIOV
+0
+2
+2
+milib
+Transformador Tenstar Robot
+
+
+0
+4
+4

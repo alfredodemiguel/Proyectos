@@ -19,7 +19,7 @@ U 1 1 5F9EAF1D
 P 2760 3550
 F 0 "F1" H 2820 3596 50  0000 L CNN
 F 1 "Fuse" H 2820 3505 50  0000 L CNN
-F 2 "Fuse:Fuseholder_Blade_Mini_Keystone_3568" V 2690 3550 50  0001 C CNN
+F 2 "milib:MiFusible" V 2690 3550 50  0001 C CNN
 F 3 "~" H 2760 3550 50  0001 C CNN
 	1    2760 3550
 	0    -1   -1   0   
@@ -30,7 +30,7 @@ U 1 1 5F9EB29E
 P 5790 2980
 F 0 "F2" H 5850 3026 50  0000 L CNN
 F 1 "Fuse" H 5850 2935 50  0000 L CNN
-F 2 "Fuse:Fuseholder_Blade_Mini_Keystone_3568" V 5720 2980 50  0001 C CNN
+F 2 "milib:MiFusible" V 5720 2980 50  0001 C CNN
 F 3 "~" H 5790 2980 50  0001 C CNN
 	1    5790 2980
 	0    1    1    0   
@@ -41,7 +41,7 @@ U 1 1 5F9ED9E2
 P 3140 3070
 F 0 "RV1" H 3243 3116 50  0000 L CNN
 F 1 "Varistor" H 3243 3025 50  0000 L CNN
-F 2 "Varistor:RV_Disc_D12mm_W4.8mm_P7.5mm" V 3070 3070 50  0001 C CNN
+F 2 "milib:RV_Disc_D12mm_W4.8mm_P7.5mm" V 3070 3070 50  0001 C CNN
 F 3 "~" H 3140 3070 50  0001 C CNN
 	1    3140 3070
 	1    0    0    -1  
@@ -68,17 +68,6 @@ F 3 "~" H 6800 3080 50  0001 C CNN
 	1    6800 3080
 	1    0    0    -1  
 $EndComp
-$Comp
-L PhotoPlug-rescue:Transformador100v-240v_5V_0.6A-sm-PhotoPlug-rescue U2
-U 1 1 5F9E9176
-P 5030 3030
-F 0 "U2" H 5030 3283 24  0000 C CNN
-F 1 "Transformador100v-240v_5V_0.6A" H 5030 3233 24  0000 C CNN
-F 2 "" H 5030 2830 24  0001 C CNN
-F 3 "" H 5030 2830 24  0001 C CNN
-	1    5030 3030
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	1970 2990 1970 2980
 Wire Wire Line
@@ -91,7 +80,7 @@ U 1 1 5F9E89DF
 P 1770 3090
 F 0 "J1" H 1850 3082 50  0000 L CNN
 F 1 "Screw_Terminal_01x02" H 1850 2991 50  0000 L CNN
-F 2 "TerminalBlock_Altech:Altech_AK300_1x02_P5.00mm_45-Degree" H 1770 3090 50  0001 C CNN
+F 2 "milib:Altech_AK300_1x02_P5.00mm_45-Degree" H 1770 3090 50  0001 C CNN
 F 3 "~" H 1770 3090 50  0001 C CNN
 	1    1770 3090
 	-1   0    0    1   
@@ -102,7 +91,7 @@ U 1 1 5FA1B76F
 P 7960 2980
 F 0 "J5" H 8040 2972 50  0000 L CNN
 F 1 "Screw_Terminal_01x02" H 8040 2881 50  0000 L CNN
-F 2 "TerminalBlock_Altech:Altech_AK300_1x02_P5.00mm_45-Degree" H 7960 2980 50  0001 C CNN
+F 2 "milib:Altech_AK300_1x02_P5.00mm_45-Degree" H 7960 2980 50  0001 C CNN
 F 3 "~" H 7960 2980 50  0001 C CNN
 	1    7960 2980
 	1    0    0    -1  
@@ -111,45 +100,23 @@ Wire Wire Line
 	7760 2560 7760 2980
 Connection ~ 3140 2560
 Wire Wire Line
-	4680 2980 4680 2560
-Wire Wire Line
-	3140 2560 4680 2560
-Connection ~ 4680 2560
-Wire Wire Line
-	4680 2560 7760 2560
-Wire Wire Line
-	4170 3130 4680 3130
-Wire Wire Line
 	1970 3650 2100 3650
 Wire Wire Line
 	1970 3090 1970 3650
 Wire Wire Line
-	2500 3750 5820 3750
-Wire Wire Line
 	7760 3750 7760 3080
 Wire Wire Line
 	2910 3550 3140 3550
-Wire Wire Line
-	3140 3550 3350 3550
-Wire Wire Line
-	4170 3130 4170 3550
 Connection ~ 3140 3550
 Wire Wire Line
 	1970 2560 3140 2560
 Wire Wire Line
-	5380 2980 5640 2980
-Wire Wire Line
 	5940 2980 6220 2980
-Wire Wire Line
-	5380 3130 5380 3180
-Wire Wire Line
-	5380 3180 6220 3180
 Wire Wire Line
 	6220 2980 6800 2980
 Connection ~ 6220 2980
 Wire Wire Line
 	6220 3180 6800 3180
-Connection ~ 6220 3180
 $Comp
 L power:+1V5 #PWR03
 U 1 1 5FA37F18
@@ -180,7 +147,7 @@ U 1 1 5FA3A92D
 P 2200 3850
 F 0 "J2" V 2072 4030 50  0000 L CNN
 F 1 "Screw_Terminal_01x03" V 2163 4030 50  0000 L CNN
-F 2 "TerminalBlock_Altech:Altech_AK300_1x03_P5.00mm_45-Degree" H 2200 3850 50  0001 C CNN
+F 2 "milib:Altech_AK300_1x03_P5.00mm_45-Degree" H 2200 3850 50  0001 C CNN
 F 3 "~" H 2200 3850 50  0001 C CNN
 	1    2200 3850
 	0    1    1    0   
@@ -205,7 +172,7 @@ U 1 1 5FA466A2
 P 2450 2980
 F 0 "J3" H 2530 2972 50  0000 L CNN
 F 1 "Screw_Terminal_01x02" H 2530 2881 50  0000 L CNN
-F 2 "TerminalBlock_Altech:Altech_AK300_1x02_P5.00mm_45-Degree" H 2450 2980 50  0001 C CNN
+F 2 "milib:Altech_AK300_1x03_P5.00mm_45-Degree" H 2450 2980 50  0001 C CNN
 F 3 "~" H 2450 2980 50  0001 C CNN
 	1    2450 2980
 	1    0    0    -1  
@@ -222,25 +189,20 @@ Wire Wire Line
 Connection ~ 1970 3090
 Text Notes 2190 3240 0    50   ~ 0
 Led_Encendido
-Connection ~ 3350 3550
-Wire Wire Line
-	3350 3550 4170 3550
 $Comp
 L power:GND #PWR01
 U 1 1 5F9F7BC7
-P 4190 4720
-F 0 "#PWR01" H 4190 4470 50  0001 C CNN
-F 1 "GND" V 4195 4592 50  0000 R CNN
-F 2 "" H 4190 4720 50  0001 C CNN
-F 3 "" H 4190 4720 50  0001 C CNN
-	1    4190 4720
+P 4590 5480
+F 0 "#PWR01" H 4590 5230 50  0001 C CNN
+F 1 "GND" V 4595 5352 50  0000 R CNN
+F 2 "" H 4590 5480 50  0001 C CNN
+F 3 "" H 4590 5480 50  0001 C CNN
+	1    4590 5480
 	0    1    1    0   
 $EndComp
 Connection ~ 5820 3750
 Wire Wire Line
 	5820 3750 7760 3750
-Wire Wire Line
-	4020 4080 6380 4080
 Wire Wire Line
 	6380 4080 6380 4730
 Wire Wire Line
@@ -268,14 +230,14 @@ F 3 "" H 6960 4530 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR011
+L power:GND #PWR013
 U 1 1 5FA0C604
-P 9490 3700
-F 0 "#PWR011" H 9490 3450 50  0001 C CNN
-F 1 "GND" V 9495 3572 50  0000 R CNN
-F 2 "" H 9490 3700 50  0001 C CNN
-F 3 "" H 9490 3700 50  0001 C CNN
-	1    9490 3700
+P 9590 3720
+F 0 "#PWR013" H 9590 3470 50  0001 C CNN
+F 1 "GND" V 9595 3592 50  0000 R CNN
+F 2 "" H 9590 3720 50  0001 C CNN
+F 3 "" H 9590 3720 50  0001 C CNN
+	1    9590 3720
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -284,7 +246,7 @@ U 1 1 5F9F4481
 P 6960 4530
 F 0 "IC1" H 7560 4795 50  0000 C CNN
 F 1 "ESP32-CAM" H 7560 4704 50  0000 C CNN
-F 2 "ESP32CAM" H 8010 4630 50  0001 L CNN
+F 2 "PhotoPlug:ESP32CAM" H 8010 4630 50  0001 L CNN
 F 3 "https://datasheet.lcsc.com/szlcsc/Ai-Thinker-ESP32-CAM_C277946.pdf" H 8010 4530 50  0001 L CNN
 F 4 "Modules PCBA Module RoHS" H 8010 4430 50  0001 L CNN "Description"
 F 5 "5" H 8010 4330 50  0001 L CNN "Height"
@@ -374,21 +336,10 @@ F 3 "" H 6750 5610 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:LED D2
-U 1 1 5FA2B115
-P 9330 4100
-F 0 "D2" H 9323 4317 50  0000 C CNN
-F 1 "LED" H 9323 4226 50  0000 C CNN
-F 2 "LED_THT:LED_D3.0mm" H 9330 4100 50  0001 C CNN
-F 3 "~" H 9330 4100 50  0001 C CNN
-	1    9330 4100
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:R R2
+L Device:R R1
 U 1 1 5FA2B11B
 P 8940 4100
-F 0 "R2" H 9010 4146 50  0000 L CNN
+F 0 "R1" H 9010 4146 50  0000 L CNN
 F 1 "R" H 9010 4055 50  0000 L CNN
 F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P2.54mm_Vertical" V 8870 4100 50  0001 C CNN
 F 3 "~" H 8940 4100 50  0001 C CNN
@@ -396,28 +347,15 @@ F 3 "~" H 8940 4100 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L power:GND #PWR012
+L power:GND #PWR011
 U 1 1 5FA2B121
 P 9480 4100
-F 0 "#PWR012" H 9480 3850 50  0001 C CNN
+F 0 "#PWR011" H 9480 3850 50  0001 C CNN
 F 1 "GND" V 9485 3972 50  0000 R CNN
 F 2 "" H 9480 4100 50  0001 C CNN
 F 3 "" H 9480 4100 50  0001 C CNN
 	1    9480 4100
 	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	9090 4100 9180 4100
-$Comp
-L Device:LED D3
-U 1 1 5FA2C4B1
-P 9350 4500
-F 0 "D3" H 9343 4717 50  0000 C CNN
-F 1 "LED" H 9343 4626 50  0000 C CNN
-F 2 "LED_THT:LED_D3.0mm" H 9350 4500 50  0001 C CNN
-F 3 "~" H 9350 4500 50  0001 C CNN
-	1    9350 4500
-	-1   0    0    1   
 $EndComp
 $Comp
 L Device:R R3
@@ -431,41 +369,26 @@ F 3 "~" H 8960 4500 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L power:GND #PWR013
+L power:GND #PWR012
 U 1 1 5FA2C4BD
 P 9500 4500
-F 0 "#PWR013" H 9500 4250 50  0001 C CNN
+F 0 "#PWR012" H 9500 4250 50  0001 C CNN
 F 1 "GND" V 9505 4372 50  0000 R CNN
 F 2 "" H 9500 4500 50  0001 C CNN
 F 3 "" H 9500 4500 50  0001 C CNN
 	1    9500 4500
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	9110 4500 9200 4500
-Wire Wire Line
-	9100 3700 9190 3700
 $Comp
-L Device:R R1
+L Device:R R2
 U 1 1 5FA0846E
 P 8950 3700
-F 0 "R1" H 9020 3746 50  0000 L CNN
+F 0 "R2" H 9020 3746 50  0000 L CNN
 F 1 "R" H 9020 3655 50  0000 L CNN
 F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P2.54mm_Vertical" V 8880 3700 50  0001 C CNN
 F 3 "~" H 8950 3700 50  0001 C CNN
 	1    8950 3700
 	0    1    1    0   
-$EndComp
-$Comp
-L Device:LED D1
-U 1 1 5F9FEB0D
-P 9340 3700
-F 0 "D1" H 9333 3917 50  0000 C CNN
-F 1 "LED" H 9333 3826 50  0000 C CNN
-F 2 "LED_THT:LED_D3.0mm" H 9340 3700 50  0001 C CNN
-F 3 "~" H 9340 3700 50  0001 C CNN
-	1    9340 3700
-	-1   0    0    1   
 $EndComp
 Wire Wire Line
 	6960 4930 6540 4930
@@ -487,34 +410,163 @@ Wire Wire Line
 $Comp
 L LibPhotoPlug:SRD-05VDC-SL-C K1
 U 1 1 5F9F695A
-P 4690 5320
-F 0 "K1" V 5555 5320 50  0000 C CNN
-F 1 "SRD-05VDC-SL-C" V 5464 5320 50  0000 C CNN
-F 2 "SRD" H 5440 5620 50  0001 L CNN
-F 3 "http://files.microjpm.webnode.com/200001010-dda41de9e1/Songle%20Relay%20Datasheet.pdf" H 5440 5520 50  0001 L CNN
-F 4 "Relay" H 5440 5420 50  0001 L CNN "Description"
-F 5 "Songle Relay" H 5440 5220 50  0001 L CNN "Manufacturer_Name"
-F 6 "SRD-05VDC-SL-C" H 5440 5120 50  0001 L CNN "Manufacturer_Part_Number"
-	1    4690 5320
-	0    -1   -1   0   
+P 4290 4980
+F 0 "K1" H 5018 5026 50  0000 L CNN
+F 1 "SRD-05VDC-SL-C" H 5018 4935 50  0000 L CNN
+F 2 "PhotoPlug:SRD" H 5040 5280 50  0001 L CNN
+F 3 "http://files.microjpm.webnode.com/200001010-dda41de9e1/Songle%20Relay%20Datasheet.pdf" H 5040 5180 50  0001 L CNN
+F 4 "Relay" H 5040 5080 50  0001 L CNN "Description"
+F 5 "Songle Relay" H 5040 4880 50  0001 L CNN "Manufacturer_Name"
+F 6 "SRD-05VDC-SL-C" H 5040 4780 50  0001 L CNN "Manufacturer_Part_Number"
+	1    4290 4980
+	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5190 4720 5820 4720
-Wire Wire Line
-	5820 3750 5820 4720
-Wire Wire Line
-	5190 5020 5820 5020
-Wire Wire Line
-	5820 5020 5820 4720
-Connection ~ 5820 4720
-Wire Wire Line
-	4690 5320 3350 5320
-Wire Wire Line
-	3350 3550 3350 5320
-Wire Wire Line
-	4190 5020 4020 5020
-Wire Wire Line
-	4020 4080 4020 5020
-Wire Wire Line
 	2200 3550 2200 3650
+Wire Wire Line
+	4290 4980 3640 4980
+Wire Wire Line
+	3140 3550 3640 3550
+Wire Wire Line
+	2500 3750 5820 3750
+Wire Wire Line
+	5820 3750 5820 4480
+Wire Wire Line
+	4890 4480 5820 4480
+Wire Wire Line
+	3640 4980 3640 3550
+Connection ~ 3640 3550
+Wire Wire Line
+	3640 3550 4170 3550
+Wire Wire Line
+	4590 4480 4590 4080
+Wire Wire Line
+	4590 4080 6380 4080
+NoConn ~ 4890 5480
+$Comp
+L Connector_Generic_MountingPin:Conn_01x02_MountingPin J8
+U 1 1 5FCBB0E6
+P 9420 3870
+F 0 "J8" V 9296 3950 50  0000 L CNN
+F 1 "Conn_01x02_MountingPin" V 9387 3950 50  0000 L CNN
+F 2 "Connector_PinHeader_1.00mm:PinHeader_1x02_P1.00mm_Vertical" H 9420 3870 50  0001 C CNN
+F 3 "~" H 9420 3870 50  0001 C CNN
+	1    9420 3870
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic_MountingPin:Conn_01x02_MountingPin J7
+U 1 1 5FE38A50
+P 9390 4300
+F 0 "J7" V 9266 4380 50  0000 L CNN
+F 1 "Conn_01x02_MountingPin" V 9357 4380 50  0000 L CNN
+F 2 "Connector_PinHeader_1.00mm:PinHeader_1x02_P1.00mm_Vertical" H 9390 4300 50  0001 C CNN
+F 3 "~" H 9390 4300 50  0001 C CNN
+	1    9390 4300
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic_MountingPin:Conn_01x02_MountingPin J6
+U 1 1 5FE3910B
+P 9380 4710
+F 0 "J6" V 9256 4790 50  0000 L CNN
+F 1 "Conn_01x02_MountingPin" V 9347 4790 50  0000 L CNN
+F 2 "Connector_PinHeader_1.00mm:PinHeader_1x02_P1.00mm_Vertical" H 9380 4710 50  0001 C CNN
+F 3 "~" H 9380 4710 50  0001 C CNN
+	1    9380 4710
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9100 3700 9180 3700
+Wire Wire Line
+	9180 3700 9180 3670
+Wire Wire Line
+	9180 3670 9320 3670
+Wire Wire Line
+	9420 3670 9590 3670
+Wire Wire Line
+	9590 3670 9590 3720
+Wire Wire Line
+	9090 4100 9290 4100
+Wire Wire Line
+	9480 4100 9390 4100
+Wire Wire Line
+	9110 4500 9280 4500
+Wire Wire Line
+	9280 4500 9280 4510
+Wire Wire Line
+	9380 4510 9500 4510
+Wire Wire Line
+	9500 4510 9500 4500
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 5FEAB868
+P 10460 1090
+F 0 "H3" H 10560 1136 50  0000 L CNN
+F 1 "MountingHole" H 10560 1045 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.5mm" H 10460 1090 50  0001 C CNN
+F 3 "~" H 10460 1090 50  0001 C CNN
+	1    10460 1090
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 5FEB53FA
+P 930 930
+F 0 "H1" H 1030 976 50  0000 L CNN
+F 1 "MountingHole" H 1030 885 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.5mm" H 930 930 50  0001 C CNN
+F 3 "~" H 930 930 50  0001 C CNN
+	1    930  930 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 5FEB5DEC
+P 1140 6020
+F 0 "H2" H 1240 6066 50  0000 L CNN
+F 1 "MountingHole" H 1240 5975 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.5mm" H 1140 6020 50  0001 C CNN
+F 3 "~" H 1140 6020 50  0001 C CNN
+	1    1140 6020
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 5FEB85CF
+P 10760 5720
+F 0 "H4" H 10860 5766 50  0000 L CNN
+F 1 "MountingHole" H 10860 5675 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.5mm" H 10760 5720 50  0001 C CNN
+F 3 "~" H 10760 5720 50  0001 C CNN
+	1    10760 5720
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3140 2560 4490 2560
+$Comp
+L LibPhotoPlug:TransformadorTenstarRobot U1
+U 1 1 5F9E9176
+P 4940 3080
+F 0 "U1" H 4940 3333 24  0000 C CNN
+F 1 "Transformador100v-240v_5V_0.6A" H 4940 3283 24  0000 C CNN
+F 2 "milib:Transformador Tenstar Robot" H 4940 2880 24  0000 C CNN
+F 3 "" H 4940 2880 24  0001 C CNN
+	1    4940 3080
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5640 2980 5390 2980
+Wire Wire Line
+	6220 3180 5390 3180
+Connection ~ 6220 3180
+Wire Wire Line
+	4490 2930 4490 2560
+Connection ~ 4490 2560
+Wire Wire Line
+	4490 2560 7760 2560
+Wire Wire Line
+	4170 3550 4170 3180
+Wire Wire Line
+	4170 3180 4490 3180
 $EndSCHEMATC

@@ -75,4 +75,20 @@ X Sin_Señal_Conectado ~ -350 -650 100 U 50 39 1 1 O
 ENDDRAW
 ENDDEF
 #
+# TransformadorTenstarRobot
+#
+DEF TransformadorTenstarRobot U 0 40 Y Y 1 F N
+F0 "U" 0 -350 50 H V C CNN
+F1 "TransformadorTenstarRobot" 50 350 50 H V C CNN
+F2 "" 0 -350 50 H I C CNN
+F3 "" 0 -350 50 H I C CNN
+DRAW
+S -350 250 350 -250 0 1 0 N
+X +V ~ 450 -100 100 L 50 50 1 1 B
+X -v ~ 450 100 100 L 50 50 1 1 B
+X AC ~ -450 -100 100 R 50 50 1 1 B
+X AC ~ -450 150 100 R 50 50 1 1 B
+ENDDRAW
+ENDDEF
+#
 #End Library
