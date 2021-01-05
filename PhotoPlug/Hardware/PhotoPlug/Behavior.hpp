@@ -14,17 +14,20 @@ void setGlobalVariablesWeb (){
 
 void checkBehavior (){
   if (smState == "On" || onoffHtml == "On"){
-      digitalWrite(ledPin , HIGH);   // poner el Pin en HIGH
+      digitalWrite(PlugPin , HIGH);   // poner el Pin en HIGH
       Serial.printf("El pin esta encendido");
   } else {
-      digitalWrite(ledPin , LOW);    // poner el Pin en LOW
+      digitalWrite(PlugPin , LOW);    // poner el Pin en LOW
       Serial.printf("El pin esta apagado");
   }
 
   if (smPG2 == "true" || photoHtml == "On"){
+    digitalWrite(LedPin , HIGH);
+    delay (1000);
     photoTosmPG3 ();
     smPG2 = "false";
     photoHtml = "Off";
     setGlobalVariablesWeb ();
+    digitalWrite(LedPin , LOW);
   }
 }

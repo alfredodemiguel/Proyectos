@@ -23,9 +23,6 @@ String _encodePhoto () {
 
 
 
-
-
-
 // Check if photo capture was successful
 bool _checkPhoto( fs::FS &fs ) {
   File f_pic = fs.open( FILE_PHOTO );

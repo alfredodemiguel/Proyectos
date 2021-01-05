@@ -42,11 +42,13 @@ void setup() {
  IPAddress IP = WiFi.softAPIP();
  Serial.print("AP IP address: ");
  Serial.println(IP);
-  
+
+ int IntentosConexionWifi = 0; 
  WiFi.begin(ssid,ssidPassword);
- while (WiFi.status() != WL_CONNECTED) {
+ while ((WiFi.status() != WL_CONNECTED) && (IntentosConexionWifi < 30)) {
    delay(1000);
-   Serial.println("Connecting to WiFi...");
+   IntentosConexionWifi ++;
+   Serial.println("Connecting to WiFi..." + IntentosConexionWifi);
  }
 
   Serial.print("IP Address: http://");
@@ -188,8 +190,9 @@ void setup() {
   }
 
 
-  // Init LedPin
-   pinMode(ledPin , OUTPUT);
+  // Init PlugPin
+   pinMode(PlugPin , OUTPUT);
+   pinMode(LedPin , OUTPUT);
 
 
 }

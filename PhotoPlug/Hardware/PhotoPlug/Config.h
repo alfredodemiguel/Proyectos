@@ -19,7 +19,8 @@ String mac = WiFi.macAddress();
 
 String bodyResponse;
 
-const int ledPin = 12;
+const int PlugPin = 15;
+const int LedPin = 12;
 
 String id = mac;
 String smLive = "true";
