@@ -24,10 +24,12 @@ function Validation(props) {
   
   function checkUser(event) {
     user = (event.target.value);
+    window.$user = user;
   }
   
   function checkPassword(event) {
     password = btoa((event.target.value));
+    window.$password = password;
   }
   
   function checkUserSubmited (){

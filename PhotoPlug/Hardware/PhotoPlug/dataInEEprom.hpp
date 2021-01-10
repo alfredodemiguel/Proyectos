@@ -20,7 +20,7 @@ void initialWriteDataInEEprom(){
 
   write(0,"Coloso");
   String ssidPasswordTemp = "31082004";
-  write(50,"31082004");
+  write(50,"A31082004");
   user = "Admin";
   write(100,user);
   userPassword = "1234";

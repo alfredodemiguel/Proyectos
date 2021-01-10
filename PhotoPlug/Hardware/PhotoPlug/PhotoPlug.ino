@@ -103,6 +103,7 @@ void setup() {
     Serial.println(onoffHtml);
     Serial.println("photo:");
     Serial.println(photoHtml);
+    datoCambiadoPP = true;
     request->send_P(200, "text/html", pag_menu_html);  
   });
   
@@ -131,6 +132,7 @@ void setup() {
     url = urlHtml;
     WriteDataInEEprom ();
 
+    datoCambiadoPP = true;
     setGlobalVariablesWeb ();
     
     request->send_P(200, "text/html", pag_menu_html);  
@@ -140,7 +142,8 @@ void setup() {
 
 
   // Check SPIFFS
- if (!SPIFFS.begin(true)) {
+  SPIFFS.begin(true);
+  if (!SPIFFS.begin(true)) {
     Serial.println("An Error has occurred while mounting SPIFFS");
     ESP.restart();
   }
@@ -194,13 +197,18 @@ void setup() {
    pinMode(PlugPin , OUTPUT);
    pinMode(LedPin , OUTPUT);
 
+   postApi(); 
 
 }
 
 void loop() {
-   postApi(); 
+   if (activarPost == true) {
+    postApi(); 
+    activarPost = false;
+   }
    getApi();
+   postApi();
    
    checkBehavior ();
-   delay (5000);  
+   delay (15000);  
 }

@@ -16,6 +16,8 @@ String contrasenaWifiInternalHtml = "";
 
 String mac = WiFi.macAddress();
 
+boolean datoCambiadoPP = false;
+boolean activarPost = false;
 
 String bodyResponse;
 
@@ -34,7 +36,7 @@ String smUser = "usuario01";
 String smPassword = "MTIzNA==";
 String smInitialConf = "advertisement";
 String smPG1 = "nul";
-String smPG2 = "false";
+String smPG2 = "False";
 String smPG3 = "nul";
 
 
@@ -62,4 +64,4 @@ String smPG3 = "nul";
 
 
 // Photo File Name to save in SPIFFS
-#define FILE_PHOTO "/photo00.jpg"
+#define FILE_PHOTO "/photo02.jpg"

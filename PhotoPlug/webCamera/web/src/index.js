@@ -9,6 +9,8 @@ import InterfazSmartPlug from './interfazSmartPlug';
 window.$urlSmartPlug = "https://api-smartplug.herokuapp.com/smartplug/";
 //window.$urlSmartPlug = "http://localhost:3017/smartplug/";
 window.$selectedMenPlugs = [];
+window.$user = "";
+window.$password = "";
 
 
 const App = () => (

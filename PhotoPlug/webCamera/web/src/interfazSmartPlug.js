@@ -6,7 +6,7 @@ import {Modal, ModalBody, ModalHeader, ModalFooter} from 'reactstrap';
 import { MDBContainer } from 'mdbreact';
 import Encabezado from './components/Encabezado';
 
-
+let menPlugs = [];
 
 function InterfazSmartPlug() {
   
@@ -23,6 +23,28 @@ function InterfazSmartPlug() {
     smEmail: '',
     smStateEmail: ''
   });
+
+  const refrescarDatos=()=>{
+    console.log ('Estoy en refrescarDatos');
+    axios.get(window.$urlSmartPlug)
+    .then(function (response) {
+      menPlugs = response.data;
+    }) 
+    .catch(function (error) {
+      console.log ('Error al hacer get'+ error);
+    });  
+    window.$selectedMenPlugs.length = 0;
+    menPlugs.forEach(element => {
+      if (element.smUser === window.$user && element.smPassword === window.$password){
+        window.$selectedMenPlugs.push({"id": element.id,"smLive": element.smLive,"smState": element.smState,
+        "smGroup": element.smGroup,"smTimeStamp": element.smTimeStamp,"smProximity": element.smProximity,
+        "smEmail": element.smEmail,"smStateEmail": element.smStateEmail,"smUser": element.smUser,
+        "smPassword": element.smPassword,"smInitialConf":element.smInitialConf,"smPG1":element.smPG1,
+        "smPG2":element.smPG2,"smPG3":element.smPG3});
+      }
+    });
+    setData(menPlugs);
+  }
 
   const seleccionarSM=(elemento)=>{
     setSM(elemento);
@@ -48,18 +70,11 @@ function InterfazSmartPlug() {
         } else {
           sm.smState="Off"
         }
-        if (smSeleccionado.smPG2 === "true" || smSeleccionado.smPG2 === "false"){
+        if (smSeleccionado.smPG2 === "True" || smSeleccionado.smPG2 === "False"){
           sm.smPG2=smSeleccionado.smPG2;
         } else {
-          sm.smPG2 = "false"
-        }
-        sm.smEmail=smSeleccionado.smEmail;
-        if (smSeleccionado.smStateEmail === "On" || smSeleccionado.smStateEmail === "Off"){
-          sm.smStateEmail=smSeleccionado.smStateEmail
-        } else {
-          sm.smStateEmail = "false"
-        }
-        
+          sm.smPG2 = "False"
+        }        
         let thePlug = {"id": sm.id,"smLive": sm.smLive,"smState": sm.smState,"smGroup": sm.smGroup,
         "smTimeStamp": 1,"smProximity": sm.smProximity,"smEmail": sm.smEmail,"smStateEmail": sm.smStateEmail,
         "smUser": sm.smUser,"smPassword": sm.smPassword,"smInitialConf":"new","smPG1":"nul","smPG2":sm.smPG2,
@@ -84,27 +99,20 @@ function InterfazSmartPlug() {
     <div className="App">
       <Encabezado/>
       <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Vivo</th>
-            <th>Estado</th>
-            <th>Tomar Fotografia</th>
-            <th>Email</th>
-            <th>Estado Email</th>
-          </tr>
-        </thead>
         <tbody>
           {window.$selectedMenPlugs.map(elemento=>(
             <tr key={elemento.id}>
-              <td>{elemento.id}</td>
-              <td>{elemento.smLive}</td>
-              <td>{elemento.smState}</td>
-              <td>{elemento.smPG2}</td>
-              <td>{elemento.smEmail}</td>
-              <td>{elemento.smStateEmail}</td>
-              <td><img src={elemento.smPG3} height="50" width="50" /></td>
-              <td><button className="btn btn-primary" onClick={()=>seleccionarSM(elemento)}>Editar</button> {"   "}</td>
+              <tr>
+                <td><strong>ID:</strong>{elemento.id}</td>
+                <td><strong>Vivo:</strong>{elemento.smLive}</td>
+                <td><strong>Estado:</strong>{elemento.smState}</td>
+                <td><strong>Fofo:</strong>{elemento.smPG2}</td>
+                <td><button className="btn btn-primary" onClick={()=>seleccionarSM(elemento)}>Editar</button> {"   "}</td>
+              </tr>  
+              <tr>
+                <td><img src={elemento.smPG3} width="100%" height="100%" alt ="Foto"/></td>
+                <td><button className="btn btn-primary" onClick={()=>refrescarDatos()}>Referescar</button> {"   "}</td>
+              </tr>
             </tr>
           ))
           }
@@ -141,45 +149,23 @@ function InterfazSmartPlug() {
             />
             <br />
 
-            <label>Estado</label>
-            <input
-              className="form-control"
-              type="text"
-              name="smState"
-              value={smSeleccionado && smSeleccionado.smState}
-              onChange={handleChange}
-            />
+            <label>Estado (Si no se elige estado pasa a Off)</label>
+            <select class="custom-select custom-select-lg mb-3"
+             name="smState"
+             onChange={handleChange} required>
+              <option selected>On/Off</option>
+              <option value="On">On</option>
+              <option value="Off">Off</option>
+            </select>
             <br/>
-
             <label>Tomar Fotografia</label>
-            <input
-              className="form-control"
-              type="text"
-              name="smPG2"
-              value={smSeleccionado && smSeleccionado.smPG2}
-              onChange={handleChange}
-            />
-            <br />
-
-            <label>Email</label>
-            <input
-              className="form-control"
-              type="email"
-              name="smEmail"
-              value={smSeleccionado && smSeleccionado.smEmail}
-              onChange={handleChange}
-            />
-            <br/>
-
-            <label>Estado Email</label>
-            <input
-              className="form-control"
-              type="text"
-              name="smStateEmail"
-              value={smSeleccionado && smSeleccionado.smStateEmail}
-              onChange={handleChange}
-            />
-            <br />
+            <select class="custom-select custom-select-lg mb-3"
+             name="smPG2"
+             onChange={handleChange} required>
+              <option selected>True/False</option>
+              <option value="True">True</option>
+              <option value="False">False</option>
+            </select>
           </div>
         </ModalBody>
         <ModalFooter>

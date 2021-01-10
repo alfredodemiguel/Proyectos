@@ -13,7 +13,20 @@ void setGlobalVariablesWeb (){
 
 
 void checkBehavior (){
-  if (smState == "On" || onoffHtml == "On"){
+  // Se han realizado cambios en el PP.
+  if (datoCambiadoPP == true){
+      smState = onoffHtml;
+      if (photoHtml = "On"){
+        smPG2 = "True";
+      } else{
+        smPG2 = "False";
+      }
+      activarPost = true;
+      datoCambiadoPP = false;
+  }
+
+  // Se han realizado cambios en PP o Web
+  if (smState == "On"){
       digitalWrite(PlugPin , HIGH);   // poner el Pin en HIGH
       Serial.printf("El pin esta encendido");
   } else {
@@ -21,13 +34,15 @@ void checkBehavior (){
       Serial.printf("El pin esta apagado");
   }
 
-  if (smPG2 == "true" || photoHtml == "On"){
+  if (smPG2 == "True"){
     digitalWrite(LedPin , HIGH);
     delay (1000);
     photoTosmPG3 ();
-    smPG2 = "false";
+    smPG2 = "False";
     photoHtml = "Off";
-    setGlobalVariablesWeb ();
+    delay (1000);
     digitalWrite(LedPin , LOW);
+    activarPost = true;
   }
-}
+    // setGlobalVariablesWeb ();
+  }
