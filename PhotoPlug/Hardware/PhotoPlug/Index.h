@@ -76,7 +76,7 @@ const char pag_validacion_html[] PROGMEM = R"rawliteral(
         <footer class='footer'>
            <p>Web para administración remota <a class='link' href='https://web-photoplug.herokuapp.com/'> https://web-photoplug.herokuapp.com/</a></p>
            <br>
-           <p>Código fuente del proyecto <a class='link' href='http://github.com/alfredodemiguel/Proyectos/tree/master/photoplug'> http://github.com/alfredodemiguel/Proyectos/tree/master/photoplug</a></p>
+           <p>Código fuente del proyecto <a class='link' href='https://github.com/alfredodemiguel/Proyectos/tree/master/PhotoPlug'> https://github.com/alfredodemiguel/Proyectos/tree/master/PhotoPlug</a></p>
         </footer>
     </body>
     <script>
@@ -153,7 +153,7 @@ const char pag_menu_html[] PROGMEM = R"rawliteral(
       <footer class='footer'>
            <p>Web para administración remota <a class='link' href='https://web-photoplug.herokuapp.com/'> https://web-photoplug.herokuapp.com/</a></p>
            <br>
-           <p>Código fuente del proyecto <a class='link' href='http://github.com/alfredodemiguel/Proyectos/tree/master/photoplug'> http://github.com/alfredodemiguel/Proyectos/tree/master/photoplug</a></p>
+           <p>Código fuente del proyecto <a class='link' href='https://github.com/alfredodemiguel/Proyectos/tree/master/PhotoPlug'>https://github.com/alfredodemiguel/Proyectos/tree/master/PhotoPlug</a></p>
       </footer>
     </body>
 </html>)rawliteral";
@@ -251,7 +251,7 @@ const char pag_configuration_html[] PROGMEM = R"rawliteral(
       <footer class='footer'>
           <p>Web para administración remota <a class='link' href='https://web-photoplug.herokuapp.com/'> https://web-photoplug.herokuapp.com/</a></p>
           <br>
-         <p>Código fuente del proyecto <a class='link' href='http://github.com/alfredodemiguel/Proyectos/tree/master/photoplug'> http://github.com/alfredodemiguel/Proyectos/tree/master/photoplug</a></p>
+         <p>Código fuente del proyecto <a class='link' href='https://github.com/alfredodemiguel/Proyectos/tree/master/PhotoPlug'>https://github.com/alfredodemiguel/Proyectos/tree/master/PhotoPlug</a></p>
       </footer>
     </body>
 </html>)rawliteral";
