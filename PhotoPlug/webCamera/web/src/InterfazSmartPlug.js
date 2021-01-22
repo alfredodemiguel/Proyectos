@@ -1,40 +1,32 @@
 import {Link} from 'react-router-dom';
 import React, {useState}  from 'react';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Modal, ModalBody, ModalHeader, ModalFooter} from 'reactstrap';
 import { MDBContainer } from 'mdbreact';
 import Encabezado from './components/Encabezado';
+import ReadApi from './ReadApi';
+import WriteApi from './WriteApi';
 
-let menPlugs = [];
+
 
 function InterfazSmartPlug() {
   
   const [data, setData] = useState(window.$selectedMenPlugs);
   const [modalEditar, setModalEditar] = useState(false);
-  
 
   const [smSeleccionado, setSM] = useState({
     id: '',
     smLive: '',
     smState: '',
-    smGroup: '',
-    smProximity: '',
-    smEmail: '',
-    smStateEmail: ''
+    smPG2: '',
+    smpG3: ''
   });
 
   const refrescarDatos=()=>{
     console.log ('Estoy en refrescarDatos');
-    axios.get(window.$urlSmartPlug)
-    .then(function (response) {
-      menPlugs = response.data;
-    }) 
-    .catch(function (error) {
-      console.log ('Error al hacer get'+ error);
-    });  
+    ReadApi(window.$urlSmartPlug);
     window.$selectedMenPlugs.length = 0;
-    menPlugs.forEach(element => {
+    window.$menPlugs.forEach(element => {
       if (element.smUser === window.$user && element.smPassword === window.$password){
         window.$selectedMenPlugs.push({"id": element.id,"smLive": element.smLive,"smState": element.smState,
         "smGroup": element.smGroup,"smTimeStamp": element.smTimeStamp,"smProximity": element.smProximity,
@@ -43,7 +35,7 @@ function InterfazSmartPlug() {
         "smPG2":element.smPG2,"smPG3":element.smPG3});
       }
     });
-    setData(menPlugs);
+    setData(window.$menPlugs);
   }
 
   const seleccionarSM=(elemento)=>{
@@ -75,18 +67,11 @@ function InterfazSmartPlug() {
         } else {
           sm.smPG2 = "False"
         }        
-        let thePlug = {"id": sm.id,"smLive": sm.smLive,"smState": sm.smState,"smGroup": sm.smGroup,
-        "smTimeStamp": 1,"smProximity": sm.smProximity,"smEmail": sm.smEmail,"smStateEmail": sm.smStateEmail,
-        "smUser": sm.smUser,"smPassword": sm.smPassword,"smInitialConf":"new","smPG1":"nul","smPG2":sm.smPG2,
-        "smPG3":"nul"};
-
-        axios.post(window.$urlSmartPlug, thePlug)
-        .then(function (response) {
-          console.log (response);
-        })
-        .catch(function (error) {
-          console.log (error);
-        });
+        let thePlug = {"id": sm.id,"smLive": sm.smLive,"smState": sm.smState,"smGroup":"nul",
+        "smTimeStamp": 1,"smProximity":"nul","smEmail":"nul","smStateEmail":"nul",
+        "smUser":sm.smUser,"smPassword":sm.smPassword,"smInitialConf":"new","smPG1":"nul","smPG2":sm.smPG2,
+        "smPG3":sm.smPG3};
+        WriteApi (window.$urlSmartPlug,thePlug);
       }
       return 0;
     });
@@ -98,27 +83,28 @@ function InterfazSmartPlug() {
   return (
     <div className="App">
       <Encabezado/>
-      <table className="table table-bordered">
-        <tbody>
-          {window.$selectedMenPlugs.map(elemento=>(
-            <tr key={elemento.id}>
-              <tr>
-                <td><strong>ID:</strong>{elemento.id}</td>
-                <td><strong>Vivo:</strong>{elemento.smLive}</td>
-                <td><strong>Estado:</strong>{elemento.smState}</td>
-                <td><strong>Fofo:</strong>{elemento.smPG2}</td>
-                <td><button className="btn btn-primary" onClick={()=>seleccionarSM(elemento)}>Editar</button> {"   "}</td>
-              </tr>  
-              <tr>
-                <td><img src={elemento.smPG3} width="100%" height="100%" alt ="Foto"/></td>
-                <td><button className="btn btn-primary" onClick={()=>refrescarDatos()}>Referescar</button> {"   "}</td>
+      <div class="table-responsive-sm" style={{width: "100%"}}>
+        <table className="table table-bordered" >
+          <tbody>
+            {window.$selectedMenPlugs.map(elemento=>(
+              <tr key={elemento.id}>
+                <tr>
+                  <td><strong>ID:</strong>{elemento.id}</td>
+                  <td><strong>Vivo:</strong>{elemento.smLive}</td>
+                  <td><strong>Estado:</strong>{elemento.smState}</td>
+                  <td><strong>Fofo:</strong>{elemento.smPG2}</td>
+                  <td><button className="btn btn-primary" onClick={()=>seleccionarSM(elemento)}>Editar</button> {"   "}</td>
+                </tr>  
+                <tr>
+                  <td><img src={elemento.smPG3} width="100%" height="100%" alt ="Foto"/></td>
+                  <td><button className="btn btn-primary" onClick={()=>refrescarDatos()}>Referescar</button> {"   "}</td>
+                </tr>
               </tr>
-            </tr>
-          ))
-          }
-        </tbody>
-      </table>
-
+            ))
+            }
+          </tbody>
+        </table>
+      </div>
 
       <Modal isOpen={modalEditar}>
         <ModalHeader>
@@ -136,8 +122,7 @@ function InterfazSmartPlug() {
               name="id"
               value={smSeleccionado && smSeleccionado.id}
             />
-            <br />
-
+            <br/>
             <label>Vivo</label>
             <input
               className="form-control"
@@ -145,11 +130,9 @@ function InterfazSmartPlug() {
               name="smLive"
               value={smSeleccionado && smSeleccionado.smLive}
               readOnly
-              onChange={handleChange}
             />
-            <br />
-
-            <label>Estado (Si no se elige estado pasa a Off)</label>
+            <br/>
+            <label>Estado (ATENCIÓN: Si no se elige estado pasa a Off)</label>
             <select class="custom-select custom-select-lg mb-3"
              name="smState"
              onChange={handleChange} required>

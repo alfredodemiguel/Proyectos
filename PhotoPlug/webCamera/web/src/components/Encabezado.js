@@ -5,7 +5,7 @@ const Encabezado = ()=> {
     return(
         <header className="Menu-header">
             <br/>
-            <h1 class="alert alert-primary" role="alert" id="titleP">PHOTOPLUG</h1>
+            <h1 className="alert alert-primary" role="alert" id="titleP">PHOTOPLUG</h1>
             <br />
         </header>
     );

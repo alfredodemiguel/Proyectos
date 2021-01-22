@@ -1,41 +1,29 @@
 import React, {useEffect} from 'react';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Encabezado from './components/Encabezado';
+import ReadApi from './ReadApi';
 
-let menPlugs = [];
-let user = "";
-let password = "";
   
 
 function Validation(props) {
   const { history } = props;
 
   useEffect(() => {
-    axios.get(window.$urlSmartPlug)
-    .then(function (response) {
-      menPlugs = response.data;
-    }) 
-    .catch(function (error) {
-      console.log ('Error al hacer get'+ error);
-    });  
+   ReadApi(window.$urlSmartPlug);
   },[]);
   
-  
   function checkUser(event) {
-    user = (event.target.value);
-    window.$user = user;
+    window.$user = (event.target.value);
   }
   
   function checkPassword(event) {
-    password = btoa((event.target.value));
-    window.$password = password;
+    window.$password = btoa((event.target.value));
   }
   
   function checkUserSubmited (){
     window.$selectedMenPlugs.length = 0;
-    menPlugs.forEach(element => {
-                                if (element.smUser === user && element.smPassword === password){
+    window.$menPlugs.forEach(element => {
+                                if (element.smUser === window.$user && element.smPassword === window.$password){
                                   window.$selectedMenPlugs.push({"id": element.id,"smLive": element.smLive,"smState": element.smState,
                                   "smGroup": element.smGroup,"smTimeStamp": element.smTimeStamp,"smProximity": element.smProximity,
                                   "smEmail": element.smEmail,"smStateEmail": element.smStateEmail,"smUser": element.smUser,
@@ -56,26 +44,26 @@ function Validation(props) {
         <br/>
         <br/>
         <form onSubmit={checkUserSubmited}>
-        <div class="input-group input-group-lg">
-         <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-lg">Usuario</span>
+        <div className="input-group input-group-lg" >
+         <div className="input-group-prepend">
+          <span className="input-group-text" id="inputGroup-sizing-lg">Usuario</span>
          </div>
-          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="usuarioOfSmartPlug" onChange={checkUser}/>
+          <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="usuarioOfSmartPlug" onChange={checkUser}/>
         </div>
 
-        <div class="input-group input-group-lg">
-         <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-lg">Contraseña</span>
+        <div className="input-group input-group-lg">
+         <div className="input-group-prepend">
+          <span className="input-group-text" id="inputGroup-sizing-lg">Contraseña</span>
          </div>
-         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="passwordOfSmartPlug" onChange={checkPassword}/>
+         <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="passwordOfSmartPlug" onChange={checkPassword}/>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <br/>
         <br/>
       </div>
-      <blockquote class="blockquote text-center">
-        <a href="https://github.com/alfredodemiguel/Proyectos/tree/master/PhotoPlug" class="badge badge-secondary">Código fuente del proyecto</a>
+      <blockquote className="blockquote text-center">
+        <a href="https://github.com/alfredodemiguel/Proyectos/tree/master/PhotoPlug" className="badge badge-secondary">Código fuente del proyecto</a>
       </blockquote>
     </div>
   );
