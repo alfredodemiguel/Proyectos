@@ -90,7 +90,6 @@ void setup() {
     }
   });
 
-  //http://192.168.17.47/validar_operacion?onoff=On&sensorProximidad=On&envEmail=Off
   server.on("/validar_operacion", HTTP_GET, [] (AsyncWebServerRequest *request) {
     if (request->hasParam("onoff")) {
         onoffHtml = request->getParam("onoff")->value();
@@ -99,15 +98,10 @@ void setup() {
         photoHtml = request->getParam("photo")->value();
     }
  
-    Serial.println("onoff:");
-    Serial.println(onoffHtml);
-    Serial.println("photo:");
-    Serial.println(photoHtml);
     datoCambiadoPP = true;
     request->send_P(200, "text/html", pag_menu_html);  
   });
   
-  //http://192.168.1.33/validar_configuracion?ssid=kjjhg&contrasenawifi=lkjkj&usuario=alfredo&contrasena=1234&grupo=grupo1
   server.on("/validar_configuracion", HTTP_GET, [] (AsyncWebServerRequest *request) {
     if (request->hasParam("ssid")) {
         ssidHtml = request->getParam("ssid")->value();

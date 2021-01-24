@@ -48,12 +48,7 @@ void _capturePhotoSaveSpiffs( void ) {
       Serial.println("Camera capture failed");
       return;
     }
-     //String mostrar (fb->buf);
-     //Serial.println( (long)&v);
-     Serial.println("fb->buf:");
-     Serial.println ((long)&(fb->buf));
-     Serial.println("fb->len:");
-     Serial.println ((long)&(fb->len));
+    
     // Photo file name
     Serial.printf("Picture file name: %s\n", FILE_PHOTO);
     File file = SPIFFS.open(FILE_PHOTO, FILE_WRITE);
@@ -63,9 +58,6 @@ void _capturePhotoSaveSpiffs( void ) {
       Serial.println("Failed to open file in writing mode");
     }
     else {
-      Serial.println("Logitud:");
-      Serial.println(fb->len);
-      //longitud = (fb->len);
       file.write(fb->buf, fb->len); // payload (image), payload length
     }
     // Close the file
@@ -78,8 +70,6 @@ void _capturePhotoSaveSpiffs( void ) {
 } 
 
 void photoTosmPG3 (void){
-  Serial.printf ("Antes _capturePhotoSaveSpiffs");
   _capturePhotoSaveSpiffs ();
-  Serial.printf ("Antes _encodePhoto");
   smPG3 = _encodePhoto ();
 }
