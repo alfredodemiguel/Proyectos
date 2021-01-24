@@ -1,0 +1,11 @@
+Informe ERC (jue 30 abr 2020 13:45:10, Codificación UTF8 )
+
+***** Hoja /
+ErrType(3): Pin connected to other pins, but not driven by any pin
+    @(104,65 mm, 75,44 mm): El pin 1 (Entrada de alimentación) del componente #PWR0103 no está alimentado (red 1).
+ErrType(3): Pin connected to other pins, but not driven by any pin
+    @(116,08 mm, 104,39 mm): El pin 1 (Entrada de alimentación) del componente #PWR0115 no está alimentado (red 2).
+ErrType(3): Pin connected to other pins, but not driven by any pin
+    @(111,00 mm, 104,39 mm): El pin 1 (Entrada de alimentación) del componente #PWR0113 no está alimentado (red 3).
+
+**Mensajes ERC: 3. Errores0, Avisos 3
