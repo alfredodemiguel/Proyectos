@@ -1,19 +1,28 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Image} from 'react-native';
 
 
 export default function ShowImage(props) {
   const {image} = props;
-  let pathImage = '';
-  
+  console.log (image);
 
-  pathImage = '../resources/' + image + '.png';
-  console.log (pathImage);
-
+  switch (image)
+  {
+     case "Salida":
+      var icon = require('../resources/Salida.png');
+      break;
+     case "Correr":
+      var icon = require('../resources/Correr.png');
+      break;
+     case "Victoria":
+      var icon = require('../resources/Victoria.png');
+      break;
+     default: 
+      var icon = require('../resources/Descanso.png');
+  }
+ 
   return (
-    <Image source={require(pathImage)} />
-    <Image source={require('../resources/' + image + '.png')} />
-    
+    <Image source={icon} />
   );
 }
 

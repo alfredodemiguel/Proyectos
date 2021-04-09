@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from "react";
 import {StyleSheet, Text, View} from 'react-native';
 
 export default function Countdown(props) {
-  const {time} = props;
+  var {time, state} = props;
+  const [isTime, setTime] = useState();
+  if (state == "iniciar"){
+    setInterval(function(){ time = time -1;
+                           setTime(time); }, 3000);
+  }
 
+  console.log (global.mitiempo);
+
+  
   return (
     <View style={styles.viewCountdown}>
-        <Text style={styles.text}>{time}</Text>
+        <Text style={styles.text}>{global.mitiempo}</Text>
     </View>
   );
 }

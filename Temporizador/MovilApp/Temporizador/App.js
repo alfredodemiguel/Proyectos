@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,15 +6,25 @@ import {
   SafeAreaView,
   Button,
   Alert,
-  Image
 } from 'react-native';
 import Countdown from './src/components/Countdown.js';
 import ShowImage from './src/components/ShowImage.js';
-import tomate from './src/resources/tomate.png';
 
 
 export default function App() {
-const tiempo = 25;
+tiempo = 25;
+const estado = "start";
+const [isTime, setTime] = useState();
+
+function start() {
+  console.log ('Estoy dentro de start');
+  setInterval(function(){ 
+    tiempo = tiempo -1;
+    setTime(tiempo);
+    console.log ('Estoy en start, dentro setinterval');
+    console.log (tiempo) }, 3000);
+  
+}
 
   return (
     <View style={styles.myScreen}>
@@ -22,28 +32,23 @@ const tiempo = 25;
         <Text style={styles.titleApp}>TEMPORIZADOR</Text>
       </SafeAreaView>
       <View style={styles.Counter}>
-        <Countdown time = {tiempo} /> 
+      <Text style={styles.text}>{isTime}</Text>
       </View>
       <View style={styles.Image}>
-        <ShowImage image="Salida"/>
+        <ShowImage image="Victoria"/>
       </View>
       <View style={styles.Buttons}>
         <Button
-          title="Press me"
-          onPress={() => Alert.alert('Simple Button pressed')}
-        />
-    
-        <Button
-          title="Left button"
-          onPress={() => Alert.alert('Left button pressed')}
+          title="INICIAR"
+          onPress={() => start()}
         />
         <Button
-          title="Right button"
-          onPress={() => Alert.alert('Right button pressed')}
+          title="PARAR"
+          onPress={() => Alert.alert('STOP button pressed')}
         />
         <Button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
-          title="boton material"
-          onPress={() => {Alert.alert('Material button pressed');
+          title="REINICIO"
+          onPress={() => {Alert.alert('RESTART button pressed');
                           console.log ('Prueba del log');
                           }
           }
