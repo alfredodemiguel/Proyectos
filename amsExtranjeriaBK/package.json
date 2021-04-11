@@ -1,0 +1,15 @@
+{
+  "name": "amsExtranjeria",
+  "version": "1.0.0",
+  "description": "Presentación ams extranjeria",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yo",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.5.0",
+    "package.json": "^2.0.1"
+  }
+}

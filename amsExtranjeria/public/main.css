@@ -1,0 +1,24 @@
+#cabecera {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#banderas{
+    margin-right: auto;
+}
+
+#contacto{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#nombre{
+    margin-left: auto; 
+}
+
+
+
+
+ 
