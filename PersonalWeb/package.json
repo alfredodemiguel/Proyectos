@@ -1,15 +1,16 @@
 {
-  "name": "amsExtranjeria",
+  "name": "amsextranjeria",
   "version": "1.0.0",
-  "description": "Presentación ams extranjeria",
-  "main": "index.js",
+  "description": "web amsExtranjeria",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Yo",
+  "author": "Alfredo De Miguel",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "nodemailer": "^6.5.0",
-    "package.json": "^2.0.1"
+    "serve-favicon": "^2.5.0"
   }
 }
