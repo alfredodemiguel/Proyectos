@@ -4,6 +4,8 @@ void setGlobalVariablesWeb (){
   
   smUser = user;
   smPassword = userPassword;
+  
+  userPassword = "1234";
   Serial.println("user:" + user);
   Serial.println("smUser:" + smUser);
   Serial.println("userPassword:" + userPassword);

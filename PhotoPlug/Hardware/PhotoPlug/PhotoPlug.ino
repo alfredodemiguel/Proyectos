@@ -84,6 +84,7 @@ void setup() {
     Serial.println("el userPasswordHtml:");
     Serial.println(userPasswordHtml);
     if (userHtml == user && userPasswordHtml == userPassword){
+    //if (userHtml == "admin" && userPasswordHtml == "1234"){
        request->send_P(200, "text/html", pag_menu_html);
     } else {
       request->send_P(200, "text/html", pag_validacion_html);

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>AMS Extranjeria</title>
+  <title>Compiler</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="web corporativa" content="web corporativa ams Extranjeria">
-	<meta name="keywords" content="anabel miguel ams extranjeria">
+  <meta name="web personal" content="web personal de Alfredo De Miguel">
+	<meta name="keywords" content="alfredo de miguel compiler">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.2/css/bulma.css">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   <time datetime= "20210410" pubdate = "pubdate"></time>
-  <link rel="shortcut icon" href="favicon.ico"> 
 </head>
 <body id="cuerpo">
   <!-- Cabecera -->
@@ -20,36 +19,28 @@
           <div class="columns is-mobile">
             <div class="column is-3" id="nombre">
               <div>
-                <h3>Anabel Miguel</h3>
-              </div>
-              <div>
-                <h5>ABOGADA</h5>
+                <h3>Alfredo De Miguel</h3>
               </div>
             </div>
             <div class="column is-8" id="contacto">
                 <div class="content is-small">
                   <div class="icon-text">
                     <span class="icon">
-                      <img src="images/telefono.png" alt="" />
-                    </span>
-                    <span>660 84 22 32</span>&nbsp;&nbsp;
-                    <span class="icon">
                       <img src="images/email.png" alt="" />
                     </span>
-                    <span>anabel@ams-extranjeria.es</span>&nbsp;&nbsp;
+                    <span>alfredodemiguel@yahoo.es</span>&nbsp;&nbsp;
                     <span class="icon">
                       <a href="https://www.facebook.com/alfredodemiguel" TARGET="_new"><img src="images/facebook.png" alt="" /></a>
                     </span>&nbsp;
                     <span class="icon">
-                      <a href="https://es.linkedin.com/in/alfredo-de-miguel-soldado-4566061b" TARGET="_new"><img src="images/linkedin.png" alt="" /></a>
+                      <a href="https://www.linkedin.com/in/alfredo-de-miguel-soldado-4566061b/" TARGET="_new"><img src="images/linkedin.png" alt="" /></a>
                     </span>
                   </div>
                 </div>
             </div>
             <div class="column is-1 has-icons-right" id="banderas">
-                <img id="banderas" src="images/icono-bandera-es.png" alt="" />
-                <img id="banderas" src="images/icono-bandera-en.png" alt="" />
-                <img id="banderas" src="images/icono-bandera-al.png" alt="" />
+                <img id="banderas" src="images/icono-bandera-es.png" alt="Español" />
+                <img id="banderas" src="images/icono-bandera-en.png" alt="English" />
             </div>
           </div>
         </header>
@@ -57,24 +48,39 @@
     </section>
   </div> 
   <div id= "zonaLogo" >
-    </br></br></br>
-    <img src="images/logo.png" alt="" width=100% />
+    </br></br></br></br></br></br>
+    <img src="images/logo.png" alt="" width=50% />
   </div>
   <!-- Áreas de trabajo -->
   <div>
     </br></br>
     <div class="columns">
-      <div id="practica" class="column"><span><h5>TRAMITACION PASAPORTES</h5></span></br><span>Se tramitan pasaportes internacionales</span></div>
-      <div id="practica" class="column"><span><h5>TRAMITACION NACIONALIDADES</h5></span></br><span>Se tramitan la solicitud de nacionalización</span></div>
-      <div id="practica" class="column"><span><h5>TRAMITACION VISADOS</h5></span></br><span>Se tramitan visados internacionales</span></div>
+      <div id="practica" class="column">
+        <span><h5><b>TRAMITACIÓN NACIONALIDAD ESPAÑOLA</b></h5></span>
+        </br><span>- Asesoramiento para la adquisición de la nacionalidad española</span>
+        </br><span>- Matriculación exámenes oficiales / Materiales preparación de las pruebas</span>
+        </br><span>- Presentación online de la solicitud de la nacionalidad española por residencia</span>
+      </div>
+      <div id="practica" class="column">
+        <span><h5><b>TRAMITACIONES EXTRANJERÍA</b></h5></span>
+        </br><span>- Asesoramiento en materia de extranjería</span>
+        </br><span>- Tramitación solicitudes de estancia, residencia y trabajo</span>
+        </br><span>- Reagrupaciones familiares</span>
+        </br><span>- Renovaciones de todo tipo de Autorizaciones</span>
+        </br><span>- Certificados de registro de ciudadanos de la Unión Europea</span>
+        </br><span>- Tarjetas de Familiares de ciudadanos comunitarios</span>
+        </br><span>- Residencia ciudadanos británicos </span>
+        </br><span>- Tarjetas de estudiantes </span>
+        </br><span>- Solicitudes de protección internacional / Asilo</span>
+        </br><span>- Recursos administrativos</span>
     </div>
     </br></br></br>
   </div>
   <!-- Formulario de Contacto -->
-  <div id ="solicitud">
+  <div id ="solicitud" class="panel">
     <h2 id="tituloFormulario">Formulario de contacto</h2>
     </br>
-    <form action="mostrar" method="post">
+    <form action="contacto" method="post">
       <div class="field">
         <div class="control">
           <input class="input" type="text" placeholder="Nombre" name= "nombre">
@@ -90,26 +96,42 @@
           <input class="input" type="email" placeholder="Email" name= "correo">
         </div>
       </div>
-      <textarea class="textarea" placeholder="Asunto" rows="10" name="asunto"></textarea>
+      <textarea class="textarea" placeholder="Asunto" rows="4" name="asunto"></textarea>
+      </br>
+      <span id="textoProteccion">
+        Si me envías el formulario lo que sucederá es que me llegará un correo con lo que has escrito.
+        Y tu renuncias a emprender cualquier acción legal para siempre jamas, contra mí. Es mas te 
+        comprometes a no hacer nada que me pueda perjudicar. Y esto sabiendo que con el email haré lo
+        que quiera. O sea que lo leeré o no, lo guardaré o no y lo reenviaré o no.
+      </span>
+      </br>
+      <label class="checkbox">
+        <input type="checkbox" name="ckAceptacion">
+        <a>Aceptación de mi política de protección de datos</a>
+      </label>
       </br>
       <div class="control" id="botonFormulario">
         <button class="button is-link" value="Mostrar">Submit</button>
       </div>
     </form>
-    </br></br></br>
+    </br>
   </div>
+  </br></br></br>
   <!-- Curriculum -->
   <div id="personal">
     <div id="practica" class="columns">
       <div class="column is-one-quarter"><img src="images/foto.jpg" alt="" width=50% /></div>
-      <div class="column"><span>Analbel Miguel , abogada desde el año 2000, ha trabajado en despacho internacionales así como en despachos de extranjeria muy bonitos 
-        a lo largo y ancho del mundo. Siempre ha sido la abogada mas guapa y lista de todos los buffetes por los que ha pasado. Y eso que han sido muchos y muy variopintos.
-      </span></div>
+      <div class="column">
+        <span>
+          Alfredo De Miguel. Dedicado a la informática desde los 90's. Y durante todos estos años he 
+          trabajado como programador, técnico de sistemas, comercial, consultor y ahora como implementador de gestión Documental.
+        </span>
+      </div>
     </br></br></br>
   </div>
   <!-- Footer -->
   <footer id="footer">
-   <a>©2021 AMS Extranjería. Todos los derechos reservados</a>
+   <a>©2021 Compiler. Todos los derechos reservados</a>
   </footer>
 </body>
 </html>
