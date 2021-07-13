@@ -1,102 +1,138 @@
+const mwBasicAuth = require ('./mwBasicAuth');
 const rest = new (require('rest-mssql-nodejs'))({
     user:'sa',
     password:'Sovasa00',
-    server: '192.168.17.91',
+    server: '192.168.17.70',
     port: 1433,
     database: 'Therefore'
     });
 const express = require('express');
 const morgan = require ('morgan');
-const fs = require('fs');
-const https = require('https');
 const bodyParser = require('body-parser');
-const cors = require('cors-express');
+
+
 const app = express();
-
-const PUERTO = 3030;
-
-https.createServer({
-   cert: fs.readFileSync('alfredodemiguel.crt'),
-   key: fs.readFileSync('alfredodemiguel.key')
- },app).listen(PUERTO, function(){
-	console.log('Servidor https correindo en el puerto 3030');
-});
-
-
-
-
 app.use (morgan('dev'));
 app.use(express.static('.'));
 app.use(bodyParser.json({limit: '10mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
+app.use (mwBasicAuth);
 
-options = {
-    allow : {
-        origin: '*',
-        methods: 'GET,PUT,POST,DELETE,HEAD,OPTIONS',
-        headers: 'Content-Type, Authorization, Content-Length, X-Requested-With, X-HTTP-Method-Override'
-    }
-};
- 
-app.use(cors(options));
+const port = process.env.PORT || 3030
 
+app.listen(port, () => {
+    console.log("The server is starting on port " + port);
+});
+    
 
-app.get ('/', (req, res) => res.send ('Incorrect URL.'));
+app.get ('/', (req, res) => res.send ('Incorrect EndPoint'));
 
 
-
-app.get('/provider/:id', function(req, res) {
-    let selectedProvider,PNombre,PDireccion,PTelefono,PFax;;
-    var { id } = req.params; 
-    id = id.split(':');
-    id = id[1];
-
+app.post('/ReadProvider', function(req, res) {
+    let id = req.body.id;
+    let nombre,direccion,telefono,fax;
+   
     setTimeout (async() =>{
-        let resultado = await rest.executeQuery ('select * from proveedores where id = @id',[{
+        let result = await rest.executeQuery ('select * from proveedores where id = @id',[{
             name: 'id',
             type:'varchar',
             value: id
         }]);
-        resultado = resultado.data[0][0];
-        PNombre = resultado.nombre;
-        PDireccion = resultado.direccion;
-        PTelefono = resultado.telefono;
-        PFax = resultado.fax;
-        selectedProvider = {id:id,PNombre:PNombre,PDireccion:PDireccion,PTelefono:PTelefono,PFax:PFax};
-        res.send(selectedProvider);
-        },1500);
+        result = result.data[0][0];
+        typeof result === 'undefined' ? console.log ("Is Empty") :  {nombre,direccion,telefono,fax} = result;
+        res.send({id:id,Nombre:nombre,Direccion:direccion,Telefono:telefono,Fax:fax});
+    },1500);
 });
 
 
-
-
-
-
-
-app.post('/provider', (req, res) => {
-            
-    let id = req.body.id;
-    let PNombre = req.body.PNombre;
-    let PDireccion = req.body.PDireccion;
-    let PTelefono = req.body.PTelefono;
-    let PFax = req.body.PFax;
-
-    
-      
+app.post('/CreateProvider', function(req, res) {
+    let {id,nombre,direccion,telefono,fax} = req.body;
+   
     setTimeout (async() =>{
-        const resultado = await rest.executeQuery ('select * from proveedores where id = @id',[{
+        let result = await rest.executeQuery ('INSERT INTO proveedores VALUES (@id,@nombre,@direccion,@telefono,@fax)',[{
             name: 'id',
             type:'varchar',
-            value: '2'
-        }]);
-        console.log (resultado.data);
-        },1500);
-
-
-
-    let selectedProvider = {id:id,PNombre:PNombre,PDireccion:PDireccion,DTelefono:PTelefono,PFax:PFax};
-    res.send(selectedProvider);
+            value: id
+        },
+        {
+            name: 'nombre',
+            type:'varchar',
+            value: nombre
+        },
+        {
+            name: 'direccion',
+            type:'varchar',
+            value: direccion
+        },
+        {
+            name: 'telefono',
+            type:'varchar',
+            value: telefono
+        },
+        {
+            name: 'fax',
+            type:'varchar',
+            value: fax
+        }
+        ]);
+        console.log (result);
+        res.send(result);
+    },1500);
 });
+
+
+app.post('/UpdateProvider', function(req, res) {
+    let {id,nombre,direccion,telefono,fax} = req.body;
+   
+    setTimeout (async() =>{
+        let result = await rest.executeQuery ('update proveedores set nombre = @nombre, direccion = @direccion, telefono = @telefono, fax = @fax where id = @id',[{
+            name: 'id',
+            type:'varchar',
+            value: id
+        },
+        {
+            name: 'nombre',
+            type:'varchar',
+            value: nombre
+        },
+        {
+            name: 'direccion',
+            type:'varchar',
+            value: direccion
+        },
+        {
+            name: 'telefono',
+            type:'varchar',
+            value: telefono
+        },
+        {
+            name: 'fax',
+            type:'varchar',
+            value: fax
+        } 
+    ]);
+    console.log (result);
+    res.send(result);
+    },1500);
+});
+
+app.post('/DeleteProvider', function(req, res) {
+    let id = req.body.id;
+   
+    setTimeout (async() =>{
+        let result = await rest.executeQuery ('delete from proveedores where id = @id',[{
+            name: 'id',
+            type:'varchar',
+            value: id
+        }]);
+        console.log (result);
+        res.send(result);
+    },1500);
+});
+
+
+
+
 
 
  
