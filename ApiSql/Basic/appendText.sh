@@ -1,3 +1,3 @@
 #!/bin/bash
-echo $* >> archivo.txt
+echo $* >> archivo.csv
 

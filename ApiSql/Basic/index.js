@@ -1,16 +1,8 @@
-require ('dotenv').config();
+require ('dotenv').config({path:'./.env'});
 const exec = require('child_process').exec
-//const Shell = require('shelljs')
 const mwBasicAuth = require ('./mwBasicAuth');
-/*
-const rest = new (require('rest-mssql-nodejs'))({
-    user:'sa',
-    password:'Sovasa00',
-    server: '192.168.17.70',
-    port: 1433,
-    database: 'Therefore'
-    });
-*/
+const mwErrorHandler = require ('./mwErrorHandler');
+const rest = require ('./rest');
 const express = require('express');
 const morgan = require ('morgan');
 const bodyParser = require('body-parser');
@@ -22,8 +14,10 @@ app.use(express.static('.'));
 app.use(bodyParser.json({limit: '10mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 app.use (mwBasicAuth);
+app.use (mwErrorHandler);
 
-const port = process.env.PORT
+
+const port = process.env.PORT;
 
 app.listen(port, () => {
     console.log("The server is starting on port " + port);
@@ -33,7 +27,7 @@ app.listen(port, () => {
 app.post('/ReadProvider', function(req, res) {
     let id = req.body.id;
     let nombre,direccion,telefono,fax;
-   
+    
     setTimeout (async() =>{
         let result = await rest.executeQuery ('select * from proveedores where id = @id',[{
             name: 'id',
@@ -139,9 +133,9 @@ app.post('/RunProgram', function(req, res) {
     
     let Line = id + '\t' + nombre + '\t' + direccion + '\t' + telefono + '\t' + fax;
     exec('./appendText.sh ' + Line, (err, stdout) =>{
-        if(err){
-            throw err;
-        }
+       // if(err){
+       //     throw err;
+       // }
     });
     res.send ('Append Line!!!!');
     res.status(204);

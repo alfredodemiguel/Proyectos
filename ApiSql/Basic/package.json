@@ -25,6 +25,7 @@
     "isarray": "^1.0.0",
     "morgan": "^1.10.0",
     "native-duplexpair": "^1.0.0",
+    "nodemailer": "^6.6.3",
     "nodemon": "^2.0.9",
     "process-nextick-args": "^2.0.1",
     "punycode": "^2.1.1",
