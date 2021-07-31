@@ -12,7 +12,7 @@ let jConfig = {
 	"auth":{ 
 		  "type":"login", 
 		  "user":"amsextranjeria@zohomail.eu", 
-		  "pass":"Sov@s@00" 
+		  "pass":"" 
   }
   };
   

@@ -37,6 +37,7 @@ app.post('/ReadProvider', function(req, res) {
         result = result.data[0][0];
         typeof result === 'undefined' ? console.log ("Is Empty") :  {nombre,direccion,telefono,fax} = result;
         res.send({id:id,Nombre:nombre,Direccion:direccion,Telefono:telefono,Fax:fax});
+        res.status(200);
     },1500);
 });
 
