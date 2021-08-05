@@ -72,7 +72,6 @@ app.post('/CreateProvider', function(req, res) {
             value: fax
         }
         ]);
-        console.log (result);
         res.send(result);
     },1500);
 });
@@ -108,7 +107,6 @@ app.post('/UpdateProvider', function(req, res) {
             value: fax
         } 
     ]);
-    console.log (result);
     res.send(result);
     },1500);
 });
@@ -122,7 +120,6 @@ app.post('/DeleteProvider', function(req, res) {
             type:'varchar',
             value: id
         }]);
-        console.log (result);
         res.send(result);
     },1500);
 });
@@ -133,11 +130,7 @@ app.post('/RunProgram', function(req, res) {
     let {id,nombre,direccion,telefono,fax} = req.body;
     
     let Line = id + '\t' + nombre + '\t' + direccion + '\t' + telefono + '\t' + fax;
-    exec('./appendText.sh ' + Line, (err, stdout) =>{
-       // if(err){
-       //     throw err;
-       // }
-    });
+    exec('./appendText.sh ' + Line, (err, stdout) =>{});
     res.send ('Append Line!!!!');
     res.status(204);
 });
