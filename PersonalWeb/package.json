@@ -9,7 +9,7 @@
   "author": "Alfredo De Miguel",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "nodemailer": "^6.5.0",
     "serve-favicon": "^2.5.0"
   }
