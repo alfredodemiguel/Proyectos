@@ -17,7 +17,7 @@
     "chai-http": "^4.3.0",
     "cors-express": "^0.2.2",
     "express": "^4.17.1",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.4"
   }
